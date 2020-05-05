@@ -1,0 +1,23 @@
+{
+  "name": "reactflo",
+  "version": "1.0.0",
+  "description": "A dev tool that helps developers visualize the flow of state through their React app",
+  "main": "null",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/ReactFLO.git"
+  },
+  "author": "TheEdgecases",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/ReactFLO/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/ReactFLO#readme",
+  "devDependencies": {
+    "ts-loader": "^7.0.2",
+    "typescript": "^3.8.3"
+  }
+}
