@@ -4,7 +4,8 @@
   "description": "A dev tool that helps developers visualize the flow of state through their React app",
   "main": "null",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,10 @@
   },
   "homepage": "https://github.com/oslabs-beta/ReactFLO#readme",
   "devDependencies": {
+    "@types/chrome": "0.0.107",
     "ts-loader": "^7.0.2",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   }
 }
