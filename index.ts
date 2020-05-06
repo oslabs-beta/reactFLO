@@ -7,7 +7,11 @@ let backgroundPageConnection = chrome.runtime.connect({
   name: "panel"
 });
 
-backgroundPageConnection.onMessage.addListener(function(message){
+backgroundPageConnection.onMessage.addListener((msg) => {
+  
+  const newMessage = document.createElement('h2');
+  newMessage.innerText = msg.message;
+  root.appendChild(newMessage);
 });
 
 backgroundPageConnection.postMessage({

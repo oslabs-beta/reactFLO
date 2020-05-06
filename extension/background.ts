@@ -36,7 +36,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse){
     console.log(tabId)
 
     if (tabId in connections){
-      connections[tabId].postMessage(msg);
+      connections[tabId].postMessage({message: tabId});
     } else {
       sendResponse({
         error: 'error',
