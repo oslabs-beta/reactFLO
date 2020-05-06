@@ -1,7 +1,11 @@
 const connections = {};
 
 chrome.runtime.onConnect.addListener(port => {
+  console.log('port outside: ', port)
+
   const devToolsListener = (message, port) => {
+    console.log('message: ', message);
+    console.log('port: ', port);
     if (message.name === 'init' && message.tabId){
       connections[message.tabId] = port;
       return;
@@ -23,14 +27,21 @@ chrome.runtime.onConnect.addListener(port => {
   });
 });
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
-
+chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse){
   if (sender.tab){
-    let tabId = sender.tab.id;
+    let tabId = `${sender.tab.id}`;
+    console.log(typeof tabId);
+    console.log('msg: ', msg)
+    console.log('connections: ', connections)
+    console.log(tabId)
+
     if (tabId in connections){
-      connections[tabId].postmessage(request);
+      connections[tabId].postMessage(msg);
     } else {
-      console.log("Tab not found in connection list.");
+      sendResponse({
+        error: 'error',
+      });
+      console.log(`Tab, ${tabId}, not found in connection list: `, connections);
     }
   } else {
     console.log("sender.tab not defined.");
