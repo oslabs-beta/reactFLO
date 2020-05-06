@@ -10,5 +10,8 @@
     "matches": ["<all_urls>"],
     "js": ["contentscript.ts"]
     }],
+  "web_accessible_resources": [
+    "inject.js"
+  ],
   "manifest_version": 2 
 }

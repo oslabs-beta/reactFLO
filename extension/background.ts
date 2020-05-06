@@ -1,11 +1,10 @@
 const connections = {};
 
 chrome.runtime.onConnect.addListener(port => {
-  console.log('port outside: ', port)
 
   const devToolsListener = (message, port) => {
-    console.log('message: ', message);
-    console.log('port: ', port);
+    console.log('background message: ', message);
+
     if (message.name === 'init' && message.tabId){
       connections[message.tabId] = port;
       return;
@@ -30,13 +29,9 @@ chrome.runtime.onConnect.addListener(port => {
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse){
   if (sender.tab){
     let tabId = `${sender.tab.id}`;
-    console.log(typeof tabId);
-    console.log('msg: ', msg)
-    console.log('connections: ', connections)
-    console.log(tabId)
 
     if (tabId in connections){
-      connections[tabId].postMessage({message: tabId});
+      connections[tabId].postMessage(msg);
     } else {
       sendResponse({
         error: 'error',
