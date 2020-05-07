@@ -1,4 +1,4 @@
-import { initialHook } from './initialHook.ts';
+import { initialHook } from './initialHook';
 
 function messageToContentScript(message) {
   window.postMessage(message, "*");

@@ -1,5 +1,12 @@
 // dec variables to hold react global hook 
-const devTools = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+//declare const window: any;
+declare global {
+  interface Window {
+    __REACT_DEVTOOLS_GLOBAL_HOOK__: any;
+  }
+}
+
+const devTools =  window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
 console.log('devTools: ', devTools)
 const reactInstance = window.__REACT_DEVTOOLS_GLOBAL_HOOK__.renderers;
 console.log('reactInstance: ', reactInstance)
@@ -7,7 +14,7 @@ const instance = reactInstance.get(1);
 console.log('instance:', instance);
 console.log('testing');
 
-const initialHook = () => {
+export const initialHook = () => {
 
   if(instance && instance.version){
     let test;
@@ -30,4 +37,4 @@ const initialHook = () => {
   }
 }
 
-export default initialHook;
+//export default initialHook;
