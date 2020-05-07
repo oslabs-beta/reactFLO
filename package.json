@@ -1,5 +1,4 @@
 {
-
   "name": "reactflo",
   "version": "1.0.0",
   "description": "A dev tool that helps developers visualize the flow of state through their React app",
