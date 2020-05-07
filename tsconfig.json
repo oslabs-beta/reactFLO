@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "./extension/build/",
+    "module": "commonjs",
+    "target": "esnext",
+    "jsx": "react",
+    "allowJs": true,
+    "sourceMap": true
+  }
+}
