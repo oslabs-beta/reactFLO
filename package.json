@@ -1,4 +1,5 @@
 {
+
   "name": "reactflo",
   "version": "1.0.0",
   "description": "A dev tool that helps developers visualize the flow of state through their React app",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/oslabs-beta/ReactFLO#readme",
   "devDependencies": {
     "@types/chrome": "0.0.107",
+    "copy-webpack-plugin": "^5.1.1",
     "ts-loader": "^7.0.2",
     "typescript": "^3.8.3",
     "webpack": "^4.43.0",
