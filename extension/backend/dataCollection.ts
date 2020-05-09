@@ -55,6 +55,7 @@ const convertProps = (node) => {
         value: node.memoizedProps[key] || null,
         topComponent: null,
         components: [],
+        type: 'prop',
       };
       // Push object to props array
       props.push(prop);

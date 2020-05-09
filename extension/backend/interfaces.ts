@@ -13,4 +13,7 @@ export interface State {
   value: any,
   topComponent: any,
   components: any[],
+  type: StateType,
 }
+
+type StateType = 'hook' | 'prop' | 'componentState'
