@@ -28,7 +28,10 @@ const injectScript =  (file, tag) => {
 window.addEventListener('message', e => {
   // console.log('window event listener e: ', e);
   // Making sure the event listened too is from the window 
-  if (e.source === window) sendMessage(e.data);
+  if (e.data.id === 'ReactFLO' && e.source === window) {
+    console.log('Data: ', e.data);
+    sendMessage(e.data);
+  }
 });
 
 // Injects the script into the dom

@@ -42,6 +42,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse){
 
     // Check if tabId corresponds to a devtool instance
     if (tabId in connections){
+      console.log(msg);
       // Send message to corresponding devtool instance
       connections[tabId].postMessage(msg);
     } else {
