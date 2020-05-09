@@ -6,7 +6,8 @@ function messageToContentScript(message) {
 
 // Note: Index will add any text in the 'message' property to the dev tool dom
 messageToContentScript({
-  message: "message from injection site!"
+  message: "message from injection site!",
+  id: 'ReactFLO',
 });
 
 // Feel free to remove when there is more code...

@@ -23,6 +23,7 @@ export const initialHook = () => {
         // for debugging
         console.log('DOM: ', test);
         console.log('Con: ', extractData(test));
+        window.postMessage({ message: extractData(test), id: 'ReactFLO' }, '*');
         return original(...args);
       };
     })(devTools.onCommitFiberRoot);
