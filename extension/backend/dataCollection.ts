@@ -8,9 +8,10 @@ class SimpleNode implements DisplayNode {
   id: number;
   displayName: string;
   tag: number;
-  props: State[] | null = null;
-  state: State[] | null = null;
+  props: State[] = [];
+  state: State[] = [];
   children: DisplayNode[] = [];
+  parent: string | null = null;
   constructor(node: any) {
     this.id = node._debugID;
     this.tag = node.tag;

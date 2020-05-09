@@ -5,6 +5,7 @@ export interface DisplayNode {
   props: State[] | null,
   state: State[] | null,
   children: DisplayNode[] | null,
+  parent: string | null,
 }
 
 export interface State {
