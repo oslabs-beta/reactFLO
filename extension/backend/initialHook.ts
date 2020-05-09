@@ -1,4 +1,5 @@
 import { childOrSibling } from "./dataCollection";
+import { extractData } from './dataCollection';
 
 // dec variables to hold react global hook 
 //declare const window: any;
@@ -24,7 +25,8 @@ export const initialHook = () => {
       return function (...args) {
         test = args[1].current;
         console.log('DOM: ', test);
-        console.log('TEST: ', childOrSibling(test));
+        // console.log('TEST: ', childOrSibling(test));
+        console.log('Con: ', extractData(test));
         return original(...args);
       };
     })(devTools.onCommitFiberRoot);
