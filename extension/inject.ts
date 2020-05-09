@@ -1,4 +1,4 @@
-import { initialHook } from './initialHook';
+import { initialHook } from './backend/initialHook';
 
 function messageToContentScript(message) {
   window.postMessage(message, "*");
@@ -10,6 +10,7 @@ messageToContentScript({
 });
 
 // Feel free to remove when there is more code...
-console.log("hello from the injection site!");
-initialHook(); 
+// console.log("hello from the injection site!");
 
+// Get data from React dev tools
+initialHook();
