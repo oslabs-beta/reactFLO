@@ -8,6 +8,7 @@ class SimpleNode implements DisplayNode {
   id: number;
   displayName: string;
   tag: number;
+  type: any;
   props: State[] | null = [];
   state: State[] | null = [];
   children: DisplayNode[] = [];
@@ -15,6 +16,7 @@ class SimpleNode implements DisplayNode {
   constructor(node: any) {
     this.id = node._debugID;
     this.tag = node.tag;
+    this.type = node.type;
     this.state = convertState(node);
     this.props = convertProps(node);
   }
