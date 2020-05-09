@@ -1,4 +1,3 @@
-import { childOrSibling } from "./dataCollection";
 import { extractData } from './dataCollection';
 
 // dec variables to hold react global hook 
@@ -10,12 +9,9 @@ declare global {
 }
 
 const devTools = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
-console.log('devTools: ', devTools)
 const reactInstance = window.__REACT_DEVTOOLS_GLOBAL_HOOK__.renderers;
-console.log('reactInstance: ', reactInstance)
 const instance = reactInstance.get(1);
-console.log('instance:', instance);
-console.log('testingz');
+
 
 export const initialHook = () => {
 
@@ -24,8 +20,8 @@ export const initialHook = () => {
     devTools.onCommitFiberRoot = (function (original) {
       return function (...args) {
         test = args[1].current;
+        // for debugging
         console.log('DOM: ', test);
-        // console.log('TEST: ', childOrSibling(test));
         console.log('Con: ', extractData(test));
         return original(...args);
       };

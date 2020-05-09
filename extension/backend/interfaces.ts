@@ -1,10 +1,10 @@
 export interface DisplayNode {
   id: number,
   displayName: string,
+  tag: number,
   props: State[] | null,
   state: State[] | null,
   children: DisplayNode[] | null,
-  tag: number,
 }
 
 export interface State {
