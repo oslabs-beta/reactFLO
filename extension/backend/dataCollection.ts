@@ -30,9 +30,30 @@ class SimpleNode implements DisplayNode {
 // If so, memoizedState will be an object of key/value pairs of component state
 
 const convertState = (node) => {
+  if(!node.memoizedState) return;
   // Create representations of state which can be queried
-  const state: State[] = [];
-  return state;
+  const stateArray: State[] = [];
+  for (const key in node.memoizedState) {
+    // console.log(counter,' ', `${key}: `, node.memoizedState[key]);
+    try {
+      // Create a prop object
+      const state: State = {
+        // Store values in object
+        key,
+        value: node.memoizedState[key] || null,
+        topComponent: null,
+        components: [],
+        type: 'componentState',
+      };
+      // Push object to props array
+      stateArray.push(state);
+    } catch (error) {
+      console.log('error: ', key);
+      console.log('error: ', node.memoizedState[key]);
+      continue;
+    }
+  }
+  return stateArray;
 }
 
 // PROPS
