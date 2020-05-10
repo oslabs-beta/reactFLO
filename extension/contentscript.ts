@@ -29,7 +29,7 @@ window.addEventListener('message', e => {
   // console.log('window event listener e: ', e);
   // Making sure the event listened too is from the window 
   if (e.data.id === 'ReactFLO' && e.source === window) {
-    console.log('Data: ', e.data);
+    // console.log('Data: ', e.data);
     sendMessage(e.data);
   }
 });

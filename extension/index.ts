@@ -3,7 +3,7 @@ const message = document.createElement('h1');
 root.appendChild(message);
 
 // Creates a connection to the background script
-let backgroundPageConnection = chrome.runtime.connect({
+const backgroundPageConnection = chrome.runtime.connect({
   name: "panel"
 });
 
@@ -20,3 +20,4 @@ backgroundPageConnection.onMessage.addListener((msg) => {
   newMessage.innerText = msg.message;
   root.appendChild(newMessage);
 });
+

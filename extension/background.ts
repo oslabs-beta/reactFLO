@@ -7,7 +7,6 @@ chrome.runtime.onConnect.addListener(port => {
   // Listens for an initial message
   const devToolsListener = (message, port) => {
     // Creates a connection to a devtool instance upon recieving message with name, 'init'
-    console.log('background message: ', message);
     if (message.name === 'init' && message.tabId){
       // Adds devtool connection to connections object at key of 'tabId'
       connections[message.tabId] = port;
@@ -42,8 +41,8 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse){
 
     // Check if tabId corresponds to a devtool instance
     if (tabId in connections){
-      console.log(msg);
       // Send message to corresponding devtool instance
+      console.log("background message: ", msg)
       connections[tabId].postMessage(msg);
     } else {
       // Tells content script that connection was not made
