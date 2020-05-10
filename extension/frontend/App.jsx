@@ -7,9 +7,16 @@ class App extends Component {
     super();
     this.state = {
       // backend obj stored here
-      array: ["hello from react state"]
+      // message: {
+        message: [],
+        children: [],
+        props: [], 
+        state:[], 
+        tag: '',
+      }
     };
-  }
+
+
 
   componentDidMount(){
     // confirm function is firing
@@ -27,22 +34,29 @@ class App extends Component {
     //     this.setState({ array:[ "hello from listener" ] })
     //   }   
     // })
-    
     chrome.runtime.onMessage.addListener((message)=>{
-      this.setState({ array: [ "hello from listener" ] })
+      if (message.id === 'ReactFLO'){
+      this.setState({
+          children: message.message.children,
+          props: message.message.props,
+          state: message.message.state,
+          tag: message.message.tag,
+        })
+      }   
     })
-
   }
+  render(){
 
-  render () {
+    const childArr = []; 
+    this.state.children.map((el, index)=> childArr.push(<h1 key={index}>{ el }</h1>))
+      
     return (
       <div>
       <h1>Hello from React!</h1>
-      { this.state.array }
+      {childArr}
       </div>
     )
   }
+ 
 }
-
-
 export default App;
