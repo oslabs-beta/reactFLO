@@ -12,13 +12,14 @@ class SimpleNode implements DisplayNode {
   props: State[] | null = [];
   state: State[] | null = [];
   children: DisplayNode[] = [];
-  parent: string | null = null;
-  constructor(node: any) {
+  parent: DisplayNode | null = null;
+  constructor(node: any, parent: DisplayNode | null) {
     this.id = node._debugID;
     this.tag = node.tag;
     this.type = node.type;
     this.state = convertState(node);
     this.props = convertProps(node);
+    this.parent = parent;
   }
 }
 
@@ -110,17 +111,17 @@ const convertProps = (node) => {
   return props;
 }
 
-const convertStructure = (node) => {
+const convertStructure = (node, parent=null) => {
   // Convert dual linked list structure into graph
   // Create a new node
-  const convertedNode = new SimpleNode(node);
+  const convertedNode = new SimpleNode(node, parent);
   // Add child to array
   if (!node.child) return convertedNode;
-  convertedNode.children.push(convertStructure(node.child));
+  convertedNode.children.push(convertStructure(node.child, convertedNode));
   // ConvertStructure() of each sibling and sibling of sibling etc. and add them to children array
   let childNode = node.child;
   while (childNode.sibling) {
-    convertedNode.children.push(convertStructure(childNode.sibling));
+    convertedNode.children.push(convertStructure(childNode.sibling, convertedNode));
     childNode = childNode.sibling;
   }
   // Return converted node
