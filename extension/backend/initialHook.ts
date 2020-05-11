@@ -1,5 +1,6 @@
 import { extractData } from './dataCollection';
 import { findHighestState } from "../frontend/categorization";
+import { traverseData } from "../frontend/categorization";
 
 // dec variables to hold react global hook 
 //declare const window: any;
@@ -27,6 +28,7 @@ export const initialHook = () => {
         const targetNode = extractData(test).children[0].children[0].children[1].children[0];
         console.log('Tar: ', targetNode);
         console.log('Sta: ', findHighestState(targetNode, targetNode.props[0]));
+        traverseData(targetNode, targetNode.props[0], (node, prop)=> console.log('node: ', node))
         window.postMessage({ message: extractData(test), id: 'ReactFLO' }, '*');
         return original(...args);
       };

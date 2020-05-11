@@ -1,6 +1,7 @@
 import {
   DisplayNode, State,
 } from '../backend/interfaces';
+import { extractData } from '../backend/dataCollection';
 
 export const findHighestState = (node: DisplayNode, prop: State) => {
   // Create an array of stateful components
@@ -28,3 +29,12 @@ export const findHighestState = (node: DisplayNode, prop: State) => {
   // Return null if no stateful component contains the value
   return null;
 };
+
+export const traverseData = (node: DisplayNode, prop: State, callback: Function) => {
+  // Look at top level stateful component
+  for (const el of node.children) {
+    // Apply callback function to each child
+    callback(el, prop);
+    traverseData(el, prop, callback);
+  }
+}
