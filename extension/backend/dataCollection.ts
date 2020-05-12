@@ -96,7 +96,7 @@ const convertProps = (node) => {
       const prop: State = {
         // Store values in object
         key,
-        value: node.memoizedProps[key] || null,
+        value: node.memoizedProps[key],
         topComponent: null,
         components: [],
         type: 'prop',
