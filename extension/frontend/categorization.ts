@@ -4,7 +4,7 @@ import {
 
 export const findHighestState = (node: DisplayNode, prop: State, callback: Function) => {
   // Create an array of stateful components
-  const statefulComps = [];
+  const statefulComps: DisplayNode[] = [];
   // Crete an array of components between the target node and a stateful node
   let mediums = [];
   // Create a helper recursive function
@@ -26,14 +26,17 @@ export const findHighestState = (node: DisplayNode, prop: State, callback: Funct
   }
   // Call this function on the target node's parent
   helper(node.parent);
+  // Create a variable to store the top level stateful node that matches the prop
+  let topNode = null
   // Check each stateful component for the value in prop
   for (const comp of statefulComps) {
     /* ------------------- Under Construction ------------------- */
     // Run the callback function on each component
     callback(comp, prop);
+    if (!topNode && comp.displayWeight > 0) topNode = comp;
   }
   // Return null if no stateful component contains the value
-  return null;
+  return topNode;
 };
 
 export const traverseData = (node: DisplayNode, prop: State, callback: Function) => {
