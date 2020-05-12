@@ -16,16 +16,16 @@ class LeftPanel extends Component {
    // creating the root data that will be passed into the heiarchy function for D3 
    const data = {
     "name": "Rootington",
-    "children":[
+    "children": [
       {
         "name": "Joe",
-        "children":[
+        "children": [
           {"name": "Cherizzle"},
           {"name": "Bob"}
         ]
       }, {
         "name": "Jimmy",
-        "children":[
+        "children": [
           {"name": "Marcus"},
           {"name": "Juan"}
         ]
@@ -45,28 +45,33 @@ class LeftPanel extends Component {
   // create the final map with nodes created from data
   const finalMap = treeMap(hierarchyNodes);
 
-  this.setState({ paths: finalMap.links() }); // returns a flat array of objects containing all the parent-child links. When turned into a component this will make the lines 
-  this.setState({ nodes: hierarchyNodes.descendants() }) // returns a flat array of  objects. Each obj has info about each node, when turned into a component this will make the actual nodes themselves and allow us to make shapes 
+  // returns a flat array of objects containing all the parent-child links. When turned into a component this will make the lines 
+  this.setState({ paths: finalMap.links() }); 
+  // returns a flat array of  objects. Each obj has info about each node, when turned into a component this will make the actual nodes themselves and allow us to make shapes 
+  this.setState({ nodes: hierarchyNodes.descendants() }); 
  }
+ // ** there are two parts two the tree , the nodes ( circles) and the path links ( the lines that connect the nodes)
+ // below one method is creating the lines and the other is creating all the nodes 
 
  render(){
-   // put paths before & because render goes before component did mount 
-   let paths = this.state.paths && this.state.paths.map((el)=>{
+   // put paths ( the lines on the graph) before & because render goes before component did mount 
+    let paths = this.state.paths && this.state.paths.map((el)=>{
     let d = d3
+    // link vertical makes our entire tree go top to bottom as opposed to left to right 
       .linkVertical()
       .x((d) => {
         return d.x;
       })
       .y((d) => {
-        return d.y/2;
+        return d.y/2; // div by 2 so make the path links shorter and not as long 
       });
     return <path 
             className='link' fill="none" 
             stroke="#97a6ff" 
             strokeWidth="2px" d={d(el)} />
   })
-
-  let nodes = this.state.nodes && this.state.nodes.map((node, i) => {
+ // renders the nodes ( the circles) to the screen
+    let nodes = this.state.nodes && this.state.nodes.map((node, i) => {
     return <g key={i} transform={ `translate(${node.x}, ${node.y/2})` }>
         <circle r="5" style={{'fill': 'blue'}}/>
         <text y="0" dy="0" textAnchor="middle">{ node.data.name }</text>

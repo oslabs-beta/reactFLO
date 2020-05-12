@@ -21,8 +21,8 @@ export const initialHook = () => {
       return function (...args) {
         test = args[1].current;
         // for debugging
-        // console.log('DOM: ', test);
-        // console.log('Con: ', extractData(test));
+        console.log('DOM: ', test);
+        console.log('Con: ', extractData(test));
         window.postMessage({ message: extractData(test), id: 'ReactFLO' }, '*');
         return original(...args);
       };

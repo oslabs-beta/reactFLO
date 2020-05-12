@@ -37,10 +37,7 @@ class App extends Component {
   // }
 
   render(){
-
-    //const childArr = []; 
-    //this.state.children.map((el, index)=> childArr.push(<h1 key={index}>{ el }</h1>))
-      
+ 
     return (
       <div>
       <h1>Hello from React!</h1>
