@@ -26,14 +26,11 @@ export const initialHook = () => {
         // for debugging
         console.log('DOM: ', test);
         console.log('Con: ', extractData(test));
-        const targetNode = extractData(test).children[0].children[0].children[1].children[0].children[0];
+        const targetNode = extractData(test).children[0].children[0].children[1].children[0].children[1];
         console.log('Tar: ', targetNode);
-        findHighestState(targetNode, targetNode.props[1], (node, prop)=>{
+        findHighestState(targetNode, targetNode.props[1], (node, prop) => {
           if (matchState(node, prop)) {
             console.log('node: ', node);
-          } else {
-            console.log('State: ', node.state);
-            console.log('Prop: ', prop);
           }
         });
         // traverseData(targetNode, targetNode.props[0], (node, prop)=> console.log('node: ', node))

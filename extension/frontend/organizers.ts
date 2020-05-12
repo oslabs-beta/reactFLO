@@ -1,10 +1,10 @@
-import { 
+import {
   DisplayNode, State,
 } from "../backend/interfaces";
 const circular = require('circular');
 
 // Check if any value, or nested value, in state matches the value of a prop
-export const matchState = (node: DisplayNode, prop: State):boolean => {
+export const matchState = (node: DisplayNode, prop: State): boolean => {
   // console.log('state', (JSON.stringify(node.state, circular())));
   // console.log('props', (JSON.stringify(prop.value, circular())));
   // Create a helper function to check every nested value in state
@@ -27,9 +27,9 @@ export const matchState = (node: DisplayNode, prop: State):boolean => {
     } else {
       // Return true if the values are equal and false if they are not
       return propValue === stateValue;
-    }    
+    }
   }
   // For each object in our state array
   // Check if our object's value is === to our props value
-  return recurse(node.state, prop.value);
+  return recurse(node.state.value, prop.value);
 };

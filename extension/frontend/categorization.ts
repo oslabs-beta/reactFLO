@@ -8,7 +8,7 @@ export const findHighestState = (node: DisplayNode, prop: State, callback: Funct
   // Create a helper recursive function
   const helper = (node: DisplayNode) => {
     // Check if a node has state
-    if (node.state && node.state.length > 0) {
+    if (node.state && node.state.value) {
       // Push node into stateful array
       statefulComps.push(node);
     }
