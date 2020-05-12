@@ -1,9 +1,8 @@
 import {
   DisplayNode, State,
 } from '../backend/interfaces';
-import { extractData } from '../backend/dataCollection';
 
-export const findHighestState = (node: DisplayNode, prop: State) => {
+export const findHighestState = (node: DisplayNode, prop: State, callback: Function) => {
   // Create an array of stateful components
   const statefulComps = [];
   // Create a helper recursive function
@@ -23,8 +22,8 @@ export const findHighestState = (node: DisplayNode, prop: State) => {
   // Check each stateful component for the value in prop
   for (const comp of statefulComps) {
     /* ------------------- Under Construction ------------------- */
-    // Return stateful component
-    return comp;
+    // Run the callback function on each component
+    callback(comp, prop);
   }
   // Return null if no stateful component contains the value
   return null;
@@ -37,4 +36,4 @@ export const traverseData = (node: DisplayNode, prop: State, callback: Function)
     callback(el, prop);
     traverseData(el, prop, callback);
   }
-}
+};
