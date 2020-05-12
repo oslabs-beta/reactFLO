@@ -5,13 +5,20 @@ import {
 export const findHighestState = (node: DisplayNode, prop: State, callback: Function) => {
   // Create an array of stateful components
   const statefulComps = [];
+  // Crete an array of components between the target node and a stateful node
+  let mediums = [];
   // Create a helper recursive function
   const helper = (node: DisplayNode) => {
     // Check if a node has state
     if (node.state && node.state.value) {
+      // Add the mediums to the stateful node's mediums property
+      node.mediums = [...mediums];
+      // Clear the mediums array
+      mediums = [];
       // Push node into stateful array
       statefulComps.push(node);
-    }
+      // If the node is not stateful, add it to the mediums array
+    } else mediums.push(node);
     // Return if parent node is null
     if (!node.parent) return;
     // Recursively call function on the parent of the current node

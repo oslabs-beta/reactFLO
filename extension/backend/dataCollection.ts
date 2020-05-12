@@ -14,6 +14,7 @@ class SimpleNode implements DisplayNode {
   state: State | null = null;
   children: DisplayNode[] = [];
   parent: DisplayNode | null = null;
+  mediums: DisplayNode[] = null;
   constructor(node: any, parent: DisplayNode | null) {
     this.id = node._debugID;
     this.tag = node.tag;

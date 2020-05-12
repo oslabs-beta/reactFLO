@@ -8,6 +8,7 @@ export interface DisplayNode {
   state: State | null,
   children: DisplayNode[] | null,
   parent: DisplayNode | null,
+  mediums: DisplayNode[] | null,
 }
 
 export interface State {

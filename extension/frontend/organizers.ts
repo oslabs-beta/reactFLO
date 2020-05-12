@@ -32,4 +32,10 @@ export const matchState = (node: DisplayNode, prop: State): void => {
   // For each object in our state array
   // Check if our object's value is === to our props value
   recurse(node.state.value, prop.value);
+  // Check if the node has medium nodes between it and the target or last stateful component
+  if (!node.mediums) return;
+  // Iterate through the mediums of the stateful component
+  for (const medium of node.mediums) {
+    medium.displayWeight = node.displayWeight;
+  }
 };
