@@ -29,9 +29,8 @@ export const initialHook = () => {
         const targetNode = extractData(test).children[0].children[0].children[1].children[0].children[1];
         console.log('Tar: ', targetNode);
         findHighestState(targetNode, targetNode.props[1], (node, prop) => {
-          if (matchState(node, prop)) {
-            console.log('node: ', node);
-          }
+          matchState(node, prop);
+          console.log('Stateful Node: ', node);
         });
         // traverseData(targetNode, targetNode.props[0], (node, prop)=> console.log('node: ', node))
         window.postMessage({ message: extractData(test), id: 'ReactFLO' }, '*');

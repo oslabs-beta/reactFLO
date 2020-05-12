@@ -7,6 +7,7 @@ import {
 class SimpleNode implements DisplayNode {
   id: number;
   displayName: string;
+  displayWeight: number = 0;
   tag: number;
   type: any;
   props: State[] | null = [];
