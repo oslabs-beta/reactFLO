@@ -4,7 +4,7 @@ export interface DisplayNode {
   tag: number,
   type: any,
   props: State[] | null,
-  state: State[] | null,
+  state: State | null,
   children: DisplayNode[] | null,
   parent: DisplayNode | null,
 }

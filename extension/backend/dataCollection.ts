@@ -2,6 +2,7 @@ import {
   DisplayNode,
   State,
 } from './interfaces';
+const circular = require('circular');
 
 
 class SimpleNode implements DisplayNode {
@@ -10,7 +11,7 @@ class SimpleNode implements DisplayNode {
   tag: number;
   type: any;
   props: State[] | null = [];
-  state: State[] | null = [];
+  state: State | null = null;
   children: DisplayNode[] = [];
   parent: DisplayNode | null = null;
   constructor(node: any, parent: DisplayNode | null) {
@@ -32,51 +33,15 @@ class SimpleNode implements DisplayNode {
 // Check if tag === 1
 // If so, memoizedState will be an object of key/value pairs of component state
 
-const convertState = (node) => {
-  if (!node.memoizedState) return;
-  // Create representations of state which can be queried
-  const stateArray: State[] = [];
-  for (const key in node.memoizedState) {
-    // console.log(counter,' ', `${key}: `, node.memoizedState[key]);
-    if (node.memoizedState.memoizedState && node._debugHookTypes[0] === 'useState') {
-      try {
-        // Create a prop object
-        const state: State = {
-          // Store values in object
-          key,
-          value: node.memoizedState[key] || null,
-          topComponent: null,
-          components: [],
-          type: 'hook',
-        };
-        // Push object to props array
-        stateArray.push(state);
-      } catch (error) {
-        console.log('error: ', key);
-        console.log('error: ', node.memoizedState[key]);
-        continue;
-      }
-    } else {
-      try {
-        // Create a prop object
-        const state: State = {
-          // Store values in object
-          key,
-          value: node.memoizedState[key] || null,
-          topComponent: null,
-          components: [],
-          type: 'componentState',
-        };
-        // Push object to props array
-        stateArray.push(state);
-      } catch (error) {
-        console.log('error: ', key);
-        console.log('error: ', node.memoizedState[key]);
-        continue;
-      }
-    }
+const convertState = (node): State => {
+  if (!node.memoizedState) return null;
+  return {
+    key: 'State',
+    value: node.memoizedState,
+    type: (node.memoizedState.memoizedState && node._debugHookTypes[0] === 'useState') ? 'hook' : 'componentState',
+    topComponent: null,
+    components: null,
   }
-  return stateArray;
 }
 
 // PROPS
@@ -125,9 +90,10 @@ const convertStructure = (node, parent=null) => {
     childNode = childNode.sibling;
   }
   // Return converted node
-  return convertedNode;
+  return convertedNode
 }
 
 export const extractData = (node) => {
-  return convertStructure(node);
+  const data = JSON.parse(JSON.stringify(convertStructure(node), circular()));
+  return data;
 }
