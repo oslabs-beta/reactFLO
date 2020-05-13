@@ -1,4 +1,5 @@
 import { extractData } from './dataCollection';
+const circular = require('circular');
 
 // dec variables to hold react global hook 
 //declare const window: any;
@@ -23,7 +24,9 @@ export const initialHook = () => {
         // for debugging
         console.log('DOM: ', test);
         console.log('Con: ', extractData(test));
-        window.postMessage({ message: extractData(test), id: 'ReactFLO' }, '*');
+        let obj = extractData(test);
+        // obj = JSON.parse(JSON.stringify(obj, circular()));
+        window.postMessage({ message: obj, id: 'ReactFLO' }, '*');
         return original(...args);
       };
     })(devTools.onCommitFiberRoot);
