@@ -2,6 +2,7 @@ import {
   DisplayNode,
   State,
 } from './interfaces';
+const circular = require('circular');
 
 
 class SimpleNode implements DisplayNode {
@@ -91,9 +92,10 @@ const convertStructure = (node, parent = null) => {
     childNode = childNode.sibling;
   }
   // Return converted node
-  return convertedNode;
+  return convertedNode
 }
 
 export const extractData = (node) => {
-  return convertStructure(node);
+  const data = JSON.parse(JSON.stringify(convertStructure(node), circular()));
+  return data;
 }
