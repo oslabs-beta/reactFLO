@@ -8,33 +8,25 @@ class App extends Component {
     super();
     this.state = {
       // backend obj stored here
-       message: {
-        message: [],
-        children: [],
-        props: [], 
-        state:[], 
-        tag: '',
-      }
+       data: {},
     }
   };
 
 
 
-  // componentDidMount(){
+  componentDidMount(){
     // confirm function is firing
     // this.setState({ array: 'hello from componentDidMount'})
 
-  //   chrome.runtime.onMessage.addListener((message)=>{
-  //     if (message.id === 'ReactFLO'){
-  //     this.setState({
-  //         children: message.message.children,
-  //         props: message.message.props,
-  //         state: message.message.state,
-  //         tag: message.message.tag,
-  //       })
-  //     }   
-  //   })
-  // }
+    chrome.runtime.onMessage.addListener((message)=>{
+      if (message.id === 'ReactFLO'){
+      console.log('CDM app: ', message.message)
+      this.setState({
+        data: message.message,
+       })
+      }   
+    })
+  }
 
   render(){
  
@@ -42,7 +34,7 @@ class App extends Component {
       <div>
       <h1>Hello from React!</h1>
       <div className="panelWrap">
-        <LeftPanel />
+        <LeftPanel data={ this.state.data }/>
         <RightPanel />
       </div>
       </div>

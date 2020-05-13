@@ -3,8 +3,8 @@ import React from "react";
 function RightPanel(props){
 
   return (
-    <div className="rightpanel">
-      <h1>Right Panel Headline</h1>
+    <div>
+      <h2>Right Panel Headline</h2>
       {/* <State /> */}
       {/* list of state */}
       {/* <Props /> */}

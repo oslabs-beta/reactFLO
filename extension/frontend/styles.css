@@ -1,18 +1,6 @@
-.panelWrap{
-  display:flex; 
-  justify-content: center;
-  align-items: center;
-}
-.LeftPanel{
-  display:flex; 
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
-}
-.RightPanel{
-  display:flex; 
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.panelWrap{
+  display: flex; 
+  justify-content: space-around;
+  align-items: flex-start;
 }
