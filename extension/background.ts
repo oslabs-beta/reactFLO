@@ -42,7 +42,6 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse){
     // Check if tabId corresponds to a devtool instance
     if (tabId in connections){
       // Send message to corresponding devtool instance
-      console.log("background message: ", msg)
       connections[tabId].postMessage(msg);
     } else {
       // Tells content script that connection was not made

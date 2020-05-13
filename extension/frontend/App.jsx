@@ -1,6 +1,6 @@
-import React, { Component, useRef } from "react";
-import { render } from "react-dom";
+import React, { Component } from "react";
 import LeftPanel from "./LeftPanel"
+import RightPanel from "./RightPanel"
 
 class App extends Component {
 
@@ -41,7 +41,10 @@ class App extends Component {
     return (
       <div>
       <h1>Hello from React!</h1>
-      <LeftPanel />
+      <div className="panelWrap">
+        <LeftPanel />
+        <RightPanel />
+      </div>
       </div>
     )
   }

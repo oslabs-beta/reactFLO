@@ -1,6 +1,6 @@
-const root = document.getElementById('root');
-const message = document.createElement('h1');
-root.appendChild(message);
+// const root = document.getElementById('root');
+// const message = document.createElement('h1');
+// root.appendChild(message);
 
 // Creates a connection to the background script
 const backgroundPageConnection = chrome.runtime.connect({
@@ -16,8 +16,8 @@ backgroundPageConnection.postMessage({
 // Listens for a message from background script
 backgroundPageConnection.onMessage.addListener((msg) => {
   // Test code: Renders messages from the background script to the dom
-  const newMessage = document.createElement('h2');
-  newMessage.innerText = msg.message;
-  root.appendChild(newMessage);
+  // const newMessage = document.createElement('h2');
+  // newMessage.innerText = msg.message;
+  // root.appendChild(newMessage);
 });
 

@@ -1,5 +1,4 @@
-import React, { Component, useRef } from "react";
-import { render } from "react-dom";
+import React, { Component } from "react";
 import * as d3 from "d3";
 
 class LeftPanel extends Component {
@@ -33,7 +32,7 @@ class LeftPanel extends Component {
     ]
   }
   // sets the heights and width of the tree to be passed into treemap 
-  const margin = {top: 40, right: 90, bottom: 50, left: 90};
+  const margin = {top: 0, right: 0, bottom: 0, left: 0};
   const height = 660 - margin.left - margin.right;
   const width = 700 - margin.top - margin.bottom;
 
@@ -60,7 +59,7 @@ class LeftPanel extends Component {
     // link vertical makes our entire tree go top to bottom as opposed to left to right 
       .linkVertical()
       .x((d) => {
-        return d.x;
+        return d.x/2;
       })
       .y((d) => {
         return d.y/2; // div by 2 so make the path links shorter and not as long 
@@ -72,7 +71,7 @@ class LeftPanel extends Component {
   })
  // renders the nodes ( the circles) to the screen
     let nodes = this.state.nodes && this.state.nodes.map((node, i) => {
-    return <g key={i} transform={ `translate(${node.x}, ${node.y/2})` }>
+    return <g key={i} transform={ `translate(${node.x/2}, ${node.y/2})` }>
         <circle r="5" style={{'fill': 'blue'}}/>
         <text y="0" dy="0" textAnchor="middle">{ node.data.name }</text>
     </g>
@@ -81,14 +80,15 @@ class LeftPanel extends Component {
     return (
       <div>
       <h1>Left Panel Headline</h1>
-      <svg style={{ width: '800px', height: '800px' }}>
-        <g transform='translate(0, 20)'>
-          {paths}
-          {nodes}
+      <svg style={{ width: '300px', height: '600px' }} viewBox={`25 -30 300 600`}>
+        <g>
+          { paths }
+          { nodes }
         </g>
       </svg>
     </div>
     )
   }
 }
+
 export default LeftPanel;
