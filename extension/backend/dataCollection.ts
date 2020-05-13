@@ -8,19 +8,21 @@ const circular = require('circular');
 class SimpleNode implements DisplayNode {
   id: number;
   displayName: string;
+  displayWeight: number = 0;
   tag: number;
   type: any;
   props: State[] | null = [];
   state: State | null = null;
   children: DisplayNode[] = [];
   parent: DisplayNode | null = null;
-  constructor(node: any, parent: DisplayNode | null) {
+  mediums: DisplayNode[] = null;
+  constructor(node: any) {
     this.id = node._debugID;
     this.tag = node.tag;
     this.type = node.type;
     this.state = convertState(node);
     this.props = convertProps(node);
-    this.parent = parent;
+    this.parent = null;
   }
 }
 
@@ -37,7 +39,8 @@ const convertState = (node): State => {
   if (!node.memoizedState) return null;
   return {
     key: 'State',
-    value: node.memoizedState,
+    // Spread operator prevents unwanted circular references
+    value: {...node.memoizedState},
     type: (node.memoizedState.memoizedState && node._debugHookTypes[0] === 'useState') ? 'hook' : 'componentState',
     topComponent: null,
     components: null,
@@ -61,7 +64,7 @@ const convertProps = (node) => {
       const prop: State = {
         // Store values in object
         key,
-        value: node.memoizedProps[key] || null,
+        value: node.memoizedProps[key],
         topComponent: null,
         components: [],
         type: 'prop',
@@ -76,17 +79,17 @@ const convertProps = (node) => {
   return props;
 }
 
-const convertStructure = (node, parent=null) => {
+const convertStructure = (node) => {
   // Convert dual linked list structure into graph
   // Create a new node
-  const convertedNode = new SimpleNode(node, parent);
+  const convertedNode = new SimpleNode(node);
   // Add child to array
   if (!node.child) return convertedNode;
-  convertedNode.children.push(convertStructure(node.child, convertedNode));
+  convertedNode.children.push(convertStructure(node.child));
   // ConvertStructure() of each sibling and sibling of sibling etc. and add them to children array
   let childNode = node.child;
   while (childNode.sibling) {
-    convertedNode.children.push(convertStructure(childNode.sibling, convertedNode));
+    convertedNode.children.push(convertStructure(childNode.sibling));
     childNode = childNode.sibling;
   }
   // Return converted node

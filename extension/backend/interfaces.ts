@@ -1,12 +1,14 @@
 export interface DisplayNode {
   id: number,
   displayName: string,
+  displayWeight: number,
   tag: number,
   type: any,
   props: State[] | null,
   state: State | null,
   children: DisplayNode[] | null,
   parent: DisplayNode | null,
+  mediums: DisplayNode[] | null,
 }
 
 export interface State {
