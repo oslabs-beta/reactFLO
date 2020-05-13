@@ -26,10 +26,10 @@ const injectScript =  (file, tag) => {
 
 // Listening for message from injected script - inject.js
 window.addEventListener('message', e => {
-  // console.log('window event listener e: ', e);
+
   // Making sure the event listened too is from the window 
   if (e.data.id === 'ReactFLO' && e.source === window) {
-    console.log('Data: ', e.data);
+    // console.log('backend data from contentscripts: ', e.data);
     sendMessage(e.data);
   }
 });
@@ -38,4 +38,4 @@ window.addEventListener('message', e => {
 injectScript(chrome.runtime.getURL('/inject.js'), 'body');
 
 // Test message:
-sendMessage({ message: 'Hello from Content Scripts' });
+// sendMessage({ message: 'Hello from Content Scripts' });

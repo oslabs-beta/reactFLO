@@ -25,7 +25,7 @@ export const initialHook = () => {
         console.log('DOM: ', test);
         console.log('Con: ', extractData(test));
         let obj = extractData(test);
-        // obj = JSON.parse(JSON.stringify(obj, circular()));
+        // console.log("initialHook obj: ", obj)
         window.postMessage({ message: obj, id: 'ReactFLO' }, '*');
         return original(...args);
       };

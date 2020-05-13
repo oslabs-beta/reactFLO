@@ -11,7 +11,11 @@
     "js": ["contentscript.js"]
     }],
   "web_accessible_resources": [
-    "inject.js"
+    "inject.js",
+    "main.js"
+  ],
+  "permissions": [
+    "*://*/*"
   ],
   "manifest_version": 2 
 }
