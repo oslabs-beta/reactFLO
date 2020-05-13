@@ -25,7 +25,7 @@ class App extends Component {
         data: message.message,
        })
       }   
-    })
+   })
   }
 
   render(){
