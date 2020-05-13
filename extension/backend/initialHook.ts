@@ -2,6 +2,8 @@ import { extractData } from './dataCollection';
 import { findHighestState } from "../frontend/categorization";
 import { traverseData } from "../frontend/categorization";
 import { matchState } from "../frontend/organizers";
+import { assignChildren } from "../frontend/assignChildren";
+import { State, DisplayNode } from './interfaces';
 
 // dec variables to hold react global hook 
 //declare const window: any;
@@ -28,12 +30,19 @@ export const initialHook = () => {
         console.log('Con: ', extractData(test));
         const targetNode = extractData(test).children[0].children[0].children[1].children[0].children[1];
         console.log('Tar: ', targetNode);
-        console.log('Top Node: ', findHighestState(targetNode, targetNode.props[1], (node, prop) => {
+        window.postMessage({ message: extractData(test), id: 'ReactFLO' }, '*');
+
+        const stateTest = extractData(test);
+        assignChildren(stateTest);
+        console.log('state', stateTest);
+        const stateTarget = stateTest.children[0].children[0].children[1].children[0].children[1]
+        console.log('Top Node: ', findHighestState(stateTarget, stateTarget.props[1], (node: DisplayNode, prop: State) => {
+          console.log(stateTarget)
           matchState(node, prop);
           console.log('Stateful Node: ', node);
+          console.log(prop.value);
         }));
         // traverseData(targetNode, targetNode.props[0], (node, prop)=> console.log('node: ', node))
-        window.postMessage({ message: extractData(test), id: 'ReactFLO' }, '*');
         return original(...args);
       };
     })(devTools.onCommitFiberRoot);
