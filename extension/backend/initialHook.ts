@@ -1,5 +1,9 @@
 import { extractData } from './dataCollection';
-const circular = require('circular');
+import { findHighestState } from "../frontend/categorization";
+import { traverseData } from "../frontend/categorization";
+import { matchState } from "../frontend/organizers";
+import { assignChildren } from "../frontend/assignChildren";
+import { State, DisplayNode } from './interfaces';
 
 // dec variables to hold react global hook 
 //declare const window: any;
@@ -24,9 +28,21 @@ export const initialHook = () => {
         // for debugging
         console.log('DOM: ', test);
         console.log('Con: ', extractData(test));
-        let obj = extractData(test);
-        // console.log("initialHook obj: ", obj)
-        window.postMessage({ message: obj, id: 'ReactFLO' }, '*');
+        const targetNode = extractData(test).children[0].children[0].children[1].children[0].children[1];
+        console.log('Tar: ', targetNode);
+        window.postMessage({ message: extractData(test), id: 'ReactFLO' }, '*');
+
+        const stateTest = extractData(test);
+        assignChildren(stateTest);
+        console.log('state', stateTest);
+        const stateTarget = stateTest.children[0].children[0].children[1].children[0].children[1]
+        console.log('Top Node: ', findHighestState(stateTarget, stateTarget.props[1], (node: DisplayNode, prop: State) => {
+          console.log(stateTarget)
+          matchState(node, prop);
+          console.log('Stateful Node: ', node);
+          console.log(prop.value);
+        }));
+        // traverseData(targetNode, targetNode.props[0], (node, prop)=> console.log('node: ', node))
         return original(...args);
       };
     })(devTools.onCommitFiberRoot);
