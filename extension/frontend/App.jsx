@@ -15,8 +15,6 @@ class App extends Component {
     this.selectNode = this.selectNode.bind(this);
   };
 
-
-
   componentDidMount(){
     // confirm function is firing
     // this.setState({ array: 'hello from componentDidMount'})
