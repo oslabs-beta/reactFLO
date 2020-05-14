@@ -10,7 +10,7 @@ function PropDisplay(props) {
   });
   return (
     <div>
-      <h1> {props.title}</h1>
+      <h2> {props.title}</h2>
       {propArray}
     </div>
   );
@@ -21,8 +21,7 @@ function PrinceAndThePropper(props) {
   console.log("supposed to be yaySON:", JSON.stringify(props.nodeValue))
   return (
     <div>
-      <button onClick={()=>props.selectProp(props.nodeProp)}>🔎</button>
-      <span>{props.nodeProp.key}:</span>
+      <button onClick={()=>props.selectProp(props.nodeProp)}>🔎 Key: {props.nodeProp.key}</button>
       <ReactJson src={{[props.nodeProp.key]: props.nodeProp.value}} name='Value' collapsed={true} enableClipboard={false} />
     </div>
   );

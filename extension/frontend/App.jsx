@@ -37,6 +37,7 @@ class App extends Component {
         console.log('CDM app: ', message.message)
         this.setState({
           data: message.message,
+          clickedNode: {},
         })
       }
     })
