@@ -11,6 +11,7 @@ function RightPanel(props){
     <div>
       <h2>Right Panel Headline</h2>
       <h1> Component Type: {type || "didnt work foo"}</h1>
+      <button onClick={props.clearTree}>Clear Selection</button>
       <StateDisplay title='State' json={ state ? state.value : null } />
       <PropDisplay title='Prop' propList={props.clickedNode.props} selectProp={props.selectProp} />
     </div> 

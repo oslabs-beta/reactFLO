@@ -4,8 +4,15 @@ import RightPanel from "./RightPanel"
 import { DisplayNode, State } from "../backend/interfaces";
 import { assignChildren } from "./assignChildren";
 import { matchState } from "./organizers";
-import { findHighestState } from "./categorization";
+import { findHighestState, traverseData } from "./categorization";
 import circular from "circular"
+
+const resetDisplayWeights = (node) => {
+  return traverseData(node, null, (childNode) => {
+      // if the weight is more than 0 resasign it to 0 
+      if(childNode.displayWeight) childNode.displayWeight = 0; 
+  });
+};
 
 class App extends Component {
 
@@ -18,7 +25,8 @@ class App extends Component {
     }
     this.selectNode = this.selectNode.bind(this);
     this.selectProp = this.selectProp.bind(this);
-  };
+    this.clearTree = this.clearTree.bind(this);
+   };
 
   componentDidMount(){
     // confirm function is firing
@@ -44,14 +52,28 @@ class App extends Component {
 
   // handle click, when clicked invoke algo, 
   selectProp(prop) {
+    // Reset results from previous selection
+    resetDisplayWeights(this.state.data);
     console.log("this prop in right panel is being hit ")
     // top level method needed before we invoke match and highest. This method allows children to connect with parents. Runs through 
     assignChildren(this.state.data);
       // find highest runs cb match state on stateful comoponent 
       findHighestState(this.state.clickedNode, prop, matchState);
           this.setState({
+            // data: this.state.data,
             data: JSON.parse(JSON.stringify(this.state.data, circular())),
           });
+  }
+  // clearTree (affecting the re render )
+  // invoke traverseDtta passing in anon cb that we write change all display weights
+  clearTree(){
+    // invoke resetDisplay weight so data is changed 
+    resetDisplayWeights(this.state.data);
+    // do setstate to re render the actual tree 
+    this.setState({
+      // data: this.state.data,
+      data: JSON.parse(JSON.stringify(this.state.data, circular())),
+    });
   }
 
   render(){
@@ -60,7 +82,7 @@ class App extends Component {
       <div>
       <div className="panelWrap">
         <LeftPanel data={ this.state.data } selectNode = {this.selectNode}/>
-        <RightPanel clickedNode={this.state.clickedNode} selectProp={this.selectProp} />
+        <RightPanel clickedNode={this.state.clickedNode} selectProp={this.selectProp} clearTree={this.clearTree}/>
       </div>
       </div>
     )
