@@ -17,7 +17,7 @@ class SimpleNode implements DisplayNode {
   parent: DisplayNode | null = null;
   mediums: DisplayNode[] = null;
   constructor(node: any) {
-    this.id = node._debugID;
+    this.id = checkDebug(node);
     this.tag = node.tag;
     this.type = node.type;
     this.state = convertState(node);
@@ -40,11 +40,17 @@ const convertState = (node): State => {
   return {
     key: 'State',
     // Spread operator prevents unwanted circular references
-    value: {...node.memoizedState},
+    value: { ...node.memoizedState },
     type: (node.memoizedState.memoizedState && node._debugHookTypes[0] === 'useState') ? 'hook' : 'componentState',
     topComponent: null,
     components: null,
   }
+}
+
+// Check for debug id
+const checkDebug = (node) => {
+  if (node._debugID) return node._debugID;
+  return null;
 }
 
 // PROPS
