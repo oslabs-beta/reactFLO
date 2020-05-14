@@ -5,31 +5,31 @@ import { DisplayNode, State } from "../backend/interfaces";
 
 class App extends Component {
 
-  constructor(){
+  constructor() {
     super();
     this.state = {
       // backend obj stored here
-       data: {},
-       clickedNode: {},
+      data: {},
+      clickedNode: {},
     }
     this.selectNode = this.selectNode.bind(this);
   };
 
-  componentDidMount(){
+  componentDidMount() {
     // confirm function is firing
     // this.setState({ array: 'hello from componentDidMount'})
 
-    chrome.runtime.onMessage.addListener((message)=>{
-      if (message.id === 'ReactFLO'){
-      console.log('CDM app: ', message.message)
-      this.setState({
-        data: message.message,
-       })
-      }   
-   })
+    chrome.runtime.onMessage.addListener((message) => {
+      if (message.id === 'ReactFLO') {
+        console.log('CDM app: ', message.message)
+        this.setState({
+          data: message.message,
+        })
+      }
+    })
   }
 
-  selectNode(node){
+  selectNode(node) {
     // assign state
     console.log('Selected: ', node);
     this.setState({
@@ -37,17 +37,17 @@ class App extends Component {
     });
   }
 
-  render(){
- 
+  render() {
+
     return (
       <div>
-      <div className="panelWrap">
-        <LeftPanel data={ this.state.data } selectNode = {this.selectNode}/>
-        <RightPanel clickedNode={this.state.clickedNode} />
-      </div>
+        <div className="panelWrap">
+          <LeftPanel data={this.state.data} selectNode={this.selectNode} />
+          <RightPanel clickedNode={this.state.clickedNode} />
+        </div>
       </div>
     )
   }
- 
 }
+
 export default App;

@@ -1,7 +1,7 @@
 // Test code
-const injectedStuff = document.createElement('h1');
-injectedStuff.innerText = 'Ya got hacked nerd!';
-document.body.appendChild(injectedStuff);
+// const injectedStuff = document.createElement('h1');
+// injectedStuff.innerText = 'Ya got hacked nerd!';
+// document.body.appendChild(injectedStuff);
 
 // Function will send a message to the background script 
 const sendMessage = (message) => {
@@ -16,12 +16,12 @@ const sendMessage = (message) => {
 }
 
 // Function will attach script to the dom 
-const injectScript =  (file, tag) => {
+const injectScript = (file, tag) => {
   const htmlBody = document.getElementsByTagName(tag)[0];
   const script = document.createElement('script');
   script.setAttribute('type', 'text/javascript');
   script.setAttribute('src', file);
-  htmlBody.appendChild(script); 
+  htmlBody.appendChild(script);
 }
 
 // Listening for message from injected script - inject.js
