@@ -3,8 +3,6 @@ import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
 import { DisplayNode, State } from "../backend/interfaces";
 
-
-
 class App extends Component {
 
   constructor() {
@@ -14,7 +12,6 @@ class App extends Component {
       data: {},
       clickedNode: {},
     }
-
     this.selectNode = this.selectNode.bind(this);
   };
 
@@ -40,16 +37,17 @@ class App extends Component {
     });
   }
 
-
   render() {
 
     return (
-      <div className="panelWrap">
-        <LeftPanel data={this.state.data} selectNode={this.selectNode} />
-        <RightPanel clickedNode={this.state.clickedNode} />
+      <div>
+        <div className="panelWrap">
+          <LeftPanel data={this.state.data} selectNode={this.selectNode} />
+          <RightPanel clickedNode={this.state.clickedNode} />
+        </div>
       </div>
     )
   }
-
 }
+
 export default App;
