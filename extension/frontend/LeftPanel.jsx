@@ -91,23 +91,32 @@ class LeftPanel extends Component {
 
         {/* Change shape of node depending on if it is stateful or not*/}
         {/* Also changes the color of the node depending on displayWeight */}
-        {node.data.state !== null ?
+
+        
+        { node.data.state !== null ?
           <rect x="-5" y="0" width="10" height="10"
             style={{
               'fill':
                 node.data.displayWeight === 0 ? 'gray' :
-                  (node.data.displayWeight === 0.5 ? 'yellow' : 'green')
+                  (node.data.displayWeight === 0.5 ? 'yellow' :
+                   this.props.clickedNode === node ? 'red' :
+                  'green'
+                  )
             }} />
           :
           <circle r="4"
             style={{
               'fill':
                 node.data.displayWeight === 0 ? 'gray' :
-                  (node.data.displayWeight === 0.5 ? 'yellow' : 'green')
+                  (node.data.displayWeight === 0.5 ? 'yellow' : 
+                  this.props.clickedNode === node ? 'red' :
+                  'green')
             }} />
-        }
-
+          }
+      
+          
         <text x="8" y="4" textAnchor="start">{node.data.type}</text>
+
       </g>
     })
 
