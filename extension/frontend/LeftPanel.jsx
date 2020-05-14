@@ -7,43 +7,42 @@ class LeftPanel extends Component {
     this.state = {
       paths: [],
       nodes: [],
-      data: {}
+      data: {},
+      toggleChild: true
     }
+    this.toggleChildren = this.toggleChildren.bind(this);
  }
 
-  componentDidUpdate(){
-    // confirm that backend data is getting updated 
-    console.log("CPU leftpanel props: ", this.props.data)
+componentDidUpdate(){
+  // confirm that backend data is getting updated 
+  console.log("CPU leftpanel props: ", this.props.data)
+}
+
+toggleChildren (d) {
+
+  if (d.data.children) {
+    d.data._children = d.data.children;
+    d.data.children = null;
+  } else {
+    d.data.children = d.data._children;
+    d.data._children = null;
   }
 
- componentDidMount(){
-   // creating the root data that will be passed into the heiarchy function for D3 
-  //  const data = {
-  //   "name": "Rootington",
-  //   "children": [
-  //     {
-  //       "name": "Joe",
-  //       "children": [
-  //         {"name": "Cherizzle"},
-  //         {"name": "Bob"}
-  //       ]
-  //     }, {
-  //       "name": "Jimmy",
-  //       "children": [
-  //         {"name": "Marcus"},
-  //         {"name": "Juan"}
-  //       ]
-  //     }
-  //   ]
-  // }
+  this.setState({
+    toggleChild: !this.state.toggleChild
+  })
+}
 
- }
+
+
+
+
+
  // ** there are two parts two the tree, the nodes (circles) and the path links (the lines that connect the nodes)
  // below one method is creating the lines and the other is creating all the nodes 
 
  render(){
   const stateData = this.props.data;
-  console.log("CPM leftpanel props: ", this.props.data)
 
   // sets the heights and width of the tree to be passed into treemap 
   const margin = {top: 0, right: 0, bottom: 0, left: 0};
@@ -82,9 +81,11 @@ class LeftPanel extends Component {
             stroke="#97a6ff" 
             strokeWidth="2px" d={d(el)} />
   })
+
+
  // renders the nodes (the circles) to the screen
  nodes = nodes && nodes.map((node, i) => {
-  return <g key={i} transform={`translate(${node.x / 2}, ${node.y / 2})`}>
+  return <g key={i} transform={`translate(${node.x / 2}, ${node.y / 2})`}  onDoubleClick={()=> this.toggleChildren(node)}>
   {/* Change shape of node depending on if it is stateful or not*/}
   {/* Also changes the color of the node depending on displayWeight */}
   { node.data.state === null ? 
@@ -103,15 +104,7 @@ class LeftPanel extends Component {
     <text y="0" dy="0" textAnchor="middle">{node.data.type}</text>
   </g>
 })
-  
-  {/* { node.data.state === null ? 
-        <rect x="-3" y="0" width="7" height="7" /> :
-        <circle r="3" 
-        style={{ 'fill' :
-         node.data.displayWeight === 0 ? 'gray' :
-           (node.data.displayWeight === 0.5 ? 'yellow' : 'green') */}
 
-  console.log("nodes: ", nodes)
     return (
       <div>
       <h2>Left Panel Headline</h2>
