@@ -40,6 +40,7 @@ export const findHighestState = (node: DisplayNode, prop: State, callback: Funct
 };
 
 export const traverseData = (node: DisplayNode, prop: State, callback: Function) => {
+  if (!node.children) return;
   // Look at top level stateful component
   for (const el of node.children) {
     // Apply callback function to each child
