@@ -34,10 +34,9 @@ toggleChildren (d) {
   })
 }
 
- // ** there are two parts two the tree, the nodes (circles) and the path links (the lines that connect the nodes)
- // below one method is creating the lines and the other is creating all the nodes 
 
  render(){
+  // data from the backend from hooking into react devtools
   const stateData = this.props.data;
 
   // sets the heights and width of the tree to be passed into treemap 
@@ -53,9 +52,11 @@ toggleChildren (d) {
   // create the final map with nodes created from data
   const finalMap = treeMap(hierarchyNodes)
 
-  // returns a flat array of objects containing all the parent-child links. When turned into a component this will make the lines 
+  // returns a flat array of objects containing all the parent-child links
+  // this will render the paths onto the component
   let paths = finalMap.links();
-  // returns a flat array of objects. Each obj has info about each node, when turned into a component this will make the actual nodes themselves and allow us to make shapes 
+  // returns a flat array of objects
+  // this will render the nodes onto the component
   let nodes = hierarchyNodes.descendants();
   
 
