@@ -91,8 +91,8 @@ class LeftPanel extends Component {
 
         {/* Change shape of node depending on if it is stateful or not*/}
         {/* Also changes the color of the node depending on displayWeight */}
-        {node.data.state === null ?
-          <rect x="-3" y="0" width="10" height="10"
+        {node.data.state !== null ?
+          <rect x="-5" y="0" width="10" height="10"
             style={{
               'fill':
                 node.data.displayWeight === 0 ? 'gray' :
@@ -107,13 +107,13 @@ class LeftPanel extends Component {
             }} />
         }
 
-        <text y="0" dy="0" textAnchor="middle">{node.data.type}</text>
+        <text x="8" y="4" textAnchor="start">{node.data.type}</text>
       </g>
     })
 
     return (
       <div>
-        <h2>Left Panel Headline</h2>
+        <h2>Component Tree</h2>
         <Stage width="500" height="1000">
           <ZoomContainer>
             {paths}
