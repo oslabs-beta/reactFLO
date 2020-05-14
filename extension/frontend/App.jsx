@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
+import { DisplayNode, State } from "../backend/interfaces";
 
 class App extends Component {
 
@@ -9,7 +10,9 @@ class App extends Component {
     this.state = {
       // backend obj stored here
        data: {},
+       clickedNode: {},
     }
+    this.selectNode = this.selectNode.bind(this);
   };
 
 
@@ -28,14 +31,21 @@ class App extends Component {
    })
   }
 
+  selectNode(node){
+    // assign state
+    console.log('Selected: ', node);
+    this.setState({
+      clickedNode: node,
+    });
+  }
+
   render(){
  
     return (
       <div>
-      <h1>Hello from React!</h1>
       <div className="panelWrap">
-        <LeftPanel data={ this.state.data }/>
-        <RightPanel />
+        <LeftPanel data={ this.state.data } selectNode = {this.selectNode}/>
+        <RightPanel clickedNode={this.state.clickedNode} />
       </div>
       </div>
     )
