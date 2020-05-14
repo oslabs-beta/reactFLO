@@ -83,13 +83,33 @@ class LeftPanel extends Component {
             strokeWidth="2px" d={d(el)} />
   })
  // renders the nodes (the circles) to the screen
-    nodes = nodes && nodes.map((node, i) => {
-      console.log("inside of node creation: ", node)
-    return <g key={i} transform={ `translate(${node.x/2}, ${node.y/2})` } >
-        { node.data.state === null ? <rect x="-3" y="0" width="7" height="7" /> : <circle r="3" style={{ 'fill' : 'blue' }} /> }
-        <text y="0" dy="0" textAnchor="middle">{ node.data.type }</text>
-    </g>
-  })
+ nodes = nodes && nodes.map((node, i) => {
+  return <g key={i} transform={`translate(${node.x / 2}, ${node.y / 2})`}>
+  {/* Change shape of node depending on if it is stateful or not*/}
+  {/* Also changes the color of the node depending on displayWeight */}
+  { node.data.state === null ? 
+    <rect x="-3" y="0" width="7" height="7" 
+    style={{ 'fill' :
+    node.data.displayWeight === 0 ? 'gray' :
+    (node.data.displayWeight === 0.5 ? 'yellow' : 'green')
+    }}/>
+    :
+    <circle r="2" 
+    style={{ 'fill' :
+    node.data.displayWeight === 0 ? 'gray' :
+    (node.data.displayWeight === 0.5 ? 'yellow' : 'green') }} />
+  }
+  
+    <text y="0" dy="0" textAnchor="middle">{node.data.type}</text>
+  </g>
+})
+  
+  {/* { node.data.state === null ? 
+        <rect x="-3" y="0" width="7" height="7" /> :
+        <circle r="3" 
+        style={{ 'fill' :
+         node.data.displayWeight === 0 ? 'gray' :
+           (node.data.displayWeight === 0.5 ? 'yellow' : 'green') */}
 
   console.log("nodes: ", nodes)
     return (
