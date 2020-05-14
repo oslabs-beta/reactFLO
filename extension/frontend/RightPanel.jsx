@@ -12,7 +12,7 @@ function RightPanel(props){
       <h2>Right Panel Headline</h2>
       <h1> Component Type: {type || "didnt work foo"}</h1>
       <StateDisplay title='State' json={ state ? state.value : null } />
-      <PropDisplay title='Prop' propList={props.clickedNode.props} />
+      <PropDisplay title='Prop' propList={props.clickedNode.props} selectProp={props.selectProp} />
     </div> 
   )}
 

@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
 import { DisplayNode, State } from "../backend/interfaces";
+import { assignChildren } from "./assignChildren";
+import { matchState } from "./organizers";
+import { findHighestState } from "./categorization";
+import circular from "circular"
 
 class App extends Component {
 
@@ -13,6 +17,7 @@ class App extends Component {
        clickedNode: {},
     }
     this.selectNode = this.selectNode.bind(this);
+    this.selectProp = this.selectProp.bind(this);
   };
 
   componentDidMount(){
@@ -37,13 +42,25 @@ class App extends Component {
     });
   }
 
+  // handle click, when clicked invoke algo, 
+  selectProp(prop) {
+    console.log("this prop in right panel is being hit ")
+    // top level method needed before we invoke match and highest. This method allows children to connect with parents. Runs through 
+    assignChildren(this.state.data);
+      // find highest runs cb match state on stateful comoponent 
+      findHighestState(this.state.clickedNode, prop, matchState);
+          this.setState({
+            data: JSON.parse(JSON.stringify(this.state.data, circular())),
+          });
+  }
+
   render(){
  
     return (
       <div>
       <div className="panelWrap">
         <LeftPanel data={ this.state.data } selectNode = {this.selectNode}/>
-        <RightPanel clickedNode={this.state.clickedNode} />
+        <RightPanel clickedNode={this.state.clickedNode} selectProp={this.selectProp} />
       </div>
       </div>
     )
