@@ -12,7 +12,7 @@ export function ZoomContainer({ children }) {
     const zoom = d3.zoom().on("zoom", function () {
       setTransform(d3.event.transform)
     })
-    selection.call(zoom)
+    selection.call(zoom).on("dblclick.zoom", null)
     return () => selection.on(".zoom", null)
   }, [svgElement])
 

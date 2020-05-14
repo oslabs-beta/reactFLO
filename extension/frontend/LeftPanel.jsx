@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import * as d3 from "d3";
 
+import { Stage } from "./Stage"
+import { ZoomContainer } from "./ZoomContainer"
+
 class LeftPanel extends Component {
   constructor(props) {
     super(props);
@@ -41,8 +44,8 @@ class LeftPanel extends Component {
 
     // sets the heights and width of the tree to be passed into treemap 
     const margin = { top: 0, right: 0, bottom: 0, left: 0 };
-    const height = 660 - margin.left - margin.right;
-    const width = 700 - margin.top - margin.bottom;
+    const height = 1000 - margin.left - margin.right;
+    const width = 1000 - margin.top - margin.bottom;
 
     // creating the tree itself
     // setting the size based on previous heights declared above 
@@ -111,8 +114,12 @@ class LeftPanel extends Component {
     return (
       <div>
         <h2>Left Panel Headline</h2>
-        {paths}
-        {nodes}
+        <Stage width="500" height="1000">
+          <ZoomContainer>
+            {paths}
+            {nodes}
+          </ZoomContainer>
+        </Stage>
       </div>
     )
   }
