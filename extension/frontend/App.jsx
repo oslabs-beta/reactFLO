@@ -3,7 +3,7 @@ import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
 import { DisplayNode, State } from "../backend/interfaces";
 import { assignChildren } from "./assignChildren";
-import { matchState } from "./organizers";
+import { matchState, matchProps } from "./organizers";
 import { findHighestState, traverseData } from "./categorization";
 import circular from "circular"
 
@@ -57,11 +57,12 @@ class App extends Component {
     console.log("this prop in right panel is being hit ")
     // top level method needed before we invoke match and highest. This method allows children to connect with parents. Runs through 
     assignChildren(this.state.data);
-      // find highest runs cb match state on stateful comoponent 
-      findHighestState(this.state.clickedNode, prop, matchState);
-          this.setState({
-            data: this.state.data,
-          });
+    // find highest runs cb match state on stateful comoponent 
+    const topNode = findHighestState(this.state.clickedNode, prop, matchState);
+    traverseData(topNode, prop, matchProps);
+    this.setState({
+      data: this.state.data,
+    });
   }
   // clearTree (affecting the re render )
   // invoke traverseDtta passing in anon cb that we write change all display weights

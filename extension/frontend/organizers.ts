@@ -44,3 +44,12 @@ const iterateMediums = (node: DisplayNode): void => {
     medium.displayWeight = node.displayWeight;
   }
 };
+
+export const matchProps = (node: DisplayNode, targetProp: State) => {
+  for (const prop of node.props) {
+    if (prop.key === targetProp.key) {
+      node.displayWeight = Math.max(.5, node.displayWeight);
+      if (prop.value === targetProp.value) node.displayWeight = Math.max(1, node.displayWeight);
+    }
+  }
+}
