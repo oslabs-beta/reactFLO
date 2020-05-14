@@ -80,7 +80,12 @@ toggleChildren (d) {
 
  // renders the nodes (the circles) to the screen
  nodes = nodes && nodes.map((node, i) => {
-  return <g key={i} transform={`translate(${node.x / 2}, ${node.y / 2})`}  onDoubleClick={()=> this.toggleChildren(node)}>
+  return <g 
+  key={i} transform={`translate(${node.x / 2}, ${node.y / 2})`}  
+  onClick={()=>this.props.selectNode(node.data)} 
+  onDoubleClick={()=> this.toggleChildren(node)}
+  >
+  
   {/* Change shape of node depending on if it is stateful or not*/}
   {/* Also changes the color of the node depending on displayWeight */}
   { node.data.state === null ? 
