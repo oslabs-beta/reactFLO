@@ -6,7 +6,7 @@ export const findHighestState = (node: DisplayNode, prop: State, callback: Funct
   // Create an array of stateful components
   const statefulComps: DisplayNode[] = [];
   // Crete an array of components between the target node and a stateful node
-  let mediums = [];
+  let mediums = [node];
   // Create a helper recursive function
   const helper = (node: DisplayNode) => {
     // Check if a node has state
