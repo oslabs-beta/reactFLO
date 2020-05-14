@@ -4,13 +4,13 @@ import ReactJson from "react-json-view";
 function PropDisplay(props) {
   console.log('Prop Display Props: ', props);
   // If no data is passed down render nothing
-  if (!props.propList || !props.propList.length) return <div>{props.title} not found</div>
+  if (!props.propList || !props.propList.length) return <div></div>
   const propArray = props.propList.map((el, i)=>{
     return <PrinceAndThePropper key={`prop${i}`} nodeProp ={el} selectProp={props.selectProp} />
   });
   return (
     <div>
-      <title> {props.title}</title>
+      <h1> {props.title}</h1>
       {propArray}
     </div>
   );
