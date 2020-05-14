@@ -3,10 +3,10 @@ import ReactJson from "react-json-view";
 
 function StateDisplay(props) {
   // If no data is passed down render nothing
-  if (!props.json) return <div>{props.title} not found</div>
+  if (!props.json) return <div></div>
   return (
     <div>
-      <title> {props.title}</title>
+      <h1> {props.title}</h1>
       <ReactJson src={props.json} name={props.title} collapsed={true} enableClipboard={false} />
     </div>
   );
