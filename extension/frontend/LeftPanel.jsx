@@ -113,7 +113,7 @@ class LeftPanel extends Component {
 
     return (
       <div>
-        <h2>Component Tree</h2>
+        <h1>Component Tree</h1>
         <Stage width="500" height="1000">
           <ZoomContainer>
             {paths}

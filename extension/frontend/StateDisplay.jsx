@@ -6,7 +6,7 @@ function StateDisplay(props) {
   if (!props.json) return <div></div>
   return (
     <div>
-      <h1> {props.title}</h1>
+      <h2> {props.title}</h2>
       <ReactJson src={props.json} name={props.title} collapsed={true} enableClipboard={false} />
     </div>
   );
