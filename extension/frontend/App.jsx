@@ -60,8 +60,7 @@ class App extends Component {
       // find highest runs cb match state on stateful comoponent 
       findHighestState(this.state.clickedNode, prop, matchState);
           this.setState({
-            // data: this.state.data,
-            data: JSON.parse(JSON.stringify(this.state.data, circular())),
+            data: this.state.data,
           });
   }
   // clearTree (affecting the re render )
@@ -71,8 +70,7 @@ class App extends Component {
     resetDisplayWeights(this.state.data);
     // do setstate to re render the actual tree 
     this.setState({
-      // data: this.state.data,
-      data: JSON.parse(JSON.stringify(this.state.data, circular())),
+      data: this.state.data,
     });
   }
 
