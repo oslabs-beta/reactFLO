@@ -32,7 +32,6 @@ class App extends Component {
  
     return (
       <div>
-      <h1>Hello from React!</h1>
       <div className="panelWrap">
         <LeftPanel data={ this.state.data }/>
         <RightPanel />

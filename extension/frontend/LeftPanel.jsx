@@ -84,13 +84,14 @@ class LeftPanel extends Component {
   })
  // renders the nodes (the circles) to the screen
     nodes = nodes && nodes.map((node, i) => {
-    return <g key={i} transform={ `translate(${node.x/2}, ${node.y/2})` }>
-        <circle r="2" style={{'fill': 'blue'}}/>
+      console.log("inside of node creation: ", node)
+    return <g key={i} transform={ `translate(${node.x/2}, ${node.y/2})` } >
+        { node.data.state === null ? <rect x="-3" y="0" width="7" height="7" /> : <circle r="3" style={{ 'fill' : 'blue' }} /> }
         <text y="0" dy="0" textAnchor="middle">{ node.data.type }</text>
     </g>
   })
-   
-  
+
+  console.log("nodes: ", nodes)
     return (
       <div>
       <h2>Left Panel Headline</h2>
