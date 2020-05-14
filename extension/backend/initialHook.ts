@@ -28,20 +28,20 @@ export const initialHook = () => {
         // for debugging
         console.log('DOM: ', test);
         console.log('Con: ', extractData(test));
-        const targetNode = extractData(test).children[0].children[0].children[1].children[0].children[1];
-        console.log('Tar: ', targetNode);
+        // const targetNode = extractData(test).children[0].children[0].children[1].children[0].children[1];
+        // console.log('Tar: ', targetNode);
         window.postMessage({ message: extractData(test), id: 'ReactFLO' }, '*');
 
-        const stateTest = extractData(test);
-        assignChildren(stateTest);
-        console.log('state', stateTest);
-        const stateTarget = stateTest.children[0].children[0].children[1].children[0].children[1]
-        console.log('Top Node: ', findHighestState(stateTarget, stateTarget.props[1], (node: DisplayNode, prop: State) => {
-          console.log(stateTarget)
-          matchState(node, prop);
-          console.log('Stateful Node: ', node);
-          console.log(prop.value);
-        }));
+        // const stateTest = extractData(test);
+        // assignChildren(stateTest);
+        // console.log('state', stateTest);
+        // const stateTarget = stateTest.children[0].children[0].children[1].children[0].children[1]
+        // console.log('Top Node: ', findHighestState(stateTarget, stateTarget.props[1], (node: DisplayNode, prop: State) => {
+        //   console.log(stateTarget)
+        //   matchState(node, prop);
+        //   console.log('Stateful Node: ', node);
+        //   console.log(prop.value);
+        // }));
         // traverseData(targetNode, targetNode.props[0], (node, prop)=> console.log('node: ', node))
         return original(...args);
       };

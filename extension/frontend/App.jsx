@@ -12,8 +12,6 @@ class App extends Component {
     }
   };
 
-
-
   componentDidMount(){
     // confirm function is firing
     // this.setState({ array: 'hello from componentDidMount'})
