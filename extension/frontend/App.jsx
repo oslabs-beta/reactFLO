@@ -32,15 +32,37 @@ class App extends Component {
     // confirm function is firing
     // this.setState({ array: 'hello from componentDidMount'})
 
-    chrome.runtime.onMessage.addListener((message) => {
+    // Set up connection to background script
+    const backgroundPageConnection = chrome.runtime.connect({
+      name: "panel"
+    });
+
+    // Initialize the connection from background script
+    backgroundPageConnection.postMessage({
+      name: 'init',
+      tabId: chrome.devtools.inspectedWindow.tabId,
+    });
+
+    // Add listener for messages from background script
+    backgroundPageConnection.onMessage.addListener((message) => {
       if (message.id === 'ReactFLO') {
         console.log('CDM app: ', message.message)
         this.setState({
           data: message.message,
           clickedNode: {},
-        })
+        });
       }
-    })
+    });
+
+    // chrome.runtime.onMessage.addListener((message) => {
+    //   if (message.id === 'ReactFLO') {
+    //     console.log('CDM app: ', message.message)
+    //     this.setState({
+    //       data: message.message,
+    //       clickedNode: {},
+    //     })
+    //   }
+    // })
   }
 
   selectNode(node) {
