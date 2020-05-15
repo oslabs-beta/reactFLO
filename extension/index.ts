@@ -2,22 +2,22 @@
 // const message = document.createElement('h1');
 // root.appendChild(message);
 
-// Creates a connection to the background script
-const backgroundPageConnection = chrome.runtime.connect({
-  name: "panel"
-});
+// // Creates a connection to the background script
+// const backgroundPageConnection = chrome.runtime.connect({
+//   name: "panel"
+// });
 
-// Sends a message to the background script that initializes a connection to the dev tool page
-backgroundPageConnection.postMessage({
-  name: 'init',
-  tabId: chrome.devtools.inspectedWindow.tabId,
-});
+// // Sends a message to the background script that initializes a connection to the dev tool page
+// backgroundPageConnection.postMessage({
+//   name: 'init',
+//   tabId: chrome.devtools.inspectedWindow.tabId,
+// });
 
-// Listens for a message from background script
-backgroundPageConnection.onMessage.addListener((msg) => {
-  // Test code: Renders messages from the background script to the dom
-  // const newMessage = document.createElement('h2');
-  // newMessage.innerText = msg.message;
-  // root.appendChild(newMessage);
-});
+// // Listens for a message from background script
+// backgroundPageConnection.onMessage.addListener((msg) => {
+//   // Test code: Renders messages from the background script to the dom
+//   // const newMessage = document.createElement('h2');
+//   // newMessage.innerText = msg.message;
+//   // root.appendChild(newMessage);
+// });
 
