@@ -11,7 +11,7 @@ class LeftPanel extends Component {
       paths: [],
       nodes: [],
       data: {},
-      toggleChild: true
+      toggleChild: true,
     }
 
     this.toggleChildren = this.toggleChildren.bind(this);
@@ -47,12 +47,12 @@ class LeftPanel extends Component {
     const height = 1000 - margin.left - margin.right;
     const width = 1000 - margin.top - margin.bottom;
 
-    // creating the tree itself
-    // setting the size based on previous heights declared above 
+    // creating the tree map 
+    // setting the size based on width and heights declared above 
     const treeMap = d3.tree().size([height, width]);
     // creating the nodes of the tree 
     const hierarchyNodes = d3.hierarchy(stateData);
-    // create the final map with nodes created from data
+    // calling tree function with nodes created from data
     const finalMap = treeMap(hierarchyNodes)
 
     // returns a flat array of objects containing all the parent-child links
@@ -61,9 +61,7 @@ class LeftPanel extends Component {
     // returns a flat array of objects
     // this will render the nodes onto the component
     let nodes = hierarchyNodes.descendants();
-
-    const clicked = this.props.clickedNode;
-
+    
     // put paths (the lines on the graph) before & because render goes before component did mount 
     paths = paths && paths.map((el, i) => {
       let d = d3
@@ -93,32 +91,30 @@ class LeftPanel extends Component {
         {/* Change shape of node depending on if it is stateful or not*/}
         {/* Also changes the color of the node depending on displayWeight */} 
 
-
         { node.data.state !== null ?
           <rect x="-5" y="0" width="15" height="10"
             style={{
+              'stroke' :  node.data === this.props.clickedNode ? 'red' : 'black',
+              'strokeWidth' : '2px',
               'fill':
                 node.data.displayWeight === 0 ? 'gray' :
-                  (node.data.displayWeight === 0.5 ? 'yellow' :
-                   clicked === node ? 'red' :
-                  'green'
-                  )
-            }} />
+                  (node.data.displayWeight === 0.5 ? 'yellow' : 'green'),
+              }} />
           :
           <circle r="7"
             style={{
+              'stroke' : node.data === this.props.clickedNode ? 'red' : 'black',
+              'strokeWidth' : '2px',
               'fill':
                 node.data.displayWeight === 0 ? 'gray' :
-                  (node.data.displayWeight === 0.5 ? 'yellow' : 
-                  clicked === node ? 'red' :
-                  'green')
+                  (node.data.displayWeight === 0.5 ? 'yellow' : 'green'),
             }} />
           }
           
-
         <text x="8" y="4" textAnchor="start">{node.data.type}</text>
       </g>
     })
+
 
     return (
       <div>
