@@ -107,7 +107,7 @@ class LeftPanel extends Component {
             }} />
         }
 
-        <text x="8" y="4" textAnchor="start">{node.data.type}</text>
+        <text x="8" y="4" textAnchor="start">{node.data.name}</text>
       </g>
     })
 

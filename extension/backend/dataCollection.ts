@@ -11,7 +11,8 @@ class SimpleNode implements DisplayNode {
   displayName: string;
   displayWeight: number = 0;
   tag: number;
-  type: any;
+  type: string;
+  name: string;
   props: State[] | null = [];
   state: State | null = null;
   children: DisplayNode[] = [];
@@ -20,7 +21,8 @@ class SimpleNode implements DisplayNode {
   constructor(node: any) {
     this.id = checkDebug(node);
     this.tag = node.tag;
-    this.type = findType(node);
+    this.name = assignName(node);
+    this.type = assignType(node);
     this.state = convertState(node);
     this.props = convertProps(node);
     this.parent = null;
@@ -48,13 +50,15 @@ const convertState = (node): State => {
   }
 }
 
-const findType = (node): any => {
+// Assigns name of component to simpleNode
+// (Need to add in all cases?)
+const assignName = (node): any => {
   // Find name of a class component
   if (node.type && node.type.name) return node.type.name;
   // Find a functional component
   if (node.tag === 0) return 'FC';
   // Tag 5 === HostComponent
-  if (node.tag === 5) return `#${node.type}`;
+  if (node.tag === 5) return `${node.type}`;
   // Tag 3 === HostRoot 
   if (node.tag === 3) return 'HR';
   // Tag 3 === HostText
@@ -62,14 +66,38 @@ const findType = (node): any => {
     return node.memoizedProps;
   }
   if (node.tag === 7) return "Fragment";
-
-  return "Fix this";
+}
+// Component Types
+const componentTypes = {
+  0: 'Functional Component',
+  1: 'Class Component',
+  2: 'Indeterminate Component',
+  3: 'Host Root',
+  4: 'Host Portal',
+  5: 'Host Component',
+  6: 'Host Text',
+  7: 'Fragment',
+  8: 'Mode',
+  9: 'Context Consumer',
+  10: 'Context Provider',
+  11: 'ForwardRef',
+  12: 'Profiler',
+  13: 'Suspense Component',
+  14: 'Memo Component',
+  15: 'Simple Memo Component',
+  16: 'Lazy Component'
+}
+// Assigns type of component to simpleNode
+const assignType = (node): any => {
+  // Check if tag is equal to key in componentTypes and return value
+  return componentTypes[node.tag];
 }
 
-// Check for debug id
-const checkDebug = (node): State => {
+// Check for debug id\
+// NEED TO FIX THIS STILL
+const checkDebug = (node): number => {
   if (node._debugID) return node._debugID;
-  return null;
+  return 0;
 }
 
 // PROPS
