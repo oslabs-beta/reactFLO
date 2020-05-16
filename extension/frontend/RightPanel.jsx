@@ -9,7 +9,7 @@ function RightPanel(props){
   const { type, state} = props.clickedNode;
   return (
     <div>
-      <h1>Componenet Data</h1>
+      <h1>Component Data</h1>
       <h2> Component Type: {type || "Anonymous"}</h2>
       <button onClick={props.clearTree}>Clear Selection</button>
       <StateDisplay title='State:' json={ state ? state.value : null } />

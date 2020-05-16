@@ -54,15 +54,6 @@ class App extends Component {
       }
     });
 
-    // chrome.runtime.onMessage.addListener((message) => {
-    //   if (message.id === 'ReactFLO') {
-    //     console.log('CDM app: ', message.message)
-    //     this.setState({
-    //       data: message.message,
-    //       clickedNode: {},
-    //     })
-    //   }
-    // })
   }
 
   selectNode(node) {

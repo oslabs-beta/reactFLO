@@ -62,6 +62,7 @@ class LeftPanel extends Component {
     // this will render the nodes onto the component
     let nodes = hierarchyNodes.descendants();
 
+    const clicked = this.props.clickedNode;
 
     // put paths (the lines on the graph) before & because render goes before component did mount 
     paths = paths && paths.map((el, i) => {
@@ -90,33 +91,32 @@ class LeftPanel extends Component {
       >
 
         {/* Change shape of node depending on if it is stateful or not*/}
-        {/* Also changes the color of the node depending on displayWeight */}
+        {/* Also changes the color of the node depending on displayWeight */} 
 
-        
+
         { node.data.state !== null ?
-          <rect x="-5" y="0" width="10" height="10"
+          <rect x="-5" y="0" width="15" height="10"
             style={{
               'fill':
                 node.data.displayWeight === 0 ? 'gray' :
                   (node.data.displayWeight === 0.5 ? 'yellow' :
-                   this.props.clickedNode === node ? 'red' :
+                   clicked === node ? 'red' :
                   'green'
                   )
             }} />
           :
-          <circle r="4"
+          <circle r="7"
             style={{
               'fill':
                 node.data.displayWeight === 0 ? 'gray' :
                   (node.data.displayWeight === 0.5 ? 'yellow' : 
-                  this.props.clickedNode === node ? 'red' :
+                  clicked === node ? 'red' :
                   'green')
             }} />
           }
-      
           
-        <text x="8" y="4" textAnchor="start">{node.data.type}</text>
 
+        <text x="8" y="4" textAnchor="start">{node.data.type}</text>
       </g>
     })
 
