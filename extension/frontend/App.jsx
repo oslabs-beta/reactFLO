@@ -77,11 +77,10 @@ class App extends Component {
   selectProp(prop) {
     // Reset results from previous selection
     resetDisplayWeights(this.state.data);
-    console.log("this prop in right panel is being hit ")
     // top level method needed before we invoke match and highest. This method allows children to connect with parents. Runs through 
     assignChildren(this.state.data);
-    // find highest runs cb match state on stateful comoponent 
-    const topNode = findHighestState(this.state.clickedNode, prop, matchState);
+    // find highest runs cb match state on stateful comoponent , if there is no highest stateful componenet with that info then start traversing at root
+    const topNode = findHighestState(this.state.clickedNode, prop, matchState) || this.state.data;
     traverseData(topNode, prop, matchProps);
     this.setState({
       data: this.state.data,
