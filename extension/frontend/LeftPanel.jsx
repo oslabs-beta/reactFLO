@@ -61,7 +61,7 @@ class LeftPanel extends Component {
     // returns a flat array of objects
     // this will render the nodes onto the component
     let nodes = hierarchyNodes.descendants();
-    
+
     // put paths (the lines on the graph) before & because render goes before component did mount 
     paths = paths && paths.map((el, i) => {
       let d = d3
@@ -89,29 +89,29 @@ class LeftPanel extends Component {
       >
 
         {/* Change shape of node depending on if it is stateful or not*/}
-        {/* Also changes the color of the node depending on displayWeight */} 
+        {/* Also changes the color of the node depending on displayWeight */}
 
-        { node.data.state !== null ?
+        {node.data.state !== null ?
           <rect x="-5" y="0" width="15" height="10"
             style={{
-              'stroke' :  node.data === this.props.clickedNode ? 'red' : 'black',
-              'strokeWidth' : '2px',
-              'fill':
-                node.data.displayWeight === 0 ? 'gray' :
-                  (node.data.displayWeight === 0.5 ? 'yellow' : 'green'),
-              }} />
-          :
-          <circle r="7"
-            style={{
-              'stroke' : node.data === this.props.clickedNode ? 'red' : 'black',
-              'strokeWidth' : '2px',
+              'stroke': node.data === this.props.clickedNode ? 'red' : 'black',
+              'strokeWidth': '2px',
               'fill':
                 node.data.displayWeight === 0 ? 'gray' :
                   (node.data.displayWeight === 0.5 ? 'yellow' : 'green'),
             }} />
-          }
-          
-        <text x="8" y="4" textAnchor="start">{node.data.type}</text>
+          :
+          <circle r="7"
+            style={{
+              'stroke': node.data === this.props.clickedNode ? 'red' : 'black',
+              'strokeWidth': '2px',
+              'fill':
+                node.data.displayWeight === 0 ? 'gray' :
+                  (node.data.displayWeight === 0.5 ? 'yellow' : 'green'),
+            }} />
+        }
+
+        <text x="8" y="4" textAnchor="start">{node.data.name}</text>
       </g>
     })
 
