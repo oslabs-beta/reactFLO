@@ -54,15 +54,6 @@ class App extends Component {
       }
     });
 
-    // chrome.runtime.onMessage.addListener((message) => {
-    //   if (message.id === 'ReactFLO') {
-    //     console.log('CDM app: ', message.message)
-    //     this.setState({
-    //       data: message.message,
-    //       clickedNode: {},
-    //     })
-    //   }
-    // })
   }
 
   selectNode(node) {
@@ -102,7 +93,7 @@ class App extends Component {
     return (
       <div>
       <div className="panelWrap">
-        <LeftPanel data={ this.state.data } selectNode = {this.selectNode}/>
+        <LeftPanel data={ this.state.data } clickedNode={this.state.clickedNode} selectNode = {this.selectNode}/>
         <RightPanel clickedNode={this.state.clickedNode} selectProp={this.selectProp} clearTree={this.clearTree}/>
       </div>
       </div>
