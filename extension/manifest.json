@@ -17,5 +17,7 @@
   "permissions": [
     "*://*/*"
   ],
+  "icons": {
+  },
   "manifest_version": 2 
 }
