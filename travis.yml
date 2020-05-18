@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+- "stable"
+
+script: npm run build
+
+notifications:
+  slack: reactflo:JSKtMwWKJ1Ghg3OU3KWnt6XS
