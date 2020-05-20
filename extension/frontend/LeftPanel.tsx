@@ -17,6 +17,19 @@ interface Props {
   selectNode: Function
 }
 
+interface Node {
+  children: [],
+  data: {
+   _children: [],
+   children: []
+  },
+  depth: number,
+  height: number,
+  parent: object,
+  x: number,
+  y: number 
+}
+
 class LeftPanel extends Component<Props, State> {
   constructor(props) {
     super(props);
@@ -35,7 +48,9 @@ class LeftPanel extends Component<Props, State> {
   //   // console.log("CPU leftpanel props: ", this.props.data)
   // }
 
-  toggleChildren(d) {
+  toggleChildren(d: Node) {
+    console.log('d: ', d)
+    console.log('type: ', typeof d)
 
     if (d.data.children) {
       d.data._children = d.data.children;
