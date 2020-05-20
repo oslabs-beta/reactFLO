@@ -1,4 +1,5 @@
 import { DisplayNode, State } from "../backend/interfaces";
+import Traverse from "./dataTraversal";
 
 // this function converts fibernode to display node and populates the children and sibling arrays recursively 
 export const fiberNodeToTree = (fiberNode) => {
@@ -13,6 +14,13 @@ export const fiberNodeToTree = (fiberNode) => {
   }
   // Return converted node
   return convertedNode
+};
+
+export const connectToParent = (node: DisplayNode) => {
+  for (const child of node.children) {
+    child.parent = node;
+    connectToParent(child);
+  }
 };
 
 // declare function that will return obj with the structure of each indiviual node saved from fiber 
