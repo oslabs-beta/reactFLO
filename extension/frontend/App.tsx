@@ -17,7 +17,7 @@ const resetDisplayWeights = (node) => {
 
 
 interface State {
-  data: null | DisplayNode,
+  data: any | DisplayNode,
   clickedNode: any | DisplayNode
 }
 
@@ -30,8 +30,8 @@ class App extends React.Component<Props, State>{
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
-      clickedNode: null
+      data: {},
+      clickedNode: {}
     }
 
     this.selectNode = this.selectNode.bind(this);

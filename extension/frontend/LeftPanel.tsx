@@ -4,8 +4,20 @@ import * as d3 from "d3";
 import { Stage } from "./Stage"
 import { ZoomContainer } from "./ZoomContainer"
 
+interface State {
+  paths: [],
+  nodes: [],
+  data: object,
+  toggleChild: boolean,
+}
 
-class LeftPanel extends Component {
+interface Props {
+  data: object,
+  clickedNode: object,
+  selectNode: Function
+}
+
+class LeftPanel extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
