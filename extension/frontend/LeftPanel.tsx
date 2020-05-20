@@ -20,8 +20,11 @@ interface Props {
 interface Node {
   children: [],
   data: {
-   _children: [],
+   _children?: [],
    children: []
+   displayWeight?: number,
+   state?: object,
+   name?: string
   },
   depth: number,
   height: number,
@@ -49,8 +52,6 @@ class LeftPanel extends Component<Props, State> {
   // }
 
   toggleChildren(d: Node) {
-    console.log('d: ', d)
-    console.log('type: ', typeof d)
 
     if (d.data.children) {
       d.data._children = d.data.children;
@@ -91,7 +92,7 @@ class LeftPanel extends Component<Props, State> {
     let nodes = hierarchyNodes.descendants();
 
     // put paths (the lines on the graph) before & because render goes before component did mount 
-    paths = paths && paths.map((el, i) => {
+    paths = paths && paths.map((el: object, i: number) => {
       let d = d3
         // link vertical makes our entire tree go top to bottom as opposed to left to right 
         .linkVertical()
@@ -109,7 +110,7 @@ class LeftPanel extends Component<Props, State> {
 
 
     // renders the nodes (the circles) to the screen
-    nodes = nodes && nodes.map((node, i) => {
+    nodes = nodes && nodes.map((node: Node, i: number) => {
       return <g
         key={i} transform={`translate(${node.x / 2}, ${node.y / 2})`}
         onClick={() => this.props.selectNode(node.data)}
