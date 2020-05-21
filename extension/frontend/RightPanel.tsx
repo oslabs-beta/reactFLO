@@ -21,7 +21,11 @@ const RightPanel = (props: RightPanelProps) => {
       <h2> Component Name: {name || "Anonymous"}</h2>
       <button onClick={props.clearTree}>Clear Selection</button>
       <StateDisplay title='State:' json={state ? state.value : null} />
-      <PropDisplay title='Props:' propList={props.clickedNode.props} selectProp={props.selectProp} />
+      <PropDisplay 
+        title='Props:' 
+        propList={props.clickedNode.props} 
+        selectProp={props.selectProp} 
+        />
     </div>
   )
 }
