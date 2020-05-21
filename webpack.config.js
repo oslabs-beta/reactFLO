@@ -9,7 +9,7 @@ module.exports = {
     background: './extension/background.ts',
     contentscript: './extension/contentscript.ts',
     inject: './extension/inject.ts',
-    main: './extension/frontend/main.jsx',
+    main: './extension/frontend/main.tsx',
   },
   plugins: [
     new CopyWebpackPlugin([
@@ -26,10 +26,10 @@ module.exports = {
         test: /\.jsx/,
         include: path.resolve('./extension/frontend/'),
         exclude: /node_modules/,
-        use: 
+        use:
         {
           loader: 'babel-loader',
-          options: 
+          options:
           {
             // @ sign is important!!
             presets: ['@babel/preset-env', '@babel/preset-react']
@@ -41,11 +41,11 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
-      { 
-        test: /\.css$/, 
+      {
+        test: /\.css$/,
         use: [
           'style-loader',
-          'css-loader' 
+          'css-loader'
         ]
       }
     ],

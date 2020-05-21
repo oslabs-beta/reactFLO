@@ -4,7 +4,36 @@ import * as d3 from "d3";
 import { Stage } from "./Stage"
 import { ZoomContainer } from "./ZoomContainer"
 
-class LeftPanel extends Component {
+interface State {
+  paths: [],
+  nodes: [],
+  data: object,
+  toggleChild: boolean,
+}
+
+interface Props {
+  data: object,
+  clickedNode: object,
+  selectNode: Function
+}
+
+interface Node {
+  children: [],
+  data: {
+   _children?: [],
+   children: []
+   displayWeight?: number,
+   state?: object,
+   name?: string
+  },
+  depth: number,
+  height: number,
+  parent: object,
+  x: number,
+  y: number 
+}
+
+class LeftPanel extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +51,7 @@ class LeftPanel extends Component {
   //   // console.log("CPU leftpanel props: ", this.props.data)
   // }
 
-  toggleChildren(d) {
+  toggleChildren(d: Node) {
 
     if (d.data.children) {
       d.data._children = d.data.children;
@@ -63,7 +92,7 @@ class LeftPanel extends Component {
     let nodes = hierarchyNodes.descendants();
 
     // put paths (the lines on the graph) before & because render goes before component did mount 
-    paths = paths && paths.map((el, i) => {
+    paths = paths && paths.map((el: object, i: number) => {
       let d = d3
         // link vertical makes our entire tree go top to bottom as opposed to left to right 
         .linkVertical()
@@ -81,7 +110,7 @@ class LeftPanel extends Component {
 
 
     // renders the nodes (the circles) to the screen
-    nodes = nodes && nodes.map((node, i) => {
+    nodes = nodes && nodes.map((node: Node, i: number) => {
       return <g
         key={i} transform={`translate(${node.x / 2}, ${node.y / 2})`}
         onClick={() => this.props.selectNode(node.data)}
