@@ -1,4 +1,4 @@
-import { 
+import {
   DisplayNode, State,
 } from "../backend/interfaces";
 

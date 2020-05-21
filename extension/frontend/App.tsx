@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
-import { DisplayNode, State } from "../backend/interfaces";
+// TOOK OUT STATE
+import { DisplayNode } from "../backend/interfaces";
 import { assignChildren } from "./assignChildren";
 import { matchState, matchProps } from "./organizers";
 import { findHighestState, traverseData } from "./categorization";
@@ -9,24 +10,35 @@ import circular from "circular"
 
 const resetDisplayWeights = (node) => {
   return traverseData(node, null, (childNode) => {
-      // if the weight is more than 0 resasign it to 0 
-      if(childNode.displayWeight) childNode.displayWeight = 0; 
+    // if the weight is more than 0 resasign it to 0 
+    if (childNode.displayWeight) childNode.displayWeight = 0;
   });
 };
 
-class App extends Component {
 
-  constructor() {
-    super();
+interface State {
+  data: any | DisplayNode,
+  clickedNode: any | DisplayNode
+}
+
+interface Props {
+
+}
+
+
+class App extends React.Component<Props, State>{
+
+  constructor(props) {
+    super(props);
     this.state = {
-      // backend obj stored here
       data: {},
-      clickedNode: {},
+      clickedNode: {}
     }
+
     this.selectNode = this.selectNode.bind(this);
     this.selectProp = this.selectProp.bind(this);
     this.clearTree = this.clearTree.bind(this);
-   };
+  };
 
   componentDidMount() {
     // confirm function is firing
@@ -79,7 +91,7 @@ class App extends Component {
   }
   // clearTree (affecting the re render )
   // invoke traverseDtta passing in anon cb that we write change all display weights
-  clearTree(){
+  clearTree() {
     // invoke resetDisplay weight so data is changed 
     resetDisplayWeights(this.state.data);
     // do setstate to re render the actual tree 
@@ -88,14 +100,20 @@ class App extends Component {
     });
   }
 
-  render(){
- 
+  render() {
+
     return (
       <div>
-      <div className="panelWrap">
-        <LeftPanel data={ this.state.data } clickedNode={this.state.clickedNode} selectNode = {this.selectNode}/>
-        <RightPanel clickedNode={this.state.clickedNode} selectProp={this.selectProp} clearTree={this.clearTree}/>
-      </div>
+        <div className="panelWrap">
+          <LeftPanel 
+          data={this.state.data} 
+          clickedNode={this.state.clickedNode} 
+          selectNode={this.selectNode} />
+          <RightPanel 
+          clickedNode={this.state.clickedNode} 
+          selectProp={this.selectProp} 
+          clearTree={this.clearTree} />
+        </div>
       </div>
     )
   }
