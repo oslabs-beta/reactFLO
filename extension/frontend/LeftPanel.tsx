@@ -72,9 +72,8 @@ class LeftPanel extends Component<Props, State> {
     const stateData = this.props.data;
 
     // sets the heights and width of the tree to be passed into treemap 
-    const margin = { top: 0, right: 0, bottom: 0, left: 0 };
-    const width = 75 - margin.left - margin.right;
-    const height = 250 - margin.top - margin.bottom;
+    const width = 75;
+    const height = 250; 
 
     // creating the tree map 
     // setting the size based on width and heights declared above 
@@ -98,11 +97,16 @@ class LeftPanel extends Component<Props, State> {
         // link vertical makes our entire tree go top to bottom as opposed to left to right 
         .linkVertical()
         .x((d) => {
+          console.log('linkVertical d: ', d)
           return d.x;
         })
         .y((d) => {
           return d.y; // div by 2 so make the path links shorter and not as long 
         });
+
+      console.log('clickedNode: ', this.props.clickedNode);
+      console.log('d :', d)
+
       return <path key={i}
         className='link' fill="none"
         stroke="#97a6ff"
