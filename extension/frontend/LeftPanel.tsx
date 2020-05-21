@@ -109,25 +109,30 @@ class LeftPanel extends Component<Props, State> {
 
 
     // put paths (the lines on the graph) before & because render goes before component did mount 
+    let savedNode = { displayWeight: 0 };
     paths = paths && paths.map((el: object, i: number) => {
+
       let d = d3
         // link vertical makes our entire tree go top to bottom as opposed to left to right 
         .linkVertical()
         .x((d) => {
-          console.log('linkVertical d: ', d)
           return d.x;
         })
         .y((d) => {
+          console.log('inside d: ', d)
+          savedNode = d.data
           return d.y; // div by 2 so make the path links shorter and not as long 
         });
 
-      console.log('clickedNode: ', this.props.clickedNode);
-      console.log('d :', d)
 
       return <path key={i}
-        className='link' fill="none"
-        stroke="#97a6ff"
-        strokeWidth="3px" d={d(el)} />
+        className='link' 
+        fill="none"
+        stroke={ savedNode.displayWeight === 0 ? 
+          'gray' : 
+          (savedNode.displayWeight === 0.5) ? 'yellow' :'green'
+        }
+        strokeWidth="10px" d={d(el)} />
     })
 
 
@@ -143,7 +148,7 @@ class LeftPanel extends Component<Props, State> {
         {/* Also changes the color of the node depending on displayWeight */}
 
         {node.data.state !== null ?
-          <rect x="-5" y="0" width="15" height="10"
+          <rect x="-5" y="0" width="30" height="20"
             style={{
               'stroke': node.data === this.props.clickedNode ? 'red' : 'black',
               'strokeWidth': '2px',
@@ -152,7 +157,7 @@ class LeftPanel extends Component<Props, State> {
                   (node.data.displayWeight === 0.5 ? 'yellow' : 'green'),
             }} />
           :
-          <circle r="7"
+          <circle r="14"
             style={{
               'stroke': node.data === this.props.clickedNode ? 'red' : 'black',
               'strokeWidth': '2px',
