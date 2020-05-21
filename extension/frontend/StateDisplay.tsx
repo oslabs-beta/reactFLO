@@ -7,7 +7,7 @@ interface stateDisplayProps {
   json: null | State
 }
 
-const StateDisplay = (props: stateDisplayProps) => {
+export const StateDisplay = (props: stateDisplayProps) => {
   // If no data is passed down render nothing
   if (!props.json) return <div></div>
   return (
@@ -23,4 +23,3 @@ const StateDisplay = (props: stateDisplayProps) => {
 
 };
 
-export default StateDisplay;

@@ -2,7 +2,7 @@ import * as d3 from "d3"
 import React, { useEffect, useState } from "react"
 import { useSvg } from "./Stage"
 
-export function ZoomContainer({ children }) {
+export const ZoomContainer = ({ children }) => {
   const svgElement = useSvg()
   const [{ x, y, k }, setTransform] = useState({ x: 0, y: 0, k: 1 })
 
