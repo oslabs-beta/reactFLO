@@ -1,10 +1,17 @@
 import React from "react";
 import StateDisplay from "./StateDisplay";
 import PropDisplay from "./PropDisplay";
+import { DisplayNode } from "../backend/interfaces";
 
-function RightPanel(props) {
-  console.log('Right props: ', props);
-  console.log(props.props)
+interface RightPanelProps {
+  clickedNode: DisplayNode,
+  selectProp: Function,
+  clearTree: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+}
+
+
+const RightPanel = (props: RightPanelProps) => {
+
   // state on line 7 is destructered from the clicked node we recieved from onclick 
   const { type, state, name } = props.clickedNode;
   return (

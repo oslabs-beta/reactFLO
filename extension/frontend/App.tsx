@@ -25,6 +25,7 @@ interface Props {
 
 }
 
+
 class App extends React.Component<Props, State>{
 
   constructor(props) {
@@ -104,8 +105,14 @@ class App extends React.Component<Props, State>{
     return (
       <div>
         <div className="panelWrap">
-          <LeftPanel data={this.state.data} clickedNode={this.state.clickedNode} selectNode={this.selectNode} />
-          <RightPanel clickedNode={this.state.clickedNode} selectProp={this.selectProp} clearTree={this.clearTree} />
+          <LeftPanel 
+          data={this.state.data} 
+          clickedNode={this.state.clickedNode} 
+          selectNode={this.selectNode} />
+          <RightPanel 
+          clickedNode={this.state.clickedNode} 
+          selectProp={this.selectProp} 
+          clearTree={this.clearTree} />
         </div>
       </div>
     )
