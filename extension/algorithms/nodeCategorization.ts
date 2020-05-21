@@ -87,7 +87,7 @@ export const workOnStatefulNodes = (nodes: DisplayNode[], prop: State): DisplayN
     nodes[i].mediums.forEach((el) => {
       // if display weight is 0 then set pathweight of medium to be equal to stateful node's path weight 
       // Note: Replace first and last displayWeight with pathWeight for production
-      el.displayWeight = nodes[i].displayWeight || nodes[i].displayWeight;
+      el.pathWeight = nodes[i].displayWeight || nodes[i].pathWeight;
     });
   }
   // Return the heighest stateful node that contains the props or return null if there are no stateful nodes
