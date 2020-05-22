@@ -65,7 +65,6 @@ class App extends React.Component<Props, State>{
         });
       }
     });
-
   }
 
   selectNode(node) {
