@@ -1,7 +1,7 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16.1';
-import PropDisplay, { PropInfo } from '../../extension/frontend/PropDisplay';
+import PropDisplay, { PropInfo } from '../../../extension/frontend/PropDisplay';
 
 
 configure({ adapter: new Adapter() });
