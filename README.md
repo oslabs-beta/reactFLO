@@ -25,6 +25,9 @@ Wether you are onboarding a new codebase or looking to expand you site, ReactFLO
 
 ### Authors
 Cherie Zhong
+
 Jordan Deleon
+
 Marcus Valverde
+
 Vaughn Hartling
