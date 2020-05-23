@@ -109,7 +109,7 @@ class LeftPanel extends Component<Props, State> {
 
 
     // put paths (the lines on the graph) before & because render goes before component did mount 
-    let savedNode = { displayWeight: 0 };
+    let savedNode = { pathWeight: 0 };
     paths = paths && paths.map((el: object, i: number) => {
 
       let d = d3
@@ -128,9 +128,9 @@ class LeftPanel extends Component<Props, State> {
       return <path key={i}
         className='link' 
         fill="none"
-        stroke={ savedNode.displayWeight === 0 ? 
+        stroke={ savedNode.pathWeight === 0 ? 
           'gray' : 
-          (savedNode.displayWeight === 0.5) ? 'yellow' :'green'
+          (savedNode.pathWeight === 0.5) ? 'yellow' :'green'
         }
         strokeWidth="10px" d={d(el)} />
     })

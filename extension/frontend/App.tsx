@@ -8,10 +8,11 @@ const { Traverse } = require('../algorithms/dataTraversal');
 const { connectToParent } = require('../algorithms/dataConversion');
 const { FindProp, createPathToRoot, workOnStatefulNodes } = require('../algorithms/nodeCategorization');
 
-const resetDisplayWeights = (node) => {
-  return Traverse.downward(node, (childNode) => {
+const resetDisplayWeights = (node: DisplayNode) => {
+  return Traverse.downward(node, (childNode: DisplayNode) => {
     // if the weight is more than 0 resasign it to 0 
     if (childNode.displayWeight) childNode.displayWeight = 0;
+    if (childNode.pathWeight) childNode.pathWeight = 0;
   });
 };
 
