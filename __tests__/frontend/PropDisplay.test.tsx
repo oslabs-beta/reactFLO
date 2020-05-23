@@ -10,13 +10,13 @@ configure({ adapter: new Adapter() });
 
 describe("PropDisplay unit tests", () => {
   // Props when PropsList is null
-  const PropDisplayPropsListNull = {
+  const propsNull = {
     title: 'title',
     propList: null,
     selectProp: () => console.log('selectProp')
   }
   // Props when PropsList exists
-  const PropDisplayPropsListExists = {
+  const propExists = {
     title: 'title',
     propList: [{
       key: 'string',
@@ -28,23 +28,25 @@ describe("PropDisplay unit tests", () => {
     selectProp: () => console.log('selectProp')
   }
   // Wrapper for no props
-  const wrapperNoProps = shallow(<PropDisplay {...PropDisplayPropsListNull} />)
+  const wrapperNoProps = shallow(<PropDisplay {...propsNull} />);
   // Wrapper for props
-  const wrapperWithProps = shallow(<PropDisplay {...PropDisplayPropsListExists} />)
+  const wrapperWithProps = shallow(<PropDisplay {...propExists} />);
 
   // PropDisplay should render empty div if props.propList doesn't exist
   it('PropDisplay should render empty div if propsList is null', () => {
     expect(wrapperNoProps.find('div')).toHaveLength(1);
-  })
+  });
+
   // PropDisplay should render an array of PropInfo components if props.propList exists
   it('PropDisplay should render a <h2> title and PropInfo component for every element in propList', () => {
     expect(wrapperWithProps.find('h2').text()).toEqual('title');
-    expect(wrapperWithProps.find(PropInfo)).toHaveLength(PropDisplayPropsListExists.propList.length)
-  })
+    expect(wrapperWithProps.find(PropInfo)).toHaveLength(propExists.propList.length)
+  });
+
   //PropInfo components should have props of key, nodeProp, and selectProp
-  it('PropDisplay should render PropInfo component if propsList is null', () => {
+  it('If PropDisplay renders PropInfo, component should have key, nodeProp, and selectProp as props', () => {
+    expect(wrapperWithProps.find(PropInfo).prop('nodeProp')).toBe(propExists.propList[0]);
+    expect(wrapperWithProps.find(PropInfo).prop('selectProp')).toBe(propExists.selectProp);
+  });
 
-  })
-
-
-})
+});

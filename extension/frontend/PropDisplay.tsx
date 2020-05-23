@@ -11,7 +11,6 @@ interface PropDisplayProps {
 
 export const PropDisplay = (props: PropDisplayProps) => {
 
-  console.log('Prop Display Props: ', props);
   // If no data is passed down render nothing
   if (!props.propList || !props.propList.length) return <div></div>
   const propArray = props.propList.map((el, i) => {
