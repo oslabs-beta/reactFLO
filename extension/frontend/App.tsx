@@ -3,7 +3,6 @@ import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
 // TOOK OUT STATE
 import { DisplayNode } from "../backend/interfaces";
-import { matchState } from "./organizers";
 import { findHighestState } from "./categorization";
 import circular from "circular"
 const { Traverse } = require('../algorithms/dataTraversal');
@@ -84,7 +83,7 @@ class App extends React.Component<Props, State>{
     // top level method needed before we invoke match and highest. This method allows children to connect with parents. Runs through 
     connectToParent(this.state.data);
     // find highest runs cb match state on stateful comoponent , if there is no highest stateful componenet with that info then start traversing at root
-    const topNode = findHighestState(this.state.clickedNode, prop, matchState) || this.state.data;
+    const topNode = findHighestState(this.state.clickedNode, prop, FindProp.inState) || this.state.data;
     Traverse.downward(topNode, FindProp.inProps, prop);
     this.setState({
       data: this.state.data,
