@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer'
 import RightPanel from '../../extension/frontend/RightPanel';
 import { StateDisplay } from '../../extension/frontend/StateDisplay';
 import PropDisplay from '../../extension/frontend/PropDisplay';
-import { StateType } from '../../extension/backend/interfaces'
+
 // Newer Enzyme versions require an adapter to a particular version of React
 configure({ adapter: new Adapter() });
 
@@ -21,7 +21,13 @@ describe('RightPanel unit tests', () => {
       tag: 2,
       type: 'string',
       name: 'name',
-      props: null,
+      props: {
+        key: 'string',
+        value: 'any',
+        topComponent: 'any',
+        components: [],
+        type: null,
+      },
       state: {
         key: 'key',
         value: null,
@@ -34,8 +40,8 @@ describe('RightPanel unit tests', () => {
       mediums: null,
     },
 
-    selectProp: () => console.log('selectProp'),
-    clearTree: () => console.log('clearTree'),
+    selectProp: jest.fn(),
+    clearTree: jest.fn(),
   }
 
   beforeAll(() => {
@@ -90,11 +96,15 @@ describe('RightPanel unit tests', () => {
       selectProp: () => console.log('selectProp'),
       clearTree: () => console.log('clearTree')
     }
-
-
-    wrapper = shallow(<RightPanel {...RightPanelProps2} />)
-    expect(wrapper.find(StateDisplay).prop('json')).toBe('test');
+    const wrapperTwo = shallow(<RightPanel {...RightPanelProps2} />)
+    expect(wrapperTwo.find(StateDisplay).prop('json')).toBe('test');
   })
 
-  // Find PropDisplay and ensure it has title, propList, and selectProp as props 
+  // Find PropDisplay and ensure it has title, propList, and selectProp as props
+  it(`RightPanel should create PropDisplay component and send in title, propList, and selectProp as props`, () => {
+    expect(wrapper.find(PropDisplay)).toHaveLength(1);
+    expect(wrapper.find(PropDisplay).prop('title')).toBe('Props:');
+    expect(wrapper.find(PropDisplay).prop('propList')).toBe(RightPanelProps.clickedNode.props);
+    expect(wrapper.find(PropDisplay).prop('selectProp')).toBe(RightPanelProps.selectProp);
+  })
 })
