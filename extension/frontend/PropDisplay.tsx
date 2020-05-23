@@ -1,6 +1,6 @@
 import React from "react";
 import ReactJson from "react-json-view";
-import { State } from "../backend/interfaces";
+import { State } from "../interfaces";
 
 
 interface PropDisplayProps {

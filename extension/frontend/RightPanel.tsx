@@ -1,7 +1,7 @@
 import React from "react";
 import { StateDisplay } from "./StateDisplay";
 import PropDisplay from "./PropDisplay";
-import { DisplayNode } from "../backend/interfaces";
+import { DisplayNode } from "../interfaces";
 
 interface RightPanelProps {
   clickedNode: DisplayNode,

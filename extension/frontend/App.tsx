@@ -2,7 +2,7 @@ import React from "react";
 import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
 // TOOK OUT STATE
-import { DisplayNode } from "../backend/interfaces";
+import { DisplayNode } from "../interfaces";
 import circular from "circular"
 const { Traverse } = require('../algorithms/dataTraversal');
 const { connectToParent } = require('../algorithms/dataConversion');
