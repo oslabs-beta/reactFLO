@@ -1,0 +1,67 @@
+Unit tests - on each algo , if input ( mock) then specific output is expected  - will prob do these little later 
+
+integreation tests - checking to see if certain methods or algos are all working together as planned - will probably do these first 
+
+our front end is in react and part of the integreation tests would need to communicate with react. 
+
+Jest for backend and jest/enzyme might be the best for testing everything 
+
+Things to test for integreation
+  - reset display weight 
+  - select node 
+  - select prop 
+  - clear tree 
+
+Things to test for unit for algos 
+
+Testing Cases
+
+dataConversion
+  - connectToParent
+    - Top level node should not have a parent
+    - For each node, the node's children's parent should be that node
+
+dataTraversal
+  - Traverse
+    - upward
+      - If the function returns a truthy, the traversal should end
+      - Should run a callback function on each node between and including the target node and root node
+      - Should not run a callback function on any sibling or child nodes
+    - downward
+      - if the function return a truthy , the traversal should end 
+      - should run a cb func on each nodes children until last child node 
+      - should not a run a callback func on any node not underneath the starting node 
+
+nodeCategorization
+  - FindProp
+    - inState
+      - DisplayWeight should be set to 1 if:
+        - If state has a top level primitive value equal to the prop value
+        - If state has a primitive value nested in an object equal to the prop value
+        - If state has a primitive value nested in an array equal to the prop value
+        - If state has a top level object value equal to the prop value
+        - If state has an object value nested in an object equal to the prop value
+        - If state has an object value nested in an array equal to the prop value
+        - If state has a top level array value equal to the prop value
+        - If state has an array value nested in an object equal to the prop value
+        - If state has an array value nested in an array equal to the prop value
+      - if the key or indx of an arr matches prop passed in then convert to .5 
+      - DisplayWeight should be 0 if none of the above conditions are met
+    - inProp
+      - if the target node has no props return unchanged display weight 
+      - if the key of the target prop matches the current prop key set weight .5 only 
+      - if the key and value of target prop matches the current prop set weight 1
+      - if the value matches but the key does not the DisplayWeight should be left unchanged
+      - if none of the props match the target prop, the DisplayWeight should be left unchanged
+  - createPathToRoot
+    - Should return an array of nodes
+    - Each node should be stateful
+    - Array should not include the target node, even if that node is stateful
+    - Each node should have a mediums array
+    - The first stateful node's mediums array should contain the starting node as its first element
+    - Each subsequent stateful node's mediums array should contain the previous stateful as its first element
+    - Each mediums array should contain all of the non stateful nodes between its state node and the node at its first element
+  - workOnStatefulNodes
+    - Every stateful node should be given an accurate DisplayWeight/ PathWeight
+    - Return null if none of the stateful nodes contain the prop
+    - return highest node that does contain the prop we are looking for
