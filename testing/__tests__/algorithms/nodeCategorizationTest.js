@@ -43,7 +43,6 @@ describe('Node categorization ', ()=>{
     });
     describe('Nested keys', ()=> {
       it('Should set displayWeight to 0.5 if a key in a nested object is equal to props', ()=> {
-        console.log(nodes[2].displayWeight);
         FindProp.inState(nodes[2], {value: 'nestedKey'});
         expect(nodes[2].displayWeight).toEqual(0.5);
       });
@@ -51,14 +50,47 @@ describe('Node categorization ', ()=>{
   });
 
   describe('Find Prop in Props', ()=>{
-
+    it('if target has no props the display weight should remain unchanged', ()=>{
+      let initialDisplayWeight = nodes[5].displayWeight
+      FindProp.inProps(nodes[5],{key: 'no boi', value: 'yeah boi'})
+      expect(nodes[5].displayWeight).toEqual(initialDisplayWeight)
+    });
+    it('Should set display weight to 0.5 if the target node has a prop with the same key but a different value', ()=>{
+      FindProp.inProps(nodes[9], {key: 'key', value: 'wrong value'});
+      expect(nodes[9].displayWeight).toEqual(0.5);
+    });
+    it('Should set display weight to 1 if the target node has a prop with the same key and value',()=>{
+      FindProp.inProps(nodes[9], {key: 'key', value: 'value'})
+      expect(nodes[9].displayWeight).toEqual(1);
+    });
   });
 
   describe('Create Path to Root', ()=>{
-    
-  });
-
-  describe('Work on Stateful Nodes', ()=>{
-  
+    let array;
+    it('Should return an array of nodes', ()=>{
+      array = createPathToRoot(nodes[7]);
+      expect(array.length).toEqual(3)
+    });
+    it('All elements in the array should be stateful', ()=>{
+      array = createPathToRoot(nodes[7]);
+      expect(!!array[0].state).toEqual(true);
+      expect(!!array[1].state).toEqual(true);
+      expect(!!array[2].state).toEqual(true);
+    });
+    it('The first stateful nodes mediums array should contain the starting node as its first element', ()=> {
+      array = createPathToRoot(nodes[7]);
+      expect(array[0].mediums[0]).toEqual(nodes[7]);
+    });
+    it('Each subsequent stateful node\'s mediums array should contain the previous stateful as its first element', ()=> {
+      array = createPathToRoot(nodes[7]);
+      expect(array[1].mediums[0]).toEqual(nodes[4]);
+      expect(array[2].mediums[0]).toEqual(nodes[2]);
+    });
+    it('Each mediums array should contain all of the non stateful nodes between its state node and the node at its first element', ()=>{
+      array = createPathToRoot(nodes[7]);
+      expect(array[0].mediums).toEqual([nodes[7],nodes[6],nodes[5]]);
+      expect(array[1].mediums).toEqual([nodes[4],nodes[3]]);
+      expect(array[2].mediums).toEqual([nodes[2]]);
+    });
   });
 });

@@ -30,7 +30,12 @@ const nodes = [
   objCreator(6, null, null),
   objCreator(7, null, null),
   objCreator(8, null, null),
-  objCreator(9, null, null),
+  objCreator(9, null, [
+    {
+      key: 'key',
+      value: 'value',
+    }
+  ]),
 ];
 
 function nodeToRoot(array){
