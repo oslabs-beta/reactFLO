@@ -1,4 +1,3 @@
-import { findHighestState } from "../frontend/categorization";
 import { State, DisplayNode } from './interfaces';
 const { fiberNodeToTree } = require('../algorithms/dataConversion');
 const circle = require('circular');
