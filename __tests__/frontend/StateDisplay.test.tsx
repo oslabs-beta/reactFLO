@@ -1,8 +1,6 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16.1';
-import toJson from 'enzyme-to-json';
-import renderer from 'react-test-renderer'
 import { StateDisplay } from '../../extension/frontend/StateDisplay';
 import ReactJson from 'react-json-view';
 

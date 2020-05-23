@@ -1,11 +1,9 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16.1';
-import toJson from 'enzyme-to-json';
-import renderer from 'react-test-renderer'
 import RightPanel from '../../extension/frontend/RightPanel';
 import { StateDisplay } from '../../extension/frontend/StateDisplay';
-import { PropDisplay } from '../../extension/frontend/PropDisplay';
+import PropDisplay from '../../extension/frontend/PropDisplay';
 
 // Newer Enzyme versions require an adapter to a particular version of React
 configure({ adapter: new Adapter() });

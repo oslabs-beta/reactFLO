@@ -1,10 +1,8 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16.1';
-import toJson from 'enzyme-to-json';
-import renderer from 'react-test-renderer'
 import PropDisplay, { PropInfo } from '../../extension/frontend/PropDisplay';
-import ReactJson from 'react-json-view';
+
 
 configure({ adapter: new Adapter() });
 
