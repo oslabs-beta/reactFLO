@@ -23,6 +23,18 @@ Wether you are onboarding a new codebase or looking to expand you site, ReactFLO
   * Sibling nodes will turn yellow if they contain a prop with the same key but a different value to the selected prop
   * Sibling nodes will turn green if they contain a prop with the same key and value as the selected prop
 
+### Making Changes
+If you are interested in altering or expanding the functionality of ReactFLO you can access the source code and build out your own versoion of the application by following these steps:
+1. Clone this repository
+1. Run `npm i` in your terminal to install dependencies
+1. Make your changes
+1. Run `npm run build` to build out the application (note: [watch](https://webpack.js.org/configuration/watch/) is active)
+1. In Chrome, navigate to your [extensions](chrome://extensions/)
+1. Make sure that developer mode is toggled on (found in the top right corner)
+1. Click on the button labled: `Load unpacked`
+1. Select the folder: `~/ReactFLO/build`
+1. Make sure to refresh the ReactFLO extension every time you make changes to the files
+
 ### Testing
 Run `npm test` in the terminal. This will initialize the testing suite. Jest is used to run unit tests on the internal library and Enzyme is used alongside Jest to run integration testing on the front end code.
 
