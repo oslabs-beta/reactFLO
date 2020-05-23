@@ -23,6 +23,9 @@ Wether you are onboarding a new codebase or looking to expand you site, ReactFLO
   * Sibling nodes will turn yellow if they contain a prop with the same key but a different value to the selected prop
   * Sibling nodes will turn green if they contain a prop with the same key and value as the selected prop
 
+### Testing
+Run `npm test` in the terminal. This will initialize the testing suite. Jest is used to run unit tests on the internal library and Enzyme is used alongside Jest to run integration testing on the front end code.
+
 ### Authors
 Cherie Zhong
 
