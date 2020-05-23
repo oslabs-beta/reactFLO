@@ -12,6 +12,7 @@ configure({ adapter: new Adapter() });
 
 describe('RightPanel unit tests', () => {
   let wrapper;
+
   const RightPanelProps = {
     clickedNode: {
       id: 1,
@@ -21,13 +22,13 @@ describe('RightPanel unit tests', () => {
       tag: 2,
       type: 'string',
       name: 'name',
-      props: {
+      props: [{
         key: 'string',
         value: 'any',
         topComponent: 'any',
         components: [],
         type: null,
-      },
+      }],
       state: {
         key: 'key',
         value: null,
@@ -65,12 +66,13 @@ describe('RightPanel unit tests', () => {
     expect(wrapper.find(StateDisplay).prop('title')).toBe('State:');
     expect(wrapper.find(StateDisplay).prop('json')).toBe(null);
   })
-
+  // Json prop should be null when there is no state
   it(`StateDisplay json prop should be null when state doesn't exist`, () => {
     expect(wrapper.find(StateDisplay).prop('json')).toBe(null);
   })
 
-  it(`StateDisplay json prop should show state.value when state.value exists`, () => {
+  // StateDisplay json prop should have value equal to state.value when state exists
+  it(`StateDisplay json prop should show state.value when state exists`, () => {
     const RightPanelProps2 = {
       clickedNode: {
         id: 1,
