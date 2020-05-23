@@ -1,6 +1,6 @@
 import { DisplayNode } from "../backend/interfaces";
 
-export default class Traverse {
+ class Traverse {
 
   static upward(targetNode: DisplayNode | null, callback: Function, ...args: any): void {
     while(targetNode) {
@@ -19,3 +19,5 @@ export default class Traverse {
   }
   
 }
+
+module.exports = { Traverse };

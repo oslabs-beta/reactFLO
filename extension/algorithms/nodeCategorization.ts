@@ -1,7 +1,7 @@
 import { DisplayNode, State } from "../backend/interfaces";
-import Traverse from "./dataTraversal";
+const { Traverse } = require("./dataTraversal");
 
-export default class FindProp {
+class FindProp {
   
   static inState (targetNode: DisplayNode, targetProp: State): void {
     /*
@@ -49,7 +49,7 @@ export default class FindProp {
 }
 
 // to create paths between startnode and the top stateful node 
-export const createPathToRoot = (startNode: DisplayNode): DisplayNode[] => {
+const createPathToRoot = (startNode: DisplayNode): DisplayNode[] => {
   // Create an array of stateful nodes
   const statefulNodeArr: DisplayNode[] = [];
   // Create an array of intermediary nodes, put startNode in med arr first because we dont want to count startNode as its own parent with same props 
@@ -74,7 +74,7 @@ export const createPathToRoot = (startNode: DisplayNode): DisplayNode[] => {
 };
 
 // will change the display weight of all stateful component and path weights of all the mediums 
-export const workOnStatefulNodes = (nodes: DisplayNode[], prop: State): DisplayNode => {
+const workOnStatefulNodes = (nodes: DisplayNode[], prop: State): DisplayNode => {
   // dec var for highest stateful node that has the props 
   let highestNodeWithTarget: null | DisplayNode = null ; 
   // iterate through the stateful nodes in reverse, from heighest to lowest
@@ -93,3 +93,5 @@ export const workOnStatefulNodes = (nodes: DisplayNode[], prop: State): DisplayN
   // Return the heighest stateful node that contains the props or return null if there are no stateful nodes
   return highestNodeWithTarget;
 };
+
+module.exports = { FindProp, createPathToRoot, workOnStatefulNodes };
