@@ -89,13 +89,12 @@ class LeftPanel extends Component<Props, State> {
     const stateData = this.props.data;
 
     // sets the heights and width of the tree to be passed into treemap 
-    const margin = { top: 0, right: 0, bottom: 0, left: 0 };
-    const height = 1000 - margin.left - margin.right;
-    const width = 1000 - margin.top - margin.bottom;
+    const width = 75;
+    const height = 250; 
 
     // creating the tree map 
     // setting the size based on width and heights declared above 
-    const treeMap = d3.tree().size([height, width]);
+    const treeMap = d3.tree().nodeSize([width, height]);
     // creating the nodes of the tree 
     const hierarchyNodes = d3.hierarchy(stateData);
     // calling tree function with nodes created from data
@@ -108,28 +107,39 @@ class LeftPanel extends Component<Props, State> {
     // this will render the nodes onto the component
     let nodes = hierarchyNodes.descendants();
 
+
     // put paths (the lines on the graph) before & because render goes before component did mount 
+    let savedNode = { displayWeight: 0 };
     paths = paths && paths.map((el: object, i: number) => {
+
       let d = d3
         // link vertical makes our entire tree go top to bottom as opposed to left to right 
         .linkVertical()
         .x((d) => {
-          return d.x / 2;
+          return d.x;
         })
         .y((d) => {
-          return d.y / 2; // div by 2 so make the path links shorter and not as long 
+          console.log('inside d: ', d)
+          savedNode = d.data
+          return d.y; // div by 2 so make the path links shorter and not as long 
         });
+
+
       return <path key={i}
-        className='link' fill="none"
-        stroke="#97a6ff"
-        strokeWidth="2px" d={d(el)} />
+        className='link' 
+        fill="none"
+        stroke={ savedNode.displayWeight === 0 ? 
+          'gray' : 
+          (savedNode.displayWeight === 0.5) ? 'yellow' :'green'
+        }
+        strokeWidth="10px" d={d(el)} />
     })
 
 
     // renders the nodes (the circles) to the screen
     nodes = nodes && nodes.map((node: Node, i: number) => {
       return <g
-        key={i} transform={`translate(${node.x / 2}, ${node.y / 2})`}
+        key={i} transform={`translate(${node.x}, ${node.y})`}
         onClick={() => this.props.selectNode(node.data)}
         onDoubleClick={() => this.toggleChildren(node)}
       >
@@ -138,7 +148,7 @@ class LeftPanel extends Component<Props, State> {
         {/* Also changes the color of the node depending on displayWeight */}
 
         {node.data.state !== null ?
-          <rect x="-5" y="0" width="15" height="10"
+          <rect x="-5" y="0" width="30" height="20"
             style={{
               'stroke': node.data === this.props.clickedNode ? 'red' : 'black',
               'strokeWidth': '2px',
@@ -147,7 +157,7 @@ class LeftPanel extends Component<Props, State> {
                   (node.data.displayWeight === 0.5 ? 'yellow' : 'green'),
             }} />
           :
-          <circle r="7"
+          <circle r="14"
             style={{
               'stroke': node.data === this.props.clickedNode ? 'red' : 'black',
               'strokeWidth': '2px',

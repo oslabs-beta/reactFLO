@@ -36,6 +36,7 @@ const convertToDisplayNode = (node): DisplayNode => {
     children: [],
     displayName: null,
     displayWeight: 0,
+    pathWeight: 0,
     mediums: [],
   }
 }

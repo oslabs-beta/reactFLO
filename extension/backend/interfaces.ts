@@ -2,6 +2,7 @@ export interface DisplayNode {
   id: number,
   displayName: string,
   displayWeight: number,
+  pathWeight: number,
   tag: number,
   type: string,
   name: string,
