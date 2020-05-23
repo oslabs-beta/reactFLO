@@ -1,4 +1,4 @@
-import { DisplayNode } from "../backend/interfaces";
+import { DisplayNode } from "../interfaces";
 
  class Traverse {
 

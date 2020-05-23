@@ -2,16 +2,17 @@ import React from "react";
 import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
 // TOOK OUT STATE
-import { DisplayNode } from "../backend/interfaces";
-import { assignChildren } from "./assignChildren";
-import { matchState, matchProps } from "./organizers";
-import { findHighestState, traverseData } from "./categorization";
+import { DisplayNode } from "../interfaces";
 import circular from "circular"
+const { Traverse } = require('../algorithms/dataTraversal');
+const { connectToParent } = require('../algorithms/dataConversion');
+const { FindProp, createPathToRoot, workOnStatefulNodes } = require('../algorithms/nodeCategorization');
 
-const resetDisplayWeights = (node) => {
-  return traverseData(node, null, (childNode) => {
+const resetDisplayWeights = (node: DisplayNode) => {
+  return Traverse.downward(node, (childNode: DisplayNode) => {
     // if the weight is more than 0 resasign it to 0 
     if (childNode.displayWeight) childNode.displayWeight = 0;
+    if (childNode.pathWeight) childNode.pathWeight = 0;
   });
 };
 
@@ -80,10 +81,11 @@ class App extends React.Component<Props, State>{
     // Reset results from previous selection
     resetDisplayWeights(this.state.data);
     // top level method needed before we invoke match and highest. This method allows children to connect with parents. Runs through 
-    assignChildren(this.state.data);
+    connectToParent(this.state.data);
     // find highest runs cb match state on stateful comoponent , if there is no highest stateful componenet with that info then start traversing at root
-    const topNode = findHighestState(this.state.clickedNode, prop, matchState) || this.state.data;
-    traverseData(topNode, prop, matchProps);
+    const statefulNodes = createPathToRoot(this.state.clickedNode);
+    const topNode = workOnStatefulNodes(statefulNodes, prop) || this.state.data;
+    Traverse.downward(topNode, FindProp.inProps, prop);
     this.setState({
       data: this.state.data,
     });

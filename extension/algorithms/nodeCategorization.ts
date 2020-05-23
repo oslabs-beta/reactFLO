@@ -1,4 +1,4 @@
-import { DisplayNode, State } from "../backend/interfaces";
+import { DisplayNode, State } from "../interfaces";
 const { Traverse } = require("./dataTraversal");
 
 class FindProp {

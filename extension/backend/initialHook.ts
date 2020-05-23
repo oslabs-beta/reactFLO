@@ -1,9 +1,6 @@
-import { extractData } from './dataCollection';
-import { findHighestState } from "../frontend/categorization";
-import { traverseData } from "../frontend/categorization";
-import { matchState } from "../frontend/organizers";
-import { assignChildren } from "../frontend/assignChildren";
-import { State, DisplayNode } from './interfaces';
+import { State, DisplayNode } from '../interfaces';
+const { fiberNodeToTree } = require('../algorithms/dataConversion');
+const circle = require('circular');
 
 // dec variables to hold react global hook 
 //declare const window: any;
@@ -27,10 +24,11 @@ export const initialHook = () => {
         test = args[1].current;
         // for debugging
         console.log('DOM: ', test);
-        console.log('Con: ', extractData(test));
+        console.log('Con2: ', fiberNodeToTree(test));
         // const targetNode = extractData(test).children[0].children[0].children[1].children[0].children[1];
         // console.log('Tar: ', targetNode);
-        window.postMessage({ message: extractData(test), id: 'ReactFLO' }, '*');
+        const message = JSON.parse(JSON.stringify(fiberNodeToTree(test), circle()));
+        window.postMessage({ message, id: 'ReactFLO' }, '*');
 
         // const stateTest = extractData(test);
         // assignChildren(stateTest);
