@@ -1,7 +1,6 @@
 import { findHighestState } from "../frontend/categorization";
 import { traverseData } from "../frontend/categorization";
 import { matchState } from "../frontend/organizers";
-import { assignChildren } from "../frontend/assignChildren";
 import { State, DisplayNode } from './interfaces';
 const { fiberNodeToTree } = require('../algorithms/dataConversion');
 const circle = require('circular');

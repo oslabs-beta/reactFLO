@@ -3,10 +3,11 @@ import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
 // TOOK OUT STATE
 import { DisplayNode } from "../backend/interfaces";
-import { assignChildren } from "./assignChildren";
+// import { assignChildren } from "./assignChildren";
 import { matchState, matchProps } from "./organizers";
 import { findHighestState, traverseData } from "./categorization";
 import circular from "circular"
+const { connectToParent } = require('../algorithms/dataConversion');
 
 const resetDisplayWeights = (node) => {
   return traverseData(node, null, (childNode) => {
@@ -80,7 +81,7 @@ class App extends React.Component<Props, State>{
     // Reset results from previous selection
     resetDisplayWeights(this.state.data);
     // top level method needed before we invoke match and highest. This method allows children to connect with parents. Runs through 
-    assignChildren(this.state.data);
+    connectToParent(this.state.data);
     // find highest runs cb match state on stateful comoponent , if there is no highest stateful componenet with that info then start traversing at root
     const topNode = findHighestState(this.state.clickedNode, prop, matchState) || this.state.data;
     traverseData(topNode, prop, matchProps);
