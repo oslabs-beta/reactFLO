@@ -3,14 +3,14 @@ import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
 // TOOK OUT STATE
 import { DisplayNode } from "../backend/interfaces";
-// import { assignChildren } from "./assignChildren";
 import { matchState, matchProps } from "./organizers";
-import { findHighestState, traverseData } from "./categorization";
+import { findHighestState } from "./categorization";
 import circular from "circular"
+const { Traverse } = require('../algorithms/dataTraversal');
 const { connectToParent } = require('../algorithms/dataConversion');
 
 const resetDisplayWeights = (node) => {
-  return traverseData(node, null, (childNode) => {
+  return Traverse.downward(node, (childNode) => {
     // if the weight is more than 0 resasign it to 0 
     if (childNode.displayWeight) childNode.displayWeight = 0;
   });
@@ -84,7 +84,7 @@ class App extends React.Component<Props, State>{
     connectToParent(this.state.data);
     // find highest runs cb match state on stateful comoponent , if there is no highest stateful componenet with that info then start traversing at root
     const topNode = findHighestState(this.state.clickedNode, prop, matchState) || this.state.data;
-    traverseData(topNode, prop, matchProps);
+    Traverse.downward(topNode, matchProps, prop);
     this.setState({
       data: this.state.data,
     });
