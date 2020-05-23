@@ -1,8 +1,9 @@
 import { DisplayNode, State } from "../backend/interfaces";
-import Traverse from "./dataTraversal";
+const { Traverse } = require("./dataTraversal");
 
+// Export as module
 // this function converts fibernode to display node and populates the children and sibling arrays recursively 
-export const fiberNodeToTree = (fiberNode) => {
+const fiberNodeToTree = (fiberNode) => {
   // Convert dual linked list structure into graph
   // Create a new node
   const convertedNode = convertToDisplayNode(fiberNode);
@@ -16,7 +17,8 @@ export const fiberNodeToTree = (fiberNode) => {
   return convertedNode
 };
 
-export const connectToParent = (node: DisplayNode) => {
+// Export as module
+const connectToParent = (node: DisplayNode) => {
   for (const child of node.children) {
     child.parent = node;
     connectToParent(child);
@@ -137,3 +139,5 @@ const convertProps = (node) => {
   // Return props array
   return props;
 };
+
+module.exports = { fiberNodeToTree, connectToParent }
