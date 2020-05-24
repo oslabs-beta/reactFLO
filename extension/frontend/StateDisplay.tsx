@@ -1,10 +1,10 @@
 import React from "react";
 import ReactJson from "react-json-view";
-import { State } from "../interfaces"
+import { Prop } from "../interfaces"
 
 interface stateDisplayProps {
   title: string,
-  json: null | State
+  json: null | Prop
 }
 
 export const StateDisplay = (props: stateDisplayProps) => {

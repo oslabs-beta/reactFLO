@@ -6,18 +6,16 @@ export interface DisplayNode {
   tag: number,
   type: string,
   name: string,
-  props: State[] | null,
-  state: State | null,
+  props: Prop[] | null,
+  state: Prop | null,
   children: DisplayNode[] | null,
   parent: DisplayNode | null,
   mediums: DisplayNode[] | null,
 }
 
-export interface State {
+export interface Prop {
   key: string,
   value: any,
-  topComponent: any,
-  components: any[],
   type: StateType,
 }
 
