@@ -9,6 +9,7 @@ interface State {
   nodes: [],
   data: object,
   toggleChild: boolean,
+  tempClickedNode: any | Node; 
 }
 
 interface Props {
@@ -41,9 +42,11 @@ class LeftPanel extends Component<Props, State> {
       nodes: [],
       data: {},
       toggleChild: true,
+      tempClickedNode: {},
     }
 
     this.toggleChildren = this.toggleChildren.bind(this);
+    this.temp = this.temp.bind(this);
   }
 
   toggleChildren(d: Node) {
@@ -61,16 +64,22 @@ class LeftPanel extends Component<Props, State> {
     })
   }
 
+  temp(n: Node) {
+    this.setState({
+      tempClickedNode: n
+    })
+  }
+
 
   render() {
     // Legend
-    let svgLegend = d3.select('#legend');
+    const svgLegend = d3.select('#legend');
     // Legend Shapes
     svgLegend.append("circle").attr("cx", 200).attr("cy", 130).attr("r", 6).style("stroke", 'black').style("fill", "none").style("stroke-width", '3px')
     svgLegend.append("rect").attr("x", 195).attr("y", 155).attr("width", 10).attr("height", 10).style("stroke", 'black').style("fill", "none").style("stroke-width", '3px')
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 190).attr("r", 6).style("fill", "grey")
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 220).attr("r", 6).style("fill", "yellow")
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 250).attr("r", 6).style("fill", "green")
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 190).attr("r", 6).style("fill", "#1E3677")
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 220).attr("r", 6).style("fill", "#55BEC7")
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 250).attr("r", 6).style("fill", "#F6780D")
     // Legend Descriptions
     svgLegend.append("text").attr("x", 220).attr("y", 130).text("Non-Stateful").style("font-size", "15px").attr("alignment-baseline", "middle")
     svgLegend.append("text").attr("x", 220).attr("y", 160).text("Stateful").style("font-size", "15px").attr("alignment-baseline", "middle")
@@ -80,10 +89,11 @@ class LeftPanel extends Component<Props, State> {
     // Legend Placement
     svgLegend.attr("x", -190)
     svgLegend.attr("y", -120)
+
     // data from the backend from hooking into react devtools
     const stateData = this.props.data;
 
-    // sets the heights and width of the tree to be passed into treemap 
+    // sets the heights and width of the tree to be passed into treemap
     const width = 75;
     const height = 250; 
 
@@ -95,6 +105,7 @@ class LeftPanel extends Component<Props, State> {
     // calling tree function with nodes created from data
     const finalMap = treeMap(hierarchyNodes)
 
+
     // returns a flat array of objects containing all the parent-child links
     // this will render the paths onto the component
     let paths = finalMap.links();
@@ -104,8 +115,7 @@ class LeftPanel extends Component<Props, State> {
 
 
     // put paths (the lines on the graph) before & because render goes before component did mount 
-    let savedNode = { pathWeight: 0 };
-    paths = paths && paths.map((el: object, i: number) => {
+      paths = paths && paths.map((el: object, i: number) => {
 
       let d = d3
         // link vertical makes our entire tree go top to bottom as opposed to left to right 
@@ -114,27 +124,28 @@ class LeftPanel extends Component<Props, State> {
           return d.x;
         })
         .y((d) => {
-          savedNode = d.data
           return d.y; // div by 2 so make the path links shorter and not as long 
         });
-
 
       return <path key={i}
         className='link' 
         fill="none"
-        stroke={ savedNode.pathWeight === 0 ? 
-          'gray' : 
-          (savedNode.pathWeight === 0.5) ? 'yellow' :'green'
-        }
+        stroke={
+          el.target.data.pathWeight === 0 ? '#1E3677' : 
+          el.target.data.pathWeight === 0.5 ?  '#55BEC7' : '#F6780D'
+      }
         strokeWidth="10px" d={d(el)} />
     })
 
-
     // renders the nodes (the circles) to the screen
     nodes = nodes && nodes.map((node: Node, i: number) => {
+
       return <g
         key={i} transform={`translate(${node.x}, ${node.y})`}
-        onClick={() => this.props.selectNode(node.data)}
+        onClick={() => {
+          this.props.selectNode(node.data)
+        }
+      }
         onDoubleClick={() => this.toggleChildren(node)}
       >
 
@@ -144,20 +155,22 @@ class LeftPanel extends Component<Props, State> {
         {node.data.state !== null ?
           <rect x="-5" y="0" width="30" height="20"
             style={{
-              'stroke': node.data === this.props.clickedNode ? 'red' : 'black',
+              'stroke': node.data === this.props.clickedNode ? 'red' : '#222',
               'strokeWidth': '2px',
+              'boxShadow' : node.data === this.props.clickedNode ? '0 0 10px #9ecaed' : 'black',
               'fill':
-                node.data.displayWeight === 0 ? 'gray' :
-                  (node.data.displayWeight === 0.5 ? 'yellow' : 'green'),
+                node.data.displayWeight === 0 ? '#1E3677' :
+                  (node.data.displayWeight === 0.5 ? '#55BEC7' : 'F6780D'),
             }} />
           :
           <circle r="14"
             style={{
               'stroke': node.data === this.props.clickedNode ? 'red' : 'black',
               'strokeWidth': '2px',
+              'boxShadow': node.data === this.props.clickedNode ? '20px 20px 20px #9ecaed' : 'black',
               'fill':
-                node.data.displayWeight === 0 ? 'gray' :
-                  (node.data.displayWeight === 0.5 ? 'yellow' : 'green'),
+                node.data.displayWeight === 0 ? '#1E3677' :
+                  (node.data.displayWeight === 0.5 ? '#55BEC7' : 'F6780D'),
             }} />
         }
 
@@ -167,8 +180,8 @@ class LeftPanel extends Component<Props, State> {
 
 
     return (
-      <div>
-        <h1>Component Tree</h1>
+      <div id="leftpanel">
+        <h1 id="leftpanelheadline">Component Tree</h1>
         <Stage width="500" height="1000">
           <svg id='legend' transform={`translate(-177,-177), scale(1)`}></svg>
           <ZoomContainer>

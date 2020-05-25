@@ -14,6 +14,7 @@ const RightPanel = (props: RightPanelProps) => {
 
   // state on line 7 is destructered from the clicked node we recieved from onclick 
   const { type, state, name } = props.clickedNode;
+  
   return (
     <div>
       <h1>Component Data</h1>

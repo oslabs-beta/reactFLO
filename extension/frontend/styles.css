@@ -1,6 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+html {
+  font-family: 'Varela Round', sans-serif;
+}
 
 .panelWrap{
   display: flex; 
   justify-content: space-around;
   align-items: flex-start;
+}
+
+#leftpanel {
+  font-family: 'Varela Round', sans-serif;
+  margin-left: 0.5em;
+}
+
+#leftpanelheadline {
+  text-align: center;
 }
