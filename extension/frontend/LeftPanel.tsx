@@ -11,7 +11,6 @@ interface State {
   nodes: [],
   data: object,
   toggleChild: boolean,
-  tempClickedNode: any | Node; 
 }
 
 interface Props {
@@ -53,11 +52,9 @@ class LeftPanel extends Component<Props, State> {
       nodes: [],
       data: {},
       toggleChild: true,
-      tempClickedNode: {},
     }
 
     this.toggleChildren = this.toggleChildren.bind(this);
-    this.temp = this.temp.bind(this);
   }
 
   toggleChildren(d: Node) {
@@ -74,13 +71,6 @@ class LeftPanel extends Component<Props, State> {
       toggleChild: !this.state.toggleChild
     })
   }
-
-  temp(n: Node) {
-    this.setState({
-      tempClickedNode: n
-    })
-  }
-
 
   render() {
     // Legend
@@ -115,8 +105,6 @@ class LeftPanel extends Component<Props, State> {
     const hierarchyNodes = d3.hierarchy(stateData);
     // calling tree function with nodes created from data
     const finalMap = treeMap(hierarchyNodes)
-
-
     // returns a flat array of objects containing all the parent-child links
     // this will render the paths onto the component
     let paths = finalMap.links();
@@ -153,8 +141,7 @@ class LeftPanel extends Component<Props, State> {
 
       return <g
         key={i} transform={`translate(${node.x}, ${node.y})`}
-        onClick={() => this.props.selectNode(node.data)
-      }
+        onClick={() => this.props.selectNode(node.data)}
         onDoubleClick={() => this.toggleChildren(node)}
       >
 
