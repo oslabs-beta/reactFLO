@@ -49,7 +49,7 @@ const convertState = (node): Prop => {
   return {
     key: 'State',
     // Spread operator prevents unwanted circular references
-    value: { ...node.memoizedState },
+    value: JSON.parse(JSON.stringify(node.memoizedState)),
     type: (node.memoizedState.memoizedState && node._debugHookTypes[0] === 'useState') ? 'hook' : 'componentState',
   }
 };
@@ -123,7 +123,8 @@ const convertProps = (node) => {
       const prop: Prop = {
         // Store values in object
         key,
-        value: node.memoizedProps[key],
+        // Create a clone of the prop value to preserve composet values
+        value: JSON.parse(JSON.stringify(node.memoizedProps[key])),
         type: 'prop',
       };
       // Push object to props array
