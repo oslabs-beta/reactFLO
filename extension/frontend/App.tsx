@@ -54,7 +54,6 @@ class App extends React.Component<Props, State>{
     // Add listener for messages from background script
     backgroundPageConnection.onMessage.addListener((message) => {
       if (message.id === 'ReactFLO') {
-        console.log('CDM app: ', message.message)
         this.setState({
           data: message.message,
           clickedNode: {},
@@ -65,7 +64,6 @@ class App extends React.Component<Props, State>{
 
   selectNode(node) {
     // assign state
-    console.log('Selected: ', node);
     this.setState({
       clickedNode: node,
     });
