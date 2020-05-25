@@ -4,6 +4,8 @@ import * as d3 from "d3";
 import { Stage } from "./Stage"
 import { ZoomContainer } from "./ZoomContainer"
 
+import { DisplayNode } from "../interfaces";
+
 interface State {
   paths: [],
   nodes: [],
@@ -32,6 +34,15 @@ interface Node {
   parent: object,
   x: number,
   y: number
+}
+
+interface Path {
+  target: {
+    data: DisplayNode
+  },
+  source: {
+    data: DisplayNode
+  }
 }
 
 class LeftPanel extends Component<Props, State> {
@@ -115,7 +126,7 @@ class LeftPanel extends Component<Props, State> {
 
 
     // put paths (the lines on the graph) before & because render goes before component did mount 
-      paths = paths && paths.map((el: object, i: number) => {
+      paths = paths && paths.map((el: Path, i: number) => {
 
       let d = d3
         // link vertical makes our entire tree go top to bottom as opposed to left to right 
@@ -142,9 +153,7 @@ class LeftPanel extends Component<Props, State> {
 
       return <g
         key={i} transform={`translate(${node.x}, ${node.y})`}
-        onClick={() => {
-          this.props.selectNode(node.data)
-        }
+        onClick={() => this.props.selectNode(node.data)
       }
         onDoubleClick={() => this.toggleChildren(node)}
       >
