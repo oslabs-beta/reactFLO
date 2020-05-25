@@ -46,11 +46,6 @@ class LeftPanel extends Component<Props, State> {
     this.toggleChildren = this.toggleChildren.bind(this);
   }
 
-  // componentDidUpdate(){
-  //   // confirm that backend data is getting updated 
-  //   // console.log("CPU leftpanel props: ", this.props.data)
-  // }
-
   toggleChildren(d: Node) {
 
     if (d.data.children) {
