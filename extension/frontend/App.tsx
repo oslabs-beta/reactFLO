@@ -1,9 +1,7 @@
 import React from "react";
 import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
-// TOOK OUT STATE
 import { DisplayNode } from "../interfaces";
-import circular from "circular"
 const { Traverse } = require('../algorithms/dataTraversal');
 const { connectToParent } = require('../algorithms/dataConversion');
 const { FindProp, createPathToRoot, workOnStatefulNodes } = require('../algorithms/nodeCategorization');
@@ -42,9 +40,6 @@ class App extends React.Component<Props, State>{
   };
 
   componentDidMount() {
-    // confirm function is firing
-    // this.setState({ array: 'hello from componentDidMount'})
-
     // Set up connection to background script
     const backgroundPageConnection = chrome.runtime.connect({
       name: "panel"
