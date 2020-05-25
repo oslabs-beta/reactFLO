@@ -114,7 +114,6 @@ class LeftPanel extends Component<Props, State> {
           return d.x;
         })
         .y((d) => {
-          console.log('inside d: ', d)
           savedNode = d.data
           return d.y; // div by 2 so make the path links shorter and not as long 
         });
