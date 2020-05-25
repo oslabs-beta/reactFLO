@@ -1,4 +1,4 @@
-import { DisplayNode, State } from "../interfaces";
+import { DisplayNode, Prop } from "../interfaces";
 const { Traverse } = require("./dataTraversal");
 
 // Export as module
@@ -44,15 +44,13 @@ const convertToDisplayNode = (node): DisplayNode => {
 }
 
 // will create structure of state that we take from fiber 
-const convertState = (node): State => {
+const convertState = (node): Prop => {
   if (!node.memoizedState) return null;
   return {
     key: 'State',
     // Spread operator prevents unwanted circular references
     value: { ...node.memoizedState },
     type: (node.memoizedState.memoizedState && node._debugHookTypes[0] === 'useState') ? 'hook' : 'componentState',
-    topComponent: null,
-    components: null,
   }
 };
 
@@ -117,17 +115,15 @@ const convertProps = (node) => {
   // If not return null
   if (!node.memoizedProps) return null;
   // Create props array
-  const props: State[] = [];
+  const props: Prop[] = [];
   // Iterate through memoizedProps.props
   for (const key in node.memoizedProps) {
     try {
       // Create a prop object
-      const prop: State = {
+      const prop: Prop = {
         // Store values in object
         key,
         value: node.memoizedProps[key],
-        topComponent: null,
-        components: [],
         type: 'prop',
       };
       // Push object to props array

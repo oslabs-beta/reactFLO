@@ -1,11 +1,11 @@
 import React from "react";
 import ReactJson from "react-json-view";
-import { State } from "../interfaces";
+import { Prop } from "../interfaces";
 
 
 interface PropDisplayProps {
   title: string,
-  propList: State[],
+  propList: Prop[],
   selectProp: Function
 }
 
@@ -31,7 +31,7 @@ export const PropDisplay = (props: PropDisplayProps) => {
 
 interface ButtonProp {
   key: string,
-  nodeProp: State,
+  nodeProp: Prop,
   selectProp: Function,
 }
 

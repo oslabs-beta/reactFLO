@@ -1,8 +1,3 @@
-// Test code
-// const injectedStuff = document.createElement('h1');
-// injectedStuff.innerText = 'Ya got hacked nerd!';
-// document.body.appendChild(injectedStuff);
-
 // Function will send a message to the background script 
 const sendMessage = (message) => {
   chrome.runtime.sendMessage(message, (response) => {
@@ -26,7 +21,6 @@ const injectScript = (file, tag) => {
 
 // Listening for message from injected script - inject.js
 window.addEventListener('message', e => {
-
   // Making sure the event listened too is from the window 
   if (e.data.id === 'ReactFLO' && e.source === window) {
     // console.log('backend data from contentscripts: ', e.data);
@@ -36,6 +30,3 @@ window.addEventListener('message', e => {
 
 // Injects the script into the dom
 injectScript(chrome.runtime.getURL('/inject.js'), 'body');
-
-// Test message:
-// sendMessage({ message: 'Hello from Content Scripts' });

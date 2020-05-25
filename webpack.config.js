@@ -4,7 +4,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   watch: true,
   entry: {
-    bundle: './extension/index.ts',
     devtools: './extension/devtools.ts',
     background: './extension/background.ts',
     contentscript: './extension/contentscript.ts',

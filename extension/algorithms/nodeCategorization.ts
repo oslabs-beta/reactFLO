@@ -1,9 +1,9 @@
-import { DisplayNode, State } from "../interfaces";
+import { DisplayNode, Prop } from "../interfaces";
 const { Traverse } = require("./dataTraversal");
 
 class FindProp {
   
-  static inState (targetNode: DisplayNode, targetProp: State): void {
+  static inState (targetNode: DisplayNode, targetProp: Prop): void {
     /*
       Searches through the entirety of State obj on a display node, both keys and values, 
       to find the value from a selected prop of clicked displayNode
@@ -36,7 +36,7 @@ class FindProp {
     crawler(targetNode.state.value, targetProp.value); 
   }
 
-  static inProps (targetNode: DisplayNode, targetProp: State): void {
+  static inProps (targetNode: DisplayNode, targetProp: Prop): void {
     if (!targetNode.props) return;
     for (const prop of targetNode.props) {
       if (prop.key === targetProp.key) {
@@ -74,7 +74,7 @@ const createPathToRoot = (startNode: DisplayNode): DisplayNode[] => {
 };
 
 // will change the display weight of all stateful component and path weights of all the mediums 
-const workOnStatefulNodes = (nodes: DisplayNode[], prop: State): DisplayNode => {
+const workOnStatefulNodes = (nodes: DisplayNode[], prop: Prop): DisplayNode => {
   // dec var for highest stateful node that has the props 
   let highestNodeWithTarget: null | DisplayNode = null ; 
   // iterate through the stateful nodes in reverse, from heighest to lowest
