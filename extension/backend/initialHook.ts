@@ -1,5 +1,4 @@
 const { fiberNodeToTree } = require('../algorithms/dataConversion');
-const circle = require('circular');
 
 declare global {
   interface Window {
@@ -17,8 +16,7 @@ export const initialHook = () => {
     devTools.onCommitFiberRoot = (function (original) {
       return function (...args) {
         const fiberNode = args[1].current;
-        const message = JSON.parse(JSON.stringify(fiberNodeToTree(fiberNode), circle()));
-        window.postMessage({ message, id: 'ReactFLO' }, '*');
+        window.postMessage({ message: fiberNodeToTree(fiberNode), id: 'ReactFLO' }, '*');
 
         return original(...args);
       };

@@ -42,6 +42,11 @@ class FindProp {
       if (prop.key === targetProp.key) {
         targetNode.displayWeight = Math.max(.5, targetNode.displayWeight);
         if (prop.value === targetProp.value) targetNode.displayWeight = Math.max(1, targetNode.displayWeight);
+        if (typeof targetProp.value === 'object' && typeof prop.value === 'object') {
+          if (JSON.stringify(prop.value) === JSON.stringify(targetProp.value)) {
+            targetNode.displayWeight = Math.max(1, targetNode.displayWeight);
+          }
+        }
       }
     }
   }
