@@ -139,7 +139,6 @@ class LeftPanel extends Component<Props, State> {
 
     // renders the nodes (the circles) to the screen
     nodes = nodes && nodes.map((node: Node, i: number) => {
-      console.log('node: ', node)
       return <g
         key={i} transform={`translate(${node.x + 1375}, ${node.y})`}
         onClick={() => this.props.selectNode(node.data)}
@@ -157,7 +156,6 @@ class LeftPanel extends Component<Props, State> {
               node.data.pathWeight === 0 && node.data.displayWeight === 0 ? '#FFFAFA' :
               node.data.pathWeight === 1 || node.data.displayWeight === 1 ? '#F6780D' :'#55BEC7',
               'strokeWidth': '8px',
-              'strokeDasharray': node.data === this.props.clickedNode ? '2em' : '0',
               'fill':
                 node.data.displayWeight === 0 ? '#1E3677' :
                   (node.data.displayWeight === 0.5 ? '#55BEC7' : '#F6780D'),
@@ -203,10 +201,10 @@ class LeftPanel extends Component<Props, State> {
 
 
     return (
-      <div id="leftpanel" className="panel">
+      <div className="leftPanel">
         <h1 id="leftpanelheadline" className="title">Component Tree</h1>
         <Stage width="65vw" height="100vh">
-          <svg id='legend' transform={`translate(-177,-177), scale(1)`}></svg>
+        <svg id='legend' transform={`translate(-177,-177), scale(1)`}></svg>
           <ZoomContainer>
             {paths}
             {nodes}

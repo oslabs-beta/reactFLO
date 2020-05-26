@@ -1,9 +1,20 @@
-.panel {
-  display: inline-block;
-  vertical-align: top;
+.panelContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.leftPanel {
   background-color: $background-color1;
   border: 2px solid $accent-color1;
+  width: 65vw;
 }
+
+.rightPanel {
+  background-color: $background-color1;
+  border: 2px solid $accent-color1;
+  width: 35vw;
+ } 
 
 .title {
   text-align: center;

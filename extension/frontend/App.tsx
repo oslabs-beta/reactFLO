@@ -108,7 +108,7 @@ class App extends React.Component<Props, State>{
         }}><Splash />
         </div>
         : <div>
-          <div className="panelWrap">
+          <div className="panelContainer">
             <LeftPanel
               data={this.state.data}
               clickedNode={this.state.clickedNode}
