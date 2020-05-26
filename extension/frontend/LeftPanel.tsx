@@ -176,8 +176,8 @@ class LeftPanel extends Component<Props, State> {
 
 
     return (
-      <div id="leftpanel">
-        <h1 id="leftpanelheadline">Component Tree</h1>
+      <div id="leftpanel" className="panel">
+        <h1 id="leftpanelheadline" className="title">Component Tree</h1>
         <Stage width="500" height="1000">
           <svg id='legend' transform={`translate(-177,-177), scale(1)`}></svg>
           <ZoomContainer>

@@ -16,11 +16,11 @@ const RightPanel = (props: RightPanelProps) => {
   const { type, state, name } = props.clickedNode;
   
   return (
-    <div>
-      <h1>Component Data</h1>
-      <h2> Component Type: {type || "Anonymous"}</h2>
-      <h2> Component Name: {name || "Anonymous"}</h2>
-      <button onClick={props.clearTree}>Clear Selection</button>
+    <div id="rightPanel" className="panel">
+      <h1 className="title">Component Data</h1>
+      <h2 className="subTitle"> Component Type: {type || "Anonymous"}</h2>
+      <h2 className="subTitle"> Component Name: {name || "Anonymous"}</h2>
+      <button onClick={props.clearTree} className="clearSelection">Clear Selection</button>
       <StateDisplay 
         title='State:' 
         json={state ? state.value : null} />
