@@ -15,22 +15,22 @@ interface State {
 
 interface Props {
   data: object,
-  clickedNode: object,
+  clickedNode: any | DisplayNode,
   selectNode: Function
 }
 
 interface Node {
   children: [],
   data: {
-    _children?: [],
-    children: []
+    _children?: DisplayNode[] | null,
+    children: DisplayNode[] | null,
     displayWeight?: number,
     state?: object,
     name?: string
   },
   depth: number,
   height: number,
-  parent: object,
+  parent: DisplayNode | null,
   x: number,
   y: number
 }
@@ -153,7 +153,6 @@ class LeftPanel extends Component<Props, State> {
             style={{
               'stroke': node.data === this.props.clickedNode ? 'red' : '#222',
               'strokeWidth': '2px',
-              'boxShadow' : node.data === this.props.clickedNode ? '0 0 10px #9ecaed' : 'black',
               'fill':
                 node.data.displayWeight === 0 ? '#1E3677' :
                   (node.data.displayWeight === 0.5 ? '#55BEC7' : 'F6780D'),
