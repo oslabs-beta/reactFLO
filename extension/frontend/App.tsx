@@ -2,11 +2,9 @@ import React from "react";
 import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
 import { DisplayNode } from "../interfaces";
-import { Splash } from "./Splash";
 const { Traverse } = require('../algorithms/dataTraversal');
 const { connectToParent } = require('../algorithms/dataConversion');
 const { FindProp, createPathToRoot, workOnStatefulNodes } = require('../algorithms/nodeCategorization');
-
 
 const resetDisplayWeights = (node: DisplayNode) => {
   return Traverse.downward(node, (childNode: DisplayNode) => {
@@ -98,16 +96,10 @@ class App extends React.Component<Props, State>{
   }
 
   render() {
-    console.log('data', this.state.data);
 
     return (
-      Object.keys(this.state.data).length === 0 && this.state.data.constructor === Object
-        ? <div style={{
-          position: 'absolute', left: '50%', top: '50%',
-          transform: 'translate(-50%, -50%)'
-        }}><Splash />
-        </div>
-        : <div>
+      <div>
+        <div className="panelWrap">
           <LeftPanel
             data={this.state.data}
             clickedNode={this.state.clickedNode}
@@ -117,6 +109,7 @@ class App extends React.Component<Props, State>{
             selectProp={this.selectProp}
             clearTree={this.clearTree} />
         </div>
+      </div>
     )
   }
 }
