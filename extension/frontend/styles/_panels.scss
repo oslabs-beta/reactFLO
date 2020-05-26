@@ -1,12 +1,15 @@
 .panel {
+  display: inline-block;
+  vertical-align: top;
   background-color: $background-color1;
   border: 2px solid $accent-color1;
 }
 
 .title {
+  text-align: center;
   margin: 0;
   padding: 10px;
-  color: $font-color1;
+  color: $RF-lightblue;
   background-color: $accent-color1;
 }
 
@@ -24,7 +27,7 @@ button {
   background-color: $accent-color1;
   border: none;
   cursor: pointer;
-  transition-duration: .5s;
+  transition-duration: .25s;
 }
 
 button:hover {

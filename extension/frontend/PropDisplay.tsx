@@ -41,7 +41,9 @@ export function PropInfo(props: ButtonProp) {
   return (
     <div>
       <button onClick={() => props.selectProp(props.nodeProp)}>🔎 Key: {props.nodeProp.key}</button>
-      <ReactJson src={{ [props.nodeProp.key]: props.nodeProp.value }} name='Value' collapsed={true} enableClipboard={false} />
+      <span>
+        <ReactJson src={{ [props.nodeProp.key]: props.nodeProp.value }} name='Value' collapsed={true} enableClipboard={false} />
+      </span>
     </div>
   );
 }
