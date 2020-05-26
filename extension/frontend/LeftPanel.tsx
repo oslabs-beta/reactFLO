@@ -130,7 +130,7 @@ class LeftPanel extends Component<Props, State> {
         className='link' 
         fill="none"
         stroke={
-          el.target.data.pathWeight === 0 ? '#FFFAFA' : 
+          el.target.data.pathWeight === 0 ? '#BDBDBD' : 
           el.target.data.pathWeight === 0.5 ?  '#55BEC7' : '#F6780D'
       }
         strokeWidth="10px" d={d(el)} />
@@ -138,7 +138,7 @@ class LeftPanel extends Component<Props, State> {
 
     // renders the nodes (the circles) to the screen
     nodes = nodes && nodes.map((node: Node, i: number) => {
-
+      console.log('node: ', node)
       return <g
         key={i} transform={`translate(${node.x + 1375}, ${node.y})`}
         onClick={() => this.props.selectNode(node.data)}
@@ -151,17 +151,24 @@ class LeftPanel extends Component<Props, State> {
         {node.data.state !== null ?
           <rect x="-25" y="0" width="50" height="50"
             style={{
-              'stroke': node.data === this.props.clickedNode ? 'red' : '#FFFAFA',
-              'strokeWidth': '5px',
+              'stroke': 
+              node.data === this.props.clickedNode ? '#BDBDBD' : 
+              node.data.pathWeight === 0 ? '#FFFAFA' :
+              node.data.pathWeight === 0.5 ? '#55BEC7' : '#F6780D',
+              'strokeWidth': '8px',
+              'strokeDasharray': node.data === this.props.clickedNode ? '2em' : '0',
               'fill':
                 node.data.displayWeight === 0 ? '#1E3677' :
-                  (node.data.displayWeight === 0.5 ? '#55BEC7' : 'F6780D'),
+                  (node.data.displayWeight === 0.5 ? '#55BEC7' : '#F6780D'),
             }} />
           :
           <circle r="25"
             style={{
-              'stroke': node.data === this.props.clickedNode ? 'red' : '#FFFAFA',
-              'strokeWidth': '5px',
+              'stroke': 
+              node.data === this.props.clickedNode ? '#BDBDBD' : 
+              node.data.pathWeight === 0 ? '#FFFAFA' :
+              node.data.pathWeight === 0.5 ? '#55BEC7' : '#F6780D',
+              'strokeWidth': '8px',
               'fill':
                 node.data.displayWeight === 0 ? '#1E3677' :
                   (node.data.displayWeight === 0.5 ? '#55BEC7' : 'F6780D'),
