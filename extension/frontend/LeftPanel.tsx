@@ -149,7 +149,7 @@ class LeftPanel extends Component<Props, State> {
         {/* Also changes the color of the node depending on displayWeight */}
 
         {node.data.state !== null ?
-          <rect x="-5" y="0" width="30" height="20"
+          <rect x="-5" y="0" width="50" height="50"
             style={{
               'stroke': node.data === this.props.clickedNode ? 'red' : '#222',
               'strokeWidth': '2px',
@@ -177,7 +177,7 @@ class LeftPanel extends Component<Props, State> {
     return (
       <div id="leftpanel" className="panel">
         <h1 id="leftpanelheadline" className="title">Component Tree</h1>
-        <Stage width="500" height="1000">
+        <Stage width="65vw" height="100vh">
           <svg id='legend' transform={`translate(-177,-177), scale(1)`}></svg>
           <ZoomContainer>
             {paths}
