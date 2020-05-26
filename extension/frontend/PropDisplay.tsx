@@ -22,7 +22,7 @@ export const PropDisplay = (props: PropDisplayProps) => {
 
   return (
     <div>
-      <h2>{props.title}</h2>
+      <h2 className="title">{props.title}</h2>
       {propArray}
     </div>
   );
@@ -41,7 +41,7 @@ export function PropInfo(props: ButtonProp) {
   return (
     <div>
       <button onClick={() => props.selectProp(props.nodeProp)}>🔎 Key: {props.nodeProp.key}</button>
-      <ReactJson src={{ [props.nodeProp.key]: props.nodeProp.value }} name='Value' collapsed={true} enableClipboard={false} />
+      <ReactJson src={{ [props.nodeProp.key]: props.nodeProp.value }} name='Value' collapsed={false} enableClipboard={false} theme="monokai" />
     </div>
   );
 }
