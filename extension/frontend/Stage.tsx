@@ -14,7 +14,7 @@ export const Stage = ({ width, height, children }: StageProps) => {
   useEffect(() => setSvg(svgRef.current), [])
 
   return (
-    <svg ref={svgRef} width={width} height={height}>
+    <svg ref={svgRef} width={width} height={height} viewBox="0 0 2750 2750">
       <Context.Provider value={svg}>{children}</Context.Provider>
     </svg>
   )
