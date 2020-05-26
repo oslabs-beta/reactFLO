@@ -24,6 +24,7 @@ interface Node {
   data: {
     _children?: DisplayNode[] | null,
     children: DisplayNode[] | null,
+    pathWeight: number,
     displayWeight?: number,
     state?: object,
     name?: string
@@ -153,8 +154,8 @@ class LeftPanel extends Component<Props, State> {
             style={{
               'stroke': 
               node.data === this.props.clickedNode ? '#BDBDBD' : 
-              node.data.pathWeight === 0 ? '#FFFAFA' :
-              node.data.pathWeight === 0.5 ? '#55BEC7' : '#F6780D',
+              node.data.pathWeight === 0 && node.data.displayWeight === 0 ? '#FFFAFA' :
+              node.data.pathWeight === 1 || node.data.displayWeight === 1 ? '#F6780D' :'#55BEC7',
               'strokeWidth': '8px',
               'strokeDasharray': node.data === this.props.clickedNode ? '2em' : '0',
               'fill':
