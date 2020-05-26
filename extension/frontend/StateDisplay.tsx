@@ -16,8 +16,10 @@ export const StateDisplay = (props: stateDisplayProps) => {
       <ReactJson
         src={props.json}
         name={props.title}
-        collapsed={true}
-        enableClipboard={false} />
+        collapsed={false}
+        enableClipboard={false}
+        theme="monokai"
+      />
     </div>
   );
 
