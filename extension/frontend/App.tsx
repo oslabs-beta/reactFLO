@@ -101,6 +101,7 @@ class App extends React.Component<Props, State>{
     console.log('data', this.state.data);
 
     return (
+      // Determine if page has rendered yet
       Object.keys(this.state.data).length === 0 && this.state.data.constructor === Object
         ? <div style={{
           position: 'absolute', left: '50%', top: '50%',
