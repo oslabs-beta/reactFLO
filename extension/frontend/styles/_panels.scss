@@ -1,0 +1,36 @@
+.panel {
+  background-color: $background-color1;
+  border: 2px solid $accent-color1;
+}
+
+.title {
+  margin: 0;
+  padding: 10px;
+  color: $font-color1;
+  background-color: $accent-color1;
+}
+
+.subTitle {
+  color: $font-color2;
+  padding: 0 10px;
+}
+
+button {
+  color: $font-color1;
+  font-size: medium;
+  padding: 5px;
+  outline: none;
+  text-decoration: none;
+  background-color: $accent-color1;
+  border: none;
+  cursor: pointer;
+  transition-duration: .5s;
+}
+
+button:hover {
+  color: $RF-orange;
+}
+
+.clearSelection {
+  border-radius: 0 5px 0 0;
+}

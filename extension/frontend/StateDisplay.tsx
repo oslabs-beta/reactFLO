@@ -12,7 +12,7 @@ export const StateDisplay = (props: stateDisplayProps) => {
   if (!props.json) return <div></div>
   return (
     <div>
-      <h2>{props.title}</h2>
+      <h2 className="title">{props.title}</h2>
       <ReactJson
         src={props.json}
         name={props.title}
