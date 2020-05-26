@@ -98,18 +98,26 @@ class App extends React.Component<Props, State>{
   render() {
 
     return (
-      <div>
-        <div className="panelWrap">
-          <LeftPanel
-            data={this.state.data}
-            clickedNode={this.state.clickedNode}
-            selectNode={this.selectNode} />
-          <RightPanel
-            clickedNode={this.state.clickedNode}
-            selectProp={this.selectProp}
-            clearTree={this.clearTree} />
+
+      // Determine if page has rendered yet using ternary
+      Object.keys(this.state.data).length === 0 && this.state.data.constructor === Object
+        ? <div style={{
+          position: 'absolute', left: '50%', top: '50%',
+          transform: 'translate(-50%, -50%)'
+        }}><Splash />
         </div>
-      </div>
+        : <div>
+          <div className="panelWrap">
+            <LeftPanel
+              data={this.state.data}
+              clickedNode={this.state.clickedNode}
+              selectNode={this.selectNode} />
+            <RightPanel
+              clickedNode={this.state.clickedNode}
+              selectProp={this.selectProp}
+              clearTree={this.clearTree} />
+          </div>
+        </div>
     )
   }
 }
