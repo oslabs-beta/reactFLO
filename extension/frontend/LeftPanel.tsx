@@ -120,17 +120,17 @@ class LeftPanel extends Component<Props, State> {
         // link vertical makes our entire tree go top to bottom as opposed to left to right 
         .linkVertical()
         .x((d) => {
-          return d.x;
+          return d.x + 1375;
         })
         .y((d) => {
-          return d.y; // div by 2 so make the path links shorter and not as long 
+          return d.y;
         });
 
       return <path key={i}
         className='link' 
         fill="none"
         stroke={
-          el.target.data.pathWeight === 0 ? '#1E3677' : 
+          el.target.data.pathWeight === 0 ? '#FFFAFA' : 
           el.target.data.pathWeight === 0.5 ?  '#55BEC7' : '#F6780D'
       }
         strokeWidth="10px" d={d(el)} />
@@ -140,7 +140,7 @@ class LeftPanel extends Component<Props, State> {
     nodes = nodes && nodes.map((node: Node, i: number) => {
 
       return <g
-        key={i} transform={`translate(${node.x}, ${node.y})`}
+        key={i} transform={`translate(${node.x + 1375}, ${node.y})`}
         onClick={() => this.props.selectNode(node.data)}
         onDoubleClick={() => this.toggleChildren(node)}
       >
@@ -149,27 +149,47 @@ class LeftPanel extends Component<Props, State> {
         {/* Also changes the color of the node depending on displayWeight */}
 
         {node.data.state !== null ?
-          <rect x="-5" y="0" width="50" height="50"
+          <rect x="-25" y="0" width="50" height="50"
             style={{
-              'stroke': node.data === this.props.clickedNode ? 'red' : '#222',
-              'strokeWidth': '2px',
+              'stroke': node.data === this.props.clickedNode ? 'red' : '#FFFAFA',
+              'strokeWidth': '5px',
               'fill':
                 node.data.displayWeight === 0 ? '#1E3677' :
                   (node.data.displayWeight === 0.5 ? '#55BEC7' : 'F6780D'),
             }} />
           :
-          <circle r="14"
+          <circle r="25"
             style={{
-              'stroke': node.data === this.props.clickedNode ? 'red' : 'black',
-              'strokeWidth': '2px',
-              'boxShadow': node.data === this.props.clickedNode ? '20px 20px 20px #9ecaed' : 'black',
+              'stroke': node.data === this.props.clickedNode ? 'red' : '#FFFAFA',
+              'strokeWidth': '5px',
               'fill':
                 node.data.displayWeight === 0 ? '#1E3677' :
                   (node.data.displayWeight === 0.5 ? '#55BEC7' : 'F6780D'),
             }} />
         }
 
-        <text x="8" y="4" textAnchor="start">{node.data.name}</text>
+        {node.data.state !== null ?
+        <text 
+        x="35" 
+        y="45" 
+        style={{
+          'fill': "#FFFAFA",
+          'fontSize' : '55px', 
+          }} 
+          textAnchor="start">
+            {node.data.name}
+        </text> :        
+        <text 
+          x="35" 
+          y="15" 
+          style={{
+            'fill': "#FFFAFA",
+            'fontSize' : '55px', 
+            }} 
+            textAnchor="start">
+              {node.data.name}
+          </text>
+        }
       </g>
     })
 
