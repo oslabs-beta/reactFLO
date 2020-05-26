@@ -102,7 +102,11 @@ class App extends React.Component<Props, State>{
 
     return (
       Object.keys(this.state.data).length === 0 && this.state.data.constructor === Object
-        ? <div><Splash /></div>
+        ? <div style={{
+          position: 'absolute', left: '50%', top: '50%',
+          transform: 'translate(-50%, -50%)'
+        }}><Splash />
+        </div>
         : <div>
           <LeftPanel
             data={this.state.data}

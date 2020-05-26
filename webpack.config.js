@@ -52,12 +52,11 @@ module.exports = {
         loader: 'svg-inline-loader'
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
+        test: /\.(png|jpe?g|gif|jp2|webp)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'images/[name].[ext]'
+        }
       },
     ],
   },

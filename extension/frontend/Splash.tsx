@@ -5,7 +5,8 @@ export const Splash = () => {
   return (
     <div>
       <img src={loading} />
-      Loading..</div>
+      Loading..
+    </div>
 
   )
 
