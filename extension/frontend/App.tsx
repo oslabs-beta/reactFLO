@@ -2,6 +2,7 @@ import React from "react";
 import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
 import { DisplayNode } from "../interfaces";
+import { Splash } from "./Splash";
 const { Traverse } = require('../algorithms/dataTraversal');
 const { connectToParent } = require('../algorithms/dataConversion');
 const { FindProp, createPathToRoot, workOnStatefulNodes } = require('../algorithms/nodeCategorization');
