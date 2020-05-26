@@ -96,8 +96,8 @@ class LeftPanel extends Component<Props, State> {
     const stateData = this.props.data;
 
     // sets the heights and width of the tree to be passed into treemap
-    const width = 75;
-    const height = 250; 
+    const width = 100;
+    const height = 350; 
 
     // creating the tree map 
     // setting the size based on width and heights declared above 
@@ -124,7 +124,7 @@ class LeftPanel extends Component<Props, State> {
           return d.x + 1375;
         })
         .y((d) => {
-          return d.y;
+          return d.y - 750;
         });
 
       return <path key={i}
@@ -140,7 +140,7 @@ class LeftPanel extends Component<Props, State> {
     // renders the nodes (the circles) to the screen
     nodes = nodes && nodes.map((node: Node, i: number) => {
       return <g
-        key={i} transform={`translate(${node.x + 1375}, ${node.y})`}
+        key={i} transform={`translate(${node.x + 1375}, ${node.y - 750})`}
         onClick={() => this.props.selectNode(node.data)}
         onDoubleClick={() => this.toggleChildren(node)}
       >
