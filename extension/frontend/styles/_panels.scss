@@ -2,19 +2,27 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  height: 100vh;
 }
 
 .leftPanel {
   background-color: $background-color1;
   border: 2px solid $accent-color1;
   width: 65vw;
+  height: 100%;
 }
 
 .rightPanel {
   background-color: $background-color1;
   border: 2px solid $accent-color1;
   width: 35vw;
+  height: 100%;
  } 
+
+ .rightPanelBottom {
+  max-height: 75%;
+  overflow-y: scroll;
+ }
 
 .title {
   text-align: center;
