@@ -46,7 +46,20 @@ module.exports = {
           'style-loader',
           'css-loader',
           'sass-loader',
-        ],
+
+
+        ]
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
+      },
+      {
+        test: /\.(png|jpe?g|gif|jp2|webp)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'images/[name].[ext]'
+        }
       },
     ],
   },
