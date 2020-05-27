@@ -21,5 +21,7 @@ export const initialHook = () => {
         return original(...args);
       };
     })(devTools.onCommitFiberRoot);
+  } else {
+    window.postMessage({ message: 'notSupported', id: 'ReactFLO' }, '*');
   }
 };
