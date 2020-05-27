@@ -3,6 +3,7 @@ import LeftPanel from "./LeftPanel"
 import RightPanel from "./RightPanel"
 import { DisplayNode } from "../interfaces";
 import { Splash } from "./Splash";
+import notSupported from "../assets/notSupported.png"
 const { Traverse } = require('../algorithms/dataTraversal');
 const { connectToParent } = require('../algorithms/dataConversion');
 const { FindProp, createPathToRoot, workOnStatefulNodes } = require('../algorithms/nodeCategorization');
@@ -97,28 +98,41 @@ class App extends React.Component<Props, State>{
   }
 
   render() {
-
+    console.log("data", this.state.data)
     return (
 
       // Determine if page has rendered yet using ternary
-      Object.keys(this.state.data).length === 0 && this.state.data.constructor === Object
-        ? <div style={{
-          position: 'absolute', left: '50%', top: '50%',
-          transform: 'translate(-50%, -50%)'
-        }}><Splash />
+      (this.state.data === 'notSupported')
+        ?
+        <div>
+          <img src={notSupported} />
+          <div style={{
+            position: 'absolute', left: '50%', top: '90%',
+            transform: 'translate(-50%, -50%)',
+            color: '#F6780D'
+          }}>
+            ReactFLO currently only supports React v16.0+</div>
         </div>
-        : <div>
-          <div className="panelWrap">
-            <LeftPanel
-              data={this.state.data}
-              clickedNode={this.state.clickedNode}
-              selectNode={this.selectNode} />
-            <RightPanel
-              clickedNode={this.state.clickedNode}
-              selectProp={this.selectProp}
-              clearTree={this.clearTree} />
-          </div>
-        </div>
+        : (
+          Object.keys(this.state.data).length === 0 && this.state.data.constructor === Object
+            ? <div style={{
+              position: 'absolute', left: '50%', top: '50%',
+              transform: 'translate(-50%, -50%)'
+            }}><Splash />
+            </div>
+            : <div>
+              <div className="panelWrap">
+                <LeftPanel
+                  data={this.state.data}
+                  clickedNode={this.state.clickedNode}
+                  selectNode={this.selectNode} />
+                <RightPanel
+                  clickedNode={this.state.clickedNode}
+                  selectProp={this.selectProp}
+                  clearTree={this.clearTree} />
+              </div>
+            </div>
+        )
     )
   }
 }
