@@ -203,7 +203,7 @@ class LeftPanel extends Component<Props, State> {
     return (
       <div className="leftPanel">
         <h1 className="title">Component Tree</h1>
-        <Stage width="65vw" height="100%">
+        <Stage width="100vw" height="100vh">
         <svg id='legend' transform={`translate(0,0), scale(1)`}></svg>
           <ZoomContainer>
             {paths}
