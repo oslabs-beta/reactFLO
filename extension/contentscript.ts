@@ -10,15 +10,6 @@ const sendMessage = (message) => {
   });
 }
 
-// Function will attach script to the dom 
-const injectScript = (file, tag) => {
-  const htmlBody = document.getElementsByTagName(tag)[0];
-  const script = document.createElement('script');
-  script.setAttribute('type', 'text/javascript');
-  script.setAttribute('src', file);
-  htmlBody.appendChild(script);
-}
-
 // Listening for message from injected script - inject.js
 window.addEventListener('message', e => {
   // Making sure the event listened too is from the window 
@@ -27,6 +18,3 @@ window.addEventListener('message', e => {
     sendMessage(e.data);
   }
 });
-
-// Injects the script into the dom
-injectScript(chrome.runtime.getURL('/inject.js'), 'body');
