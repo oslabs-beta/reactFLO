@@ -77,11 +77,11 @@ class LeftPanel extends Component<Props, State> {
     // Legend
     const svgLegend = d3.select('#legend');
     // Legend Shapes
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 130).attr("r", 6).style("stroke", 'black').style("fill", "none").style("stroke-width", '3px')
-    svgLegend.append("rect").attr("x", 195).attr("y", 155).attr("width", 10).attr("height", 10).style("stroke", 'black').style("fill", "none").style("stroke-width", '3px')
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 190).attr("r", 6).style("fill", "#1E3677")
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 220).attr("r", 6).style("fill", "#55BEC7")
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 250).attr("r", 6).style("fill", "#F6780D")
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 130).attr("r", 25).style("stroke", 'black').style("fill", "none").style("stroke-width", '3px')
+    svgLegend.append("rect").attr("x", 195).attr("y", 155).attr("width", 50).attr("height", 10).style("stroke", 'black').style("fill", "none").style("stroke-width", '3px')
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 190).attr("r", 25).style("fill", "#1E3677")
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 220).attr("r", 25).style("fill", "#55BEC7")
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 250).attr("r", 25).style("fill", "#F6780D")
     // Legend Descriptions
     svgLegend.append("text").attr("x", 220).attr("y", 130).text("Non-Stateful").style("font-size", "15px").attr("alignment-baseline", "middle")
     svgLegend.append("text").attr("x", 220).attr("y", 160).text("Stateful").style("font-size", "15px").attr("alignment-baseline", "middle")
@@ -89,8 +89,8 @@ class LeftPanel extends Component<Props, State> {
     svgLegend.append("text").attr("x", 220).attr("y", 220).text("Medium Relation").style("font-size", "15px").attr("alignment-baseline", "middle")
     svgLegend.append("text").attr("x", 220).attr("y", 250).text("High Relation").style("font-size", "15px").attr("alignment-baseline", "middle")
     // Legend Placement
-    svgLegend.attr("x", -190)
-    svgLegend.attr("y", -120)
+    svgLegend.attr("x", 0)
+    svgLegend.attr("y", 0)
 
     // data from the backend from hooking into react devtools
     const stateData = this.props.data;
@@ -203,8 +203,8 @@ class LeftPanel extends Component<Props, State> {
     return (
       <div className="leftPanel">
         <h1 className="title">Component Tree</h1>
-        <Stage width="65vw" height="100vh">
-        <svg id='legend' transform={`translate(-177,-177), scale(1)`}></svg>
+        <Stage width="65vw" height="100%">
+        <svg id='legend' transform={`translate(0,0), scale(1)`}></svg>
           <ZoomContainer>
             {paths}
             {nodes}

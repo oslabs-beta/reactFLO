@@ -19,6 +19,11 @@
   height: 100%;
  } 
 
+.rightPanelTop {
+  max-height: 25%;
+  overflow-y: scroll;
+}
+
  .rightPanelBottom {
   max-height: 75%;
   overflow-y: scroll;
