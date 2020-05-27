@@ -77,11 +77,11 @@ class LeftPanel extends Component<Props, State> {
     // Legend
     const svgLegend = d3.select('#legend');
     // Legend Shapes
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 130).attr("r", 6).style("stroke", 'black').style("fill", "none").style("stroke-width", '3px')
-    svgLegend.append("rect").attr("x", 195).attr("y", 155).attr("width", 10).attr("height", 10).style("stroke", 'black').style("fill", "none").style("stroke-width", '3px')
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 190).attr("r", 6).style("fill", "#1E3677")
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 220).attr("r", 6).style("fill", "#55BEC7")
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 250).attr("r", 6).style("fill", "#F6780D")
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 130).attr("r", 25).style("stroke", 'black').style("fill", "none").style("stroke-width", '3px')
+    svgLegend.append("rect").attr("x", 195).attr("y", 155).attr("width", 50).attr("height", 10).style("stroke", 'black').style("fill", "none").style("stroke-width", '3px')
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 190).attr("r", 25).style("fill", "#1E3677")
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 220).attr("r", 25).style("fill", "#55BEC7")
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 250).attr("r", 25).style("fill", "#F6780D")
     // Legend Descriptions
     svgLegend.append("text").attr("x", 220).attr("y", 130).text("Non-Stateful").style("font-size", "15px").attr("alignment-baseline", "middle")
     svgLegend.append("text").attr("x", 220).attr("y", 160).text("Stateful").style("font-size", "15px").attr("alignment-baseline", "middle")
@@ -89,15 +89,15 @@ class LeftPanel extends Component<Props, State> {
     svgLegend.append("text").attr("x", 220).attr("y", 220).text("Medium Relation").style("font-size", "15px").attr("alignment-baseline", "middle")
     svgLegend.append("text").attr("x", 220).attr("y", 250).text("High Relation").style("font-size", "15px").attr("alignment-baseline", "middle")
     // Legend Placement
-    svgLegend.attr("x", -190)
-    svgLegend.attr("y", -120)
+    svgLegend.attr("x", 0)
+    svgLegend.attr("y", 0)
 
     // data from the backend from hooking into react devtools
     const stateData = this.props.data;
 
     // sets the heights and width of the tree to be passed into treemap
-    const width = 75;
-    const height = 250; 
+    const width = 100;
+    const height = 350; 
 
     // creating the tree map 
     // setting the size based on width and heights declared above 
@@ -124,7 +124,7 @@ class LeftPanel extends Component<Props, State> {
           return d.x + 1375;
         })
         .y((d) => {
-          return d.y;
+          return d.y - 750;
         });
 
       return <path key={i}
@@ -139,9 +139,8 @@ class LeftPanel extends Component<Props, State> {
 
     // renders the nodes (the circles) to the screen
     nodes = nodes && nodes.map((node: Node, i: number) => {
-      console.log('node: ', node)
       return <g
-        key={i} transform={`translate(${node.x + 1375}, ${node.y})`}
+        key={i} transform={`translate(${node.x + 1375}, ${node.y - 750})`}
         onClick={() => this.props.selectNode(node.data)}
         onDoubleClick={() => this.toggleChildren(node)}
       >
@@ -157,7 +156,6 @@ class LeftPanel extends Component<Props, State> {
               node.data.pathWeight === 0 && node.data.displayWeight === 0 ? '#FFFAFA' :
               node.data.pathWeight === 1 || node.data.displayWeight === 1 ? '#F6780D' :'#55BEC7',
               'strokeWidth': '8px',
-              'strokeDasharray': node.data === this.props.clickedNode ? '2em' : '0',
               'fill':
                 node.data.displayWeight === 0 ? '#1E3677' :
                   (node.data.displayWeight === 0.5 ? '#55BEC7' : '#F6780D'),
@@ -203,10 +201,10 @@ class LeftPanel extends Component<Props, State> {
 
 
     return (
-      <div id="leftpanel" className="panel">
-        <h1 id="leftpanelheadline" className="title">Component Tree</h1>
-        <Stage width="65vw" height="100vh">
-          <svg id='legend' transform={`translate(-177,-177), scale(1)`}></svg>
+      <div className="leftPanel">
+        <h1 className="title">Component Tree</h1>
+        <Stage width="65vw" height="100%">
+        <svg id='legend' transform={`translate(0,0), scale(1)`}></svg>
           <ZoomContainer>
             {paths}
             {nodes}

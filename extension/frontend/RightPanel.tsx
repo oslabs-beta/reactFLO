@@ -16,20 +16,23 @@ const RightPanel = (props: RightPanelProps) => {
   const { type, state, name } = props.clickedNode;
   
   return (
-    <div id="rightPanel" className="panel">
+    <div className="rightPanel">
       <h1 className="title">Component Data</h1>
       <h2 className="subTitle"> Component Type: {type || "Anonymous"}</h2>
       <h2 className="subTitle"> Component Name: {name || "Anonymous"}</h2>
       <button onClick={props.clearTree} className="clearSelection">Clear Selection</button>
-      <StateDisplay 
-        title='State:' 
-        json={state ? state.value : null} />
-
-      <PropDisplay 
-        title='Props:' 
-        propList={props.clickedNode.props} 
-        selectProp={props.selectProp} 
-        />
+      <div className ="rightPanelTop">
+        <StateDisplay 
+          title='State:' 
+          json={state ? state.value : null} />
+      </div>
+      <div className="rightPanelBottom">
+        <PropDisplay 
+          title='Props:' 
+          propList={props.clickedNode.props} 
+          selectProp={props.selectProp} 
+          />
+      </div>  
     </div>
   )
 }
