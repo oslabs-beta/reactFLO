@@ -18,6 +18,11 @@ export const StateDisplay = (props: stateDisplayProps) => {
         name={props.title}
         collapsed={false}
         enableClipboard={false}
+        displayDataTypes={false}
+        style={{
+          "fontSize": "medium",
+          "background": "none",
+        }}
         theme="monokai"
       />
     </div>
