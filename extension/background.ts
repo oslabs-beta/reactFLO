@@ -10,6 +10,21 @@ chrome.runtime.onConnect.addListener(port => {
     if (message.name === 'init' && message.tabId){
       // Adds devtool connection to connections object at key of 'tabId'
       connections[message.tabId] = port;
+      // Inject script to window
+      console.log('Tab Id: ', message.tabId);
+      chrome.tabs.executeScript(message.tabId, {
+        code: `
+          // Function will attach script to the dom 
+          const injectScript = (file, tag) => {
+            const htmlBody = document.getElementsByTagName(tag)[0];
+            const script = document.createElement('script');
+            script.setAttribute('type', 'text/javascript');
+            script.setAttribute('src', file);
+            htmlBody.appendChild(script);
+          };
+          injectScript(chrome.runtime.getURL('/inject.js'), 'body');
+        `,
+      });
       return;
     }
   }
