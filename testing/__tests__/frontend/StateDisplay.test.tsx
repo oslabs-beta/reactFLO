@@ -46,7 +46,7 @@ describe('StateDisplay unit tests', () => {
   it('ReactJson should have correct values for src, name, collapsed, and enableClipboard props, ', () => {
     expect(wrapperJsonTrue.find(ReactJson).prop('src')).toBe(stateNodeProps.json);
     expect(wrapperJsonTrue.find(ReactJson).prop('name')).toBe(stateNodeProps.title);
-    expect(wrapperJsonTrue.find(ReactJson).prop('collapsed')).toBe(true);
+    expect(wrapperJsonTrue.find(ReactJson).prop('collapsed')).toBe(false);
     expect(wrapperJsonTrue.find(ReactJson).prop('enableClipboard')).toBe(false);
   })
 })
