@@ -47,8 +47,18 @@
 }
 
 .subTitle {
+  font-weight: 200;
   color: $font-color2;
   padding: 0 10px;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.value {
+  font-weight: 600;
+  color: $font-color1;
+  padding-left: 20px;
+  margin-bottom: 15px;
 }
 
 button {

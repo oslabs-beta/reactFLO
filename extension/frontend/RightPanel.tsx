@@ -18,8 +18,10 @@ const RightPanel = (props: RightPanelProps) => {
   return (
     <div className="rightPanel">
       <h1 className="title">Component Data</h1>
-      <h2 className="subTitle"> Component Type: {type || "Anonymous"}</h2>
-      <h2 className="subTitle"> Component Name: {name || "Anonymous"}</h2>
+      <h2 className="subTitle"> Component Type:</h2>
+      <h2 className="subTitle value"> {type || "Anonymous"}</h2>
+      <h2 className="subTitle"> Component Name:</h2>
+      <h2 className="subTitle value"> {name || "Anonymous"}</h2>
       <button onClick={props.clearTree} className="clearSelection">Clear Selection</button>
       <StateDisplay 
         title='State:' 
