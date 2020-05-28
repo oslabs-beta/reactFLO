@@ -76,20 +76,20 @@ class LeftPanel extends Component<Props, State> {
     // Legend
     const svgLegend = d3.select('#legend');
     // Legend Shapes
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 130).attr("r", 30).style("stroke", 'white').style("fill", "none").style("stroke-width", '3px')
-    svgLegend.append("rect").attr("x", 177).attr("y", 180).attr("width", 50).attr("height", 50).style("stroke", 'white').style("fill", "none").style("stroke-width", '3px')
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 280).attr("r", 30).style("fill", "#1E3677")
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 350).attr("r", 30).style("fill", "#55BEC7")
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 420).attr("r", 30).style("fill", "#F6780D")
+    svgLegend.append("circle").attr("cx", 1500).attr("cy", 1000).attr("r", 300).style("stroke", 'white').style("fill", "none").style("stroke-width", '50px')
+    svgLegend.append("rect").attr("x", 1250).attr("y", 1700).attr("width", 525).attr("height", 525).style("stroke", 'white').style("fill", "none").style("stroke-width", '50px')
+    svgLegend.append("circle").attr("cx", 1500).attr("cy", 3000).attr("r", 300).style("fill", "#1E3677")
+    svgLegend.append("circle").attr("cx", 1500).attr("cy", 4000).attr("r", 300).style("fill", "#55BEC7")
+    svgLegend.append("circle").attr("cx", 1500).attr("cy", 5000).attr("r", 300).style("fill", "#F6780D")
     // Legend Descriptions
-    svgLegend.append("text").attr("x", 245).attr("y", 130).text("Non-Stateful").style("font-size", "65px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
-    svgLegend.append("text").attr("x", 245).attr("y", 210).text("Stateful").style("font-size", "65px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
-    svgLegend.append("text").attr("x", 245).attr("y", 280).text("No Relation").style("font-size", "65px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
-    svgLegend.append("text").attr("x", 245).attr("y", 350).text("Medium Relation").style("font-size", "65px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
-    svgLegend.append("text").attr("x", 245).attr("y", 420).text("High Relation").style("font-size", "65px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
+    svgLegend.append("text").attr("x", 2000).attr("y", 1000).text("Non-Stateful").style("font-size", "600px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
+    svgLegend.append("text").attr("x", 2000).attr("y", 2000).text("Stateful").style("font-size", "600px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
+    svgLegend.append("text").attr("x", 2000).attr("y", 3000).text("No Relation").style("font-size", "600px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
+    svgLegend.append("text").attr("x", 2000).attr("y", 4000).text("Medium Relation").style("font-size", "600px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
+    svgLegend.append("text").attr("x", 2000).attr("y", 5000).text("High Relation").style("font-size", "600px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
     // Legend Placement
-    svgLegend.attr("x", 0)
-    svgLegend.attr("y", 0)
+    svgLegend.attr("x", -500)
+    svgLegend.attr("y", -500)
 
     // data from the backend from hooking into react devtools
     const stateData = this.props.data;
@@ -230,7 +230,7 @@ class LeftPanel extends Component<Props, State> {
       <div className="leftPanel">
         <h1 className="title">Component Tree</h1>
         <Stage width="100vw" height="100vh">
-          <svg id='legend' transform={`translate(0,0), scale(1)`}></svg>
+          <svg id='legend' transform={`translate(0,0), scale(1)`} width="10000" ></svg>
           <ZoomContainer>
             {paths}
             {nodes}
