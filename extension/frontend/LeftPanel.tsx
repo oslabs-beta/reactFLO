@@ -178,8 +178,6 @@ class LeftPanel extends Component<Props, State> {
               'cursor': 'pointer',
               'opacity':'1'
                 }}
-                 //onMouseOver={(e)=> e.target.style.fill = "55c75b"}
-                  //onMouseOut={(e)=> e.target.style.fill = '#1E3677')}
                     onMouseOver={(e :any)=>{e.target.setAttribute('r', '45')}}
                     onMouseOut={(e : any)=>{e.target.setAttribute('r', '25') }}
                 />
