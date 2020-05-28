@@ -95,8 +95,8 @@ class LeftPanel extends Component<Props, State> {
     const stateData = this.props.data;
 
     // sets the heights and width of the tree to be passed into treemap
-    const width = 100;
-    const height = 350; 
+    const width = 500;
+    const height = 1550; 
 
     // creating the tree map 
     // setting the size based on width and heights declared above 
@@ -120,10 +120,10 @@ class LeftPanel extends Component<Props, State> {
         // link vertical makes our entire tree go top to bottom as opposed to left to right 
         .linkVertical()
         .x((d) => {
-          return d.x + 1375;
+          return d.x + 8000;
         })
         .y((d) => {
-          return d.y - 750;
+          return d.y - 900;
         });
 
       return <path key={i}
@@ -133,13 +133,17 @@ class LeftPanel extends Component<Props, State> {
           el.target.data.pathWeight === 0 ? '#BDBDBD' : 
           el.target.data.pathWeight === 0.5 ?  '#55BEC7' : '#F6780D'
       }
-        strokeWidth="20px" d={d(el)} />
+        strokeWidth={
+          el.target.data.pathWeight === 0 ? '35px' : 
+          el.target.data.pathWeight === 0.5 ?  '70px' : '70px'
+      }  
+        d={d(el)} />
     })
 
     // renders the nodes (the circles) to the screen
     nodes = nodes && nodes.map((node: Node, i: number) => {
       return <g
-        key={i} transform={`translate(${node.x + 1375}, ${node.y - 750})`}
+        key={i} transform={`translate(${node.x + 8000}, ${node.y - 900})`}
         onClick={() => this.props.selectNode(node.data)}
         onDoubleClick={() => this.toggleChildren(node)}
       >
@@ -148,37 +152,39 @@ class LeftPanel extends Component<Props, State> {
         {/* Also changes the color of the node depending on displayWeight */}
 
         {node.data.state !== null ?
-          <rect x="-25" y="0" width="80" height="80"
+          <rect x="-150" y="0" width="300" height="300"
             style={{
               'stroke': 
               node.data === this.props.clickedNode ? '#BDBDBD' : 
               node.data.pathWeight === 0 && node.data.displayWeight === 0 ? '#FFFAFA' :
               node.data.pathWeight === 1 || node.data.displayWeight === 1 ? '#F6780D' :'#55BEC7',
-              'strokeWidth': '8px',
+              'strokeWidth': '25px',
               'fill':
                 node.data.displayWeight === 0 ? '#1E3677' :
                   (node.data.displayWeight === 0.5 ? '#55BEC7' : '#F6780D'),
-                  'opacity':'1'
+                  'opacity':'1',
+              'cursor': 'pointer',
             }}
+      
             onMouseOver = {
               (e :any) => {
-                e.target.setAttribute('height', '120'); 
-                e.target.setAttribute('width', '120')
+                e.target.setAttribute('height', '600'); 
+                e.target.setAttribute('width', '600')
             }}
             onMouseOut = {
               (e :any) => {
-                e.target.setAttribute('height','80'); 
-                e.target.setAttribute('width','80')
+                e.target.setAttribute('height','300'); 
+                e.target.setAttribute('width','300')
             }}       
             />
           :
-          <circle r="40"
+          <circle r="150"
             style={{
               'stroke': 
               node.data === this.props.clickedNode ? '#BDBDBD' : 
               node.data.pathWeight === 0 ? '#FFFAFA' :
               node.data.pathWeight === 0.5 ? '#55BEC7' : '#F6780D',
-              'strokeWidth': '8px',
+              'strokeWidth': '25px',
               'fill':
                 node.data.displayWeight === 0 ? '#1E3677' :
                   (node.data.displayWeight === 0.5 ? '#55BEC7' : 'F6780D'),
@@ -187,28 +193,28 @@ class LeftPanel extends Component<Props, State> {
                 }}
                  //onMouseOver={(e)=> e.target.style.fill = "55c75b"}
                   //onMouseOut={(e)=> e.target.style.fill = '#1E3677')}
-                    onMouseOver={(e :any)=>{e.target.setAttribute('r', '60')}}
-                    onMouseOut={(e : any)=>{e.target.setAttribute('r', '40') }}
+                    onMouseOver={(e :any)=>{e.target.setAttribute('r', '300')}}
+                    onMouseOut={(e : any)=>{e.target.setAttribute('r', '150') }}
                 />
         }
 
         {node.data.state !== null ?
-        <text 
-        x="35" 
-        y="45" 
+        <text className="text"
+        x="220" 
+        y="400" 
         style={{
           'fill': "#FFFAFA",
-          'fontSize' : '55px', 
+          'fontSize' : '300px',
           }} 
           textAnchor="start">
             {node.data.name}
         </text> :        
-        <text 
-          x="35" 
-          y="15" 
+        <text className="text"
+          x="200" 
+          y="250" 
           style={{
             'fill': "#FFFAFA",
-            'fontSize' : '55px', 
+            'fontSize' : '300px',
             }} 
             textAnchor="start">
               {node.data.name}
