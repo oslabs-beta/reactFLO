@@ -133,7 +133,7 @@ class LeftPanel extends Component<Props, State> {
           el.target.data.pathWeight === 0 ? '#BDBDBD' : 
           el.target.data.pathWeight === 0.5 ?  '#55BEC7' : '#F6780D'
       }
-        strokeWidth="10px" d={d(el)} />
+        strokeWidth="20px" d={d(el)} />
     })
 
     // renders the nodes (the circles) to the screen
@@ -148,7 +148,7 @@ class LeftPanel extends Component<Props, State> {
         {/* Also changes the color of the node depending on displayWeight */}
 
         {node.data.state !== null ?
-          <rect x="-25" y="0" width="50" height="50"
+          <rect x="-25" y="0" width="80" height="80"
             style={{
               'stroke': 
               node.data === this.props.clickedNode ? '#BDBDBD' : 
@@ -160,12 +160,19 @@ class LeftPanel extends Component<Props, State> {
                   (node.data.displayWeight === 0.5 ? '#55BEC7' : '#F6780D'),
                   'opacity':'1'
             }}
-                     onMouseOver ={(e :any)=>{e.target.setAttribute('height', '75'); e.target.setAttribute('width', '75')}}
-                     onMouseOut={(e :any)=>{e.target.setAttribute('height','50'); e.target.setAttribute('width','50')}}
-                     
+            onMouseOver = {
+              (e :any) => {
+                e.target.setAttribute('height', '120'); 
+                e.target.setAttribute('width', '120')
+            }}
+            onMouseOut = {
+              (e :any) => {
+                e.target.setAttribute('height','80'); 
+                e.target.setAttribute('width','80')
+            }}       
             />
           :
-          <circle r="25"
+          <circle r="40"
             style={{
               'stroke': 
               node.data === this.props.clickedNode ? '#BDBDBD' : 
@@ -180,8 +187,8 @@ class LeftPanel extends Component<Props, State> {
                 }}
                  //onMouseOver={(e)=> e.target.style.fill = "55c75b"}
                   //onMouseOut={(e)=> e.target.style.fill = '#1E3677')}
-                    onMouseOver={(e :any)=>{e.target.setAttribute('r', '45')}}
-                    onMouseOut={(e : any)=>{e.target.setAttribute('r', '25') }}
+                    onMouseOver={(e :any)=>{e.target.setAttribute('r', '60')}}
+                    onMouseOut={(e : any)=>{e.target.setAttribute('r', '40') }}
                 />
         }
 
