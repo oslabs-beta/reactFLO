@@ -1,5 +1,5 @@
 chrome.devtools.panels.create(
-  'ReactFlo',
+  'reactFLO',
   null,
   'panel.html',
 );
