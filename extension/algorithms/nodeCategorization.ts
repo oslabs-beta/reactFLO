@@ -9,31 +9,8 @@ class FindProp {
       to find the value from a selected prop of clicked displayNode
     */
 
-    // dec a func to actually do the traversing up 
-    const crawler = (stateValue: any, propValue: any): void =>{
-      if (typeof stateValue === 'object') {
-        // Check that propValue is an object and propValue and stateValue are either both array or neither are arrays
-        if (typeof propValue === 'object' && Array.isArray(stateValue) === Array.isArray(propValue)){
-          // compare stringified
-          if(JSON.stringify(propValue) === JSON.stringify(stateValue)) {
-            // increment the displayWeight of the node 
-            // Math max says that if the value is higher than 1 return the higher value 
-            targetNode.displayWeight = Math.max(1, targetNode.displayWeight);
-          }
-        }
-        for (const key in stateValue) {
-          // Compare propValue to each key in stateValue
-          if (key == propValue) targetNode.displayWeight = Math.max(0.5, targetNode.displayWeight);
-          // Run crawler on each element in stateValue
-          crawler(stateValue[key], propValue);
-        }
-      } else {
-        // If stateValue is primitive, compare stateValue to propValue
-        if (stateValue === propValue) targetNode.displayWeight = Math.max(1, targetNode.displayWeight);
-      }
-    }
     //invoke with params (node higher on the tree than clicked nodes state value and the prop from the clickedNode 
-    crawler(targetNode.state.value, targetProp.value); 
+    crawler(targetNode,targetNode.state.value, targetProp.value); 
   }
 
   static inProps (targetNode: DisplayNode, targetProp: Prop): void {
@@ -53,6 +30,40 @@ class FindProp {
 
 }
 
+class FindState {
+  static inProps (targetNode: DisplayNode, searchValue:any): void{
+  // if props are null then return 
+  // iterate through props array and invoke crawler on each curr val 
+  console.log('this is the search value:', searchValue)
+  if(!targetNode.props) return 
+    for(const prop of targetNode.props){
+      crawler(targetNode,prop.value,searchValue)
+    }
+  }
+}
+
+const crawler = (targetNode:DisplayNode, targetValue: any, searchValue: any): void =>{
+  if (typeof targetValue === 'object') {
+    // Check that searchValue is an object and searchValue and targetValue are either both array or neither are arrays
+    if (typeof searchValue === 'object' && Array.isArray(targetValue) === Array.isArray(searchValue)){
+      // compare stringified
+      if(JSON.stringify(searchValue) === JSON.stringify(targetValue)) {
+        // increment the displayWeight of the node 
+        // Math max says that if the value is higher than 1 return the higher value 
+        targetNode.displayWeight = Math.max(1, targetNode.displayWeight);
+      }
+    }
+    for (const key in targetValue) {
+      // Compare searchValue to each key in targetValue
+      if (key == searchValue) targetNode.displayWeight = Math.max(0.5, targetNode.displayWeight);
+      // Run crawler on each element in targetValue
+      crawler(targetNode, targetValue[key], searchValue);
+    }
+  } else {
+    // If targetValue is primitive, compare targetValue to searchValue
+    if (targetValue === searchValue) targetNode.displayWeight = Math.max(1, targetNode.displayWeight);
+  }
+}
 // to create paths between startnode and the top stateful node 
 const createPathToRoot = (startNode: DisplayNode): DisplayNode[] => {
   // Create an array of stateful nodes
@@ -99,4 +110,4 @@ const workOnStatefulNodes = (nodes: DisplayNode[], prop: Prop): DisplayNode => {
   return highestNodeWithTarget;
 };
 
-module.exports = { FindProp, createPathToRoot, workOnStatefulNodes };
+module.exports = { FindProp, createPathToRoot, workOnStatefulNodes ,FindState};
