@@ -3,31 +3,40 @@
   flex-direction: row;
   align-items: flex-start;
   height: 100vh;
+  width: 100vw;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+
+.panelContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .leftPanel {
   background-color: $background-color1;
   border: 2px solid $accent-color1;
-  width: 65vw;
+  border-right: none;
+  width: auto;
+  min-width: 300px;
+  max-width: 100vw;
   height: 100%;
 }
 
 .rightPanel {
   background-color: $background-color1;
   border: 2px solid $accent-color1;
-  width: 35vw;
+  width: 300px;
+  min-width: 300px;
   height: 100%;
- } 
-
-.rightPanelTop {
-  max-height: 25%;
   overflow-y: scroll;
+  .title {
+    position: sticky;
+  }
 }
 
- .rightPanelBottom {
-  max-height: 75%;
-  overflow-y: scroll;
- }
+.rightPanel::-webkit-scrollbar {
+  display: none;
+}
 
 .title {
   text-align: center;
@@ -56,6 +65,11 @@ button {
 
 button:hover {
   color: $RF-orange;
+}
+
+.propName {
+  width: 100%;
+  text-align: left;
 }
 
 .clearSelection {
