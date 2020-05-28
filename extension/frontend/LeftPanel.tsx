@@ -1,4 +1,4 @@
-import React, { Component,MouseEvent } from "react";
+import React, { Component, MouseEvent } from "react";
 import * as d3 from "d3";
 
 import { Stage } from "./Stage"
@@ -76,17 +76,17 @@ class LeftPanel extends Component<Props, State> {
     // Legend
     const svgLegend = d3.select('#legend');
     // Legend Shapes
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 130).attr("r", 25).style("stroke", 'black').style("fill", "none").style("stroke-width", '3px')
-    svgLegend.append("rect").attr("x", 195).attr("y", 155).attr("width", 50).attr("height", 10).style("stroke", 'black').style("fill", "none").style("stroke-width", '3px')
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 190).attr("r", 25).style("fill", "#1E3677")
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 220).attr("r", 25).style("fill", "#55BEC7")
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 250).attr("r", 25).style("fill", "#F6780D")
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 130).attr("r", 30).style("stroke", 'white').style("fill", "none").style("stroke-width", '3px')
+    svgLegend.append("rect").attr("x", 177).attr("y", 180).attr("width", 50).attr("height", 50).style("stroke", 'white').style("fill", "none").style("stroke-width", '3px')
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 280).attr("r", 30).style("fill", "#1E3677")
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 350).attr("r", 30).style("fill", "#55BEC7")
+    svgLegend.append("circle").attr("cx", 200).attr("cy", 420).attr("r", 30).style("fill", "#F6780D")
     // Legend Descriptions
-    svgLegend.append("text").attr("x", 220).attr("y", 130).text("Non-Stateful").style("font-size", "15px").attr("alignment-baseline", "middle")
-    svgLegend.append("text").attr("x", 220).attr("y", 160).text("Stateful").style("font-size", "15px").attr("alignment-baseline", "middle")
-    svgLegend.append("text").attr("x", 220).attr("y", 190).text("No Relation").style("font-size", "15px").attr("alignment-baseline", "middle")
-    svgLegend.append("text").attr("x", 220).attr("y", 220).text("Medium Relation").style("font-size", "15px").attr("alignment-baseline", "middle")
-    svgLegend.append("text").attr("x", 220).attr("y", 250).text("High Relation").style("font-size", "15px").attr("alignment-baseline", "middle")
+    svgLegend.append("text").attr("x", 245).attr("y", 130).text("Non-Stateful").style("font-size", "65px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
+    svgLegend.append("text").attr("x", 245).attr("y", 210).text("Stateful").style("font-size", "65px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
+    svgLegend.append("text").attr("x", 245).attr("y", 280).text("No Relation").style("font-size", "65px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
+    svgLegend.append("text").attr("x", 245).attr("y", 350).text("Medium Relation").style("font-size", "65px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
+    svgLegend.append("text").attr("x", 245).attr("y", 420).text("High Relation").style("font-size", "65px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
     // Legend Placement
     svgLegend.attr("x", 0)
     svgLegend.attr("y", 0)
@@ -95,8 +95,13 @@ class LeftPanel extends Component<Props, State> {
     const stateData = this.props.data;
 
     // sets the heights and width of the tree to be passed into treemap
+<<<<<<< HEAD
     const width = 500;
     const height = 1550; 
+=======
+    const width = 100;
+    const height = 350;
+>>>>>>> zoomsvg
 
     // creating the tree map 
     // setting the size based on width and heights declared above 
@@ -114,7 +119,7 @@ class LeftPanel extends Component<Props, State> {
 
 
     // put paths (the lines on the graph) before & because render goes before component did mount 
-      paths = paths && paths.map((el: Path, i: number) => {
+    paths = paths && paths.map((el: Path, i: number) => {
 
       let d = d3
         // link vertical makes our entire tree go top to bottom as opposed to left to right 
@@ -127,9 +132,10 @@ class LeftPanel extends Component<Props, State> {
         });
 
       return <path key={i}
-        className='link' 
+        className='link'
         fill="none"
         stroke={
+<<<<<<< HEAD
           el.target.data.pathWeight === 0 ? '#BDBDBD' : 
           el.target.data.pathWeight === 0.5 ?  '#55BEC7' : '#F6780D'
       }
@@ -138,6 +144,12 @@ class LeftPanel extends Component<Props, State> {
           el.target.data.pathWeight === 0.5 ?  '70px' : '70px'
       }  
         d={d(el)} />
+=======
+          el.target.data.pathWeight === 0 ? '#BDBDBD' :
+            el.target.data.pathWeight === 0.5 ? '#55BEC7' : '#F6780D'
+        }
+        strokeWidth="10px" d={d(el)} />
+>>>>>>> zoomsvg
     })
 
     // renders the nodes (the circles) to the screen
@@ -154,6 +166,7 @@ class LeftPanel extends Component<Props, State> {
         {node.data.state !== null ?
           <rect x="-150" y="0" width="300" height="300"
             style={{
+<<<<<<< HEAD
               'stroke': 
               node.data === this.props.clickedNode ? '#BDBDBD' : 
               node.data.pathWeight === 0 && node.data.displayWeight === 0 ? '#FFFAFA' :
@@ -177,18 +190,43 @@ class LeftPanel extends Component<Props, State> {
                 e.target.setAttribute('width','300')
             }}       
             />
+=======
+              'stroke':
+                node.data === this.props.clickedNode ? '#BDBDBD' :
+                  node.data.pathWeight === 0 && node.data.displayWeight === 0 ? '#FFFAFA' :
+                    node.data.pathWeight === 1 || node.data.displayWeight === 1 ? '#F6780D' : '#55BEC7',
+              'strokeWidth': '8px',
+              'fill':
+                node.data.displayWeight === 0 ? '#1E3677' :
+                  (node.data.displayWeight === 0.5 ? '#55BEC7' : '#F6780D'),
+              'opacity': '1'
+            }}
+            onMouseOver={(e: any) => { e.target.setAttribute('height', '75'); e.target.setAttribute('width', '75') }}
+            onMouseOut={(e: any) => { e.target.setAttribute('height', '50'); e.target.setAttribute('width', '50') }}
+
+          />
+>>>>>>> zoomsvg
           :
           <circle r="150"
             style={{
+<<<<<<< HEAD
               'stroke': 
               node.data === this.props.clickedNode ? '#BDBDBD' : 
               node.data.pathWeight === 0 ? '#FFFAFA' :
               node.data.pathWeight === 0.5 ? '#55BEC7' : '#F6780D',
               'strokeWidth': '25px',
+=======
+              'stroke':
+                node.data === this.props.clickedNode ? '#BDBDBD' :
+                  node.data.pathWeight === 0 ? '#FFFAFA' :
+                    node.data.pathWeight === 0.5 ? '#55BEC7' : '#F6780D',
+              'strokeWidth': '8px',
+>>>>>>> zoomsvg
               'fill':
                 node.data.displayWeight === 0 ? '#1E3677' :
                   (node.data.displayWeight === 0.5 ? '#55BEC7' : 'F6780D'),
               'cursor': 'pointer',
+<<<<<<< HEAD
               'opacity':'1'
                 }}
                  //onMouseOver={(e)=> e.target.style.fill = "55c75b"}
@@ -216,8 +254,37 @@ class LeftPanel extends Component<Props, State> {
             'fill': "#FFFAFA",
             'fontSize' : '300px',
             }} 
+=======
+              'opacity': '1'
+            }}
+            //onMouseOver={(e)=> e.target.style.fill = "55c75b"}
+            //onMouseOut={(e)=> e.target.style.fill = '#1E3677')}
+            onMouseOver={(e: any) => { e.target.setAttribute('r', '45') }}
+            onMouseOut={(e: any) => { e.target.setAttribute('r', '25') }}
+          />
+        }
+
+        {node.data.state !== null ?
+          <text
+            x="35"
+            y="45"
+            style={{
+              'fill': "#FFFAFA",
+              'fontSize': '55px',
+            }}
             textAnchor="start">
-              {node.data.name}
+            {node.data.name}
+          </text> :
+          <text
+            x="35"
+            y="15"
+            style={{
+              'fill': "#FFFAFA",
+              'fontSize': '55px',
+            }}
+>>>>>>> zoomsvg
+            textAnchor="start">
+            {node.data.name}
           </text>
         }
       </g>
@@ -227,8 +294,13 @@ class LeftPanel extends Component<Props, State> {
     return (
       <div className="leftPanel">
         <h1 className="title">Component Tree</h1>
+<<<<<<< HEAD
         <Stage width="100vw" height="100vh">
         <svg id='legend' transform={`translate(0,0), scale(1)`}></svg>
+=======
+        <Stage width="65vw" height="100%">
+          <svg id='legend' transform={`translate(0,0), scale(3)`}></svg>
+>>>>>>> zoomsvg
           <ZoomContainer>
             {paths}
             {nodes}
