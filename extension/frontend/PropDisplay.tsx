@@ -1,6 +1,7 @@
 import React from "react";
 import ReactJson from "react-json-view";
 import { Prop } from "../interfaces";
+import { NONAME } from "dns";
 
 
 interface PropDisplayProps {
@@ -21,9 +22,11 @@ export const PropDisplay = (props: PropDisplayProps) => {
   });
 
   return (
-    <div>
+    <div className="propDisplay">
       <h2 className="title">{props.title}</h2>
-      {propArray}
+      <div className="info">
+        {propArray}
+      </div>
     </div>
   );
 
@@ -40,8 +43,24 @@ export function PropInfo(props: ButtonProp) {
 
   return (
     <div>
-      <button onClick={() => props.selectProp(props.nodeProp)}>🔎 Key: {props.nodeProp.key}</button>
-      <ReactJson src={{ [props.nodeProp.key]: props.nodeProp.value }} name='Value' collapsed={false} enableClipboard={false} theme="monokai" />
+      <button
+        className="propName"
+        onClick={() => props.selectProp(props.nodeProp)}
+      >
+        🔎 Key: {props.nodeProp.key}
+      </button>
+      <ReactJson
+        src={{ [props.nodeProp.key]: props.nodeProp.value }}
+        name='Value'
+        collapsed={false}
+        enableClipboard={false}
+        displayDataTypes={false}
+        style={{
+          "fontSize": "medium",
+          "background": "none",
+        }}
+        theme="monokai"
+      />
     </div>
   );
 }

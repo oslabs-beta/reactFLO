@@ -3,31 +3,41 @@
   flex-direction: row;
   align-items: flex-start;
   height: 100vh;
+  width: 100vw;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+
+.panelContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .leftPanel {
   background-color: $background-color1;
   border: 2px solid $accent-color1;
-  width: 65vw;
+  border-right: none;
+  width: auto;
+  min-width: 300px;
+  max-width: 100vw;
   height: 100%;
 }
 
 .rightPanel {
   background-color: $background-color1;
   border: 2px solid $accent-color1;
-  width: 35vw;
+  width: 300px;
+  min-width: 300px;
   height: 100%;
- } 
-
-.rightPanelTop {
-  max-height: 25%;
   overflow-y: scroll;
+
+  .title {
+    position: sticky;
+  }
 }
 
- .rightPanelBottom {
-  max-height: 75%;
-  overflow-y: scroll;
- }
+.rightPanel::-webkit-scrollbar {
+  display: none;
+}
 
 .title {
   text-align: center;
@@ -38,8 +48,26 @@
 }
 
 .subTitle {
+  font-weight: 200;
   color: $font-color2;
   padding: 0 10px;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.value {
+  font-weight: 600;
+  color: $font-color1;
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.noNode {
+  font-size: 24px;
+  text-align: center;
+  padding: 10px;
+  color: $RF-orange;
+  font-weight: 600;
 }
 
 button {
@@ -58,7 +86,11 @@ button:hover {
   color: $RF-orange;
 }
 
+.propName {
+  width: 100%;
+  text-align: left;
+}
+
 .clearSelection {
   border-radius: 0 5px 0 0;
 }
-

@@ -33,7 +33,7 @@ class App extends React.Component<Props, State>{
     super(props);
     this.state = {
       data: {},
-      clickedNode: {}
+      clickedNode: null,
     }
 
     this.selectNode = this.selectNode.bind(this);
@@ -58,7 +58,7 @@ class App extends React.Component<Props, State>{
       if (message.id === 'ReactFLO') {
         this.setState({
           data: message.message,
-          clickedNode: {},
+          clickedNode: null,
         });
       }
     });
@@ -94,11 +94,12 @@ class App extends React.Component<Props, State>{
     // do setstate to re render the actual tree 
     this.setState({
       data: this.state.data,
+      clickedNode: null,
     });
   }
 
   render() {
-    console.log("data", this.state.data)
+
     return (
 
       // Determine if page has rendered yet using ternary
