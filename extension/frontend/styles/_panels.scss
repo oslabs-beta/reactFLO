@@ -37,3 +37,8 @@ button:hover {
 .clearSelection {
   border-radius: 0 5px 0 0;
 }
+.rect:hover, .circle:hover {  
+  fill: pink;
+stroke: cyan;
+cursor:pointer;
+}

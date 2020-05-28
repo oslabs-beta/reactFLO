@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,MouseEvent } from "react";
 import * as d3 from "d3";
 
 import { Stage } from "./Stage"
@@ -72,7 +72,6 @@ class LeftPanel extends Component<Props, State> {
       toggleChild: !this.state.toggleChild
     })
   }
-
   render() {
     // Legend
     const svgLegend = d3.select('#legend');
@@ -139,7 +138,6 @@ class LeftPanel extends Component<Props, State> {
 
     // renders the nodes (the circles) to the screen
     nodes = nodes && nodes.map((node: Node, i: number) => {
-      console.log('node: ', node)
       return <g
         key={i} transform={`translate(${node.x + 1375}, ${node.y})`}
         onClick={() => this.props.selectNode(node.data)}
@@ -161,7 +159,12 @@ class LeftPanel extends Component<Props, State> {
               'fill':
                 node.data.displayWeight === 0 ? '#1E3677' :
                   (node.data.displayWeight === 0.5 ? '#55BEC7' : '#F6780D'),
-            }} />
+                  'opacity':'1'
+            }}
+                     onMouseOver ={(e :any)=>{e.target.setAttribute('height', '75'); e.target.setAttribute('width', '75')}}
+                     onMouseOut={(e :any)=>{e.target.setAttribute('height','50'); e.target.setAttribute('width','50')}}
+                     
+            />
           :
           <circle r="25"
             style={{
@@ -173,7 +176,14 @@ class LeftPanel extends Component<Props, State> {
               'fill':
                 node.data.displayWeight === 0 ? '#1E3677' :
                   (node.data.displayWeight === 0.5 ? '#55BEC7' : 'F6780D'),
-            }} />
+              'cursor': 'pointer',
+              'opacity':'1'
+                }}
+                 //onMouseOver={(e)=> e.target.style.fill = "55c75b"}
+                  //onMouseOut={(e)=> e.target.style.fill = '#1E3677')}
+                    onMouseOver={(e :any)=>{e.target.setAttribute('r', '45')}}
+                    onMouseOut={(e : any)=>{e.target.setAttribute('r', '25') }}
+                />
         }
 
         {node.data.state !== null ?
