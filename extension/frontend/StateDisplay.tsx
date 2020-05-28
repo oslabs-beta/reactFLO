@@ -1,10 +1,11 @@
 import React from "react";
-import ReactJson from "react-json-view";
-import { Prop } from "../interfaces"
+import { Prop } from "../interfaces";
+import ReactJson, {OnSelectProps} from "react-json-view";
 
 interface stateDisplayProps {
   title: string,
-  json: null | Prop
+  json: null | Prop,
+  selectState: ((select: OnSelectProps) => void)
 }
 
 export const StateDisplay = (props: stateDisplayProps) => {
@@ -19,6 +20,7 @@ export const StateDisplay = (props: stateDisplayProps) => {
         collapsed={false}
         enableClipboard={false}
         theme="monokai"
+        onSelect={props.selectState}
       />
     </div>
   );

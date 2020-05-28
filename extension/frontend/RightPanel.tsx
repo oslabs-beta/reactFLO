@@ -1,12 +1,14 @@
 import React from "react";
 import { StateDisplay } from "./StateDisplay";
 import PropDisplay from "./PropDisplay";
+import {OnSelectProps} from "react-json-view";
 import { DisplayNode } from "../interfaces";
 
 interface RightPanelProps {
   clickedNode: DisplayNode,
   selectProp: Function,
   clearTree: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  selectState: ((select: OnSelectProps) => void),
 }
 
 
@@ -23,6 +25,7 @@ const RightPanel = (props: RightPanelProps) => {
       <button onClick={props.clearTree} className="clearSelection">Clear Selection</button>
       <div className ="rightPanelTop">
         <StateDisplay 
+          selectState={props.selectState}
           title='State:' 
           json={state ? state.value : null} />
       </div>

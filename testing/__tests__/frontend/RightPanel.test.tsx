@@ -41,6 +41,7 @@ describe('RightPanel unit tests', () => {
 
     selectProp: jest.fn(),
     clearTree: jest.fn(),
+    selectState: jest.fn(),
   }
 
   beforeAll(() => {
@@ -94,7 +95,8 @@ describe('RightPanel unit tests', () => {
       },
 
       selectProp: () => console.log('selectProp'),
-      clearTree: () => console.log('clearTree')
+      clearTree: () => console.log('clearTree'),
+      selectState: () => console.log('selectState')
     }
     const wrapperTwo = shallow(<RightPanel {...RightPanelProps2} />)
     expect(wrapperTwo.find(StateDisplay).prop('json')).toBe('test');
