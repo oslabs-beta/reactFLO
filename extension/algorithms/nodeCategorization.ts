@@ -34,7 +34,6 @@ class FindState {
   static inProps (targetNode: DisplayNode, searchValue:any): void{
   // if props are null then return 
   // iterate through props array and invoke crawler on each curr val 
-  console.log('this is the search value:', searchValue)
   if(!targetNode.props) return 
     for(const prop of targetNode.props){
       crawler(targetNode,prop.value,searchValue)
