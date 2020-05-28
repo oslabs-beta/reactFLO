@@ -1,4 +1,4 @@
-import React, { Component,MouseEvent } from "react";
+import React, { Component, MouseEvent } from "react";
 import * as d3 from "d3";
 
 import { Stage } from "./Stage"
@@ -76,27 +76,29 @@ class LeftPanel extends Component<Props, State> {
     // Legend
     const svgLegend = d3.select('#legend');
     // Legend Shapes
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 130).attr("r", 25).style("stroke", 'black').style("fill", "none").style("stroke-width", '3px')
-    svgLegend.append("rect").attr("x", 195).attr("y", 155).attr("width", 50).attr("height", 10).style("stroke", 'black').style("fill", "none").style("stroke-width", '3px')
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 190).attr("r", 25).style("fill", "#1E3677")
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 220).attr("r", 25).style("fill", "#55BEC7")
-    svgLegend.append("circle").attr("cx", 200).attr("cy", 250).attr("r", 25).style("fill", "#F6780D")
+    svgLegend.append("circle").attr("cx", 1500).attr("cy", 1000).attr("r", 300).style("stroke", 'white').style("fill", "none").style("stroke-width", '50px')
+    svgLegend.append("rect").attr("x", 1250).attr("y", 1700).attr("width", 525).attr("height", 525).style("stroke", 'white').style("fill", "none").style("stroke-width", '50px')
+    svgLegend.append("circle").attr("cx", 1500).attr("cy", 3000).attr("r", 300).style("fill", "#1E3677")
+    svgLegend.append("circle").attr("cx", 1500).attr("cy", 4000).attr("r", 300).style("fill", "#55BEC7")
+    svgLegend.append("circle").attr("cx", 1500).attr("cy", 5000).attr("r", 300).style("fill", "#F6780D")
     // Legend Descriptions
-    svgLegend.append("text").attr("x", 220).attr("y", 130).text("Non-Stateful").style("font-size", "15px").attr("alignment-baseline", "middle")
-    svgLegend.append("text").attr("x", 220).attr("y", 160).text("Stateful").style("font-size", "15px").attr("alignment-baseline", "middle")
-    svgLegend.append("text").attr("x", 220).attr("y", 190).text("No Relation").style("font-size", "15px").attr("alignment-baseline", "middle")
-    svgLegend.append("text").attr("x", 220).attr("y", 220).text("Medium Relation").style("font-size", "15px").attr("alignment-baseline", "middle")
-    svgLegend.append("text").attr("x", 220).attr("y", 250).text("High Relation").style("font-size", "15px").attr("alignment-baseline", "middle")
+    svgLegend.append("text").attr("x", 2000).attr("y", 1000).text("Non-Stateful").style("font-size", "600px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
+    svgLegend.append("text").attr("x", 2000).attr("y", 2000).text("Stateful").style("font-size", "600px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
+    svgLegend.append("text").attr("x", 2000).attr("y", 3000).text("No Relation").style("font-size", "600px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
+    svgLegend.append("text").attr("x", 2000).attr("y", 4000).text("Medium Relation").style("font-size", "600px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
+    svgLegend.append("text").attr("x", 2000).attr("y", 5000).text("High Relation").style("font-size", "600px").attr("alignment-baseline", "middle").style("fill", "white").style("stroke-width", '3px')
     // Legend Placement
-    svgLegend.attr("x", 0)
-    svgLegend.attr("y", 0)
+    svgLegend.attr("x", -500)
+    svgLegend.attr("y", -500)
 
     // data from the backend from hooking into react devtools
     const stateData = this.props.data;
 
     // sets the heights and width of the tree to be passed into treemap
+
     const width = 500;
-    const height = 1550; 
+    const height = 1550;
+
 
     // creating the tree map 
     // setting the size based on width and heights declared above 
@@ -114,7 +116,7 @@ class LeftPanel extends Component<Props, State> {
 
 
     // put paths (the lines on the graph) before & because render goes before component did mount 
-      paths = paths && paths.map((el: Path, i: number) => {
+    paths = paths && paths.map((el: Path, i: number) => {
 
       let d = d3
         // link vertical makes our entire tree go top to bottom as opposed to left to right 
@@ -127,16 +129,16 @@ class LeftPanel extends Component<Props, State> {
         });
 
       return <path key={i}
-        className='link' 
+        className='link'
         fill="none"
         stroke={
-          el.target.data.pathWeight === 0 ? '#BDBDBD' : 
-          el.target.data.pathWeight === 0.5 ?  '#55BEC7' : '#F6780D'
-      }
+          el.target.data.pathWeight === 0 ? '#BDBDBD' :
+            el.target.data.pathWeight === 0.5 ? '#55BEC7' : '#F6780D'
+        }
         strokeWidth={
-          el.target.data.pathWeight === 0 ? '35px' : 
-          el.target.data.pathWeight === 0.5 ?  '70px' : '70px'
-      }  
+          el.target.data.pathWeight === 0 ? '35px' :
+            el.target.data.pathWeight === 0.5 ? '70px' : '70px'
+        }
         d={d(el)} />
     })
 
@@ -154,69 +156,69 @@ class LeftPanel extends Component<Props, State> {
         {node.data.state !== null ?
           <rect x="-150" y="0" width="300" height="300"
             style={{
-              'stroke': 
-              node.data === this.props.clickedNode ? '#BDBDBD' : 
-              node.data.pathWeight === 0 && node.data.displayWeight === 0 ? '#FFFAFA' :
-              node.data.pathWeight === 1 || node.data.displayWeight === 1 ? '#F6780D' :'#55BEC7',
+              'stroke':
+                node.data === this.props.clickedNode ? '#BDBDBD' :
+                  node.data.pathWeight === 0 && node.data.displayWeight === 0 ? '#FFFAFA' :
+                    node.data.pathWeight === 1 || node.data.displayWeight === 1 ? '#F6780D' : '#55BEC7',
               'strokeWidth': '25px',
               'fill':
                 node.data.displayWeight === 0 ? '#1E3677' :
                   (node.data.displayWeight === 0.5 ? '#55BEC7' : '#F6780D'),
-                  'opacity':'1',
+              'opacity': '1',
               'cursor': 'pointer',
             }}
-      
-            onMouseOver = {
-              (e :any) => {
-                e.target.setAttribute('height', '600'); 
+
+            onMouseOver={
+              (e: any) => {
+                e.target.setAttribute('height', '600');
                 e.target.setAttribute('width', '600')
-            }}
-            onMouseOut = {
-              (e :any) => {
-                e.target.setAttribute('height','300'); 
-                e.target.setAttribute('width','300')
-            }}       
-            />
+              }}
+            onMouseOut={
+              (e: any) => {
+                e.target.setAttribute('height', '300');
+                e.target.setAttribute('width', '300')
+              }}
+          />
           :
           <circle r="150"
             style={{
-              'stroke': 
-              node.data === this.props.clickedNode ? '#BDBDBD' : 
-              node.data.pathWeight === 0 ? '#FFFAFA' :
-              node.data.pathWeight === 0.5 ? '#55BEC7' : '#F6780D',
+              'stroke':
+                node.data === this.props.clickedNode ? '#BDBDBD' :
+                  node.data.pathWeight === 0 ? '#FFFAFA' :
+                    node.data.pathWeight === 0.5 ? '#55BEC7' : '#F6780D',
               'strokeWidth': '25px',
               'fill':
                 node.data.displayWeight === 0 ? '#1E3677' :
                   (node.data.displayWeight === 0.5 ? '#55BEC7' : 'F6780D'),
               'cursor': 'pointer',
-              'opacity':'1'
-                }}
-                 
-                    onMouseOver={(e :any)=>{e.target.setAttribute('r', '300')}}
-                    onMouseOut={(e : any)=>{e.target.setAttribute('r', '150') }}
-                />
+              'opacity': '1'
+            }}
+
+            onMouseOver={(e: any) => { e.target.setAttribute('r', '300') }}
+            onMouseOut={(e: any) => { e.target.setAttribute('r', '150') }}
+          />
         }
 
         {node.data.state !== null ?
-        <text className="text"
-        x="220" 
-        y="400" 
-        style={{
-          'fill': "#FFFAFA",
-          'fontSize' : '300px',
-          }} 
-          textAnchor="start">
-            {node.data.name}
-        </text> :        
-        <text className="text"
-          x="200" 
-          y="250" 
-          style={{
-            'fill': "#FFFAFA",
-            'fontSize' : '300px',
-            }} 
+          <text className="text"
+            x="220"
+            y="400"
+            style={{
+              'fill': "#FFFAFA",
+              'fontSize': '300px',
+            }}
             textAnchor="start">
-              {node.data.name}
+            {node.data.name}
+          </text> :
+          <text className="text"
+            x="200"
+            y="250"
+            style={{
+              'fill': "#FFFAFA",
+              'fontSize': '300px',
+            }}
+            textAnchor="start">
+            {node.data.name}
           </text>
         }
       </g>
@@ -227,7 +229,7 @@ class LeftPanel extends Component<Props, State> {
       <div className="leftPanel">
         <h1 className="title">Component Tree</h1>
         <Stage width="100vw" height="100vh">
-        <svg id='legend' transform={`translate(0,0), scale(1)`}></svg>
+          <svg id='legend' transform={`translate(0,0), scale(1)`} width="10000" ></svg>
           <ZoomContainer>
             {paths}
             {nodes}
