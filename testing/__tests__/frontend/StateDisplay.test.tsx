@@ -11,7 +11,8 @@ describe('StateDisplay unit tests', () => {
   // Set json value to null 
   const nullProps = {
     title: 'title',
-    json: null
+    json: null,
+    selectState: null
   }
 
   // Set json value to truthy
@@ -23,7 +24,8 @@ describe('StateDisplay unit tests', () => {
       topComponent: 'any',
       components: [],
       type: null
-    }
+    },
+    selectState: null
   }
 
   // Shallow copy of StateDisplay when json value is null

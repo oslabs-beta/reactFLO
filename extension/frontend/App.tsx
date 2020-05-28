@@ -6,7 +6,7 @@ import { Splash } from "./Splash";
 import notSupported from "../assets/notSupported.png"
 const { Traverse } = require('../algorithms/dataTraversal');
 const { connectToParent } = require('../algorithms/dataConversion');
-const { FindProp, createPathToRoot, workOnStatefulNodes } = require('../algorithms/nodeCategorization');
+const { FindProp, createPathToRoot, workOnStatefulNodes ,FindState} = require('../algorithms/nodeCategorization');
 
 const resetDisplayWeights = (node: DisplayNode) => {
   return Traverse.downward(node, (childNode: DisplayNode) => {
@@ -39,6 +39,7 @@ class App extends React.Component<Props, State>{
     this.selectNode = this.selectNode.bind(this);
     this.selectProp = this.selectProp.bind(this);
     this.clearTree = this.clearTree.bind(this);
+    this.selectState = this.selectState.bind(this);
   };
 
   componentDidMount() {
@@ -86,6 +87,14 @@ class App extends React.Component<Props, State>{
     });
   }
 
+  selectState(clickedState){
+    resetDisplayWeights(this.state.data);
+    connectToParent(this.state.data);
+    Traverse.downward(this.state.clickedNode, FindState.inProps,clickedState.value);
+    this.setState({
+      data: this.state.data,
+    });
+  }
   // clearTree (affecting the re render )
   // invoke traverseDtta passing in anon cb that we write change all display weights
   clearTree() {
@@ -99,7 +108,6 @@ class App extends React.Component<Props, State>{
   }
 
   render() {
-
     return (
 
       // Determine if page has rendered yet using ternary
@@ -130,7 +138,9 @@ class App extends React.Component<Props, State>{
                 <RightPanel
                   clickedNode={this.state.clickedNode}
                   selectProp={this.selectProp}
-                  clearTree={this.clearTree} />
+                  clearTree={this.clearTree}
+                  selectState={this.selectState}
+                  />
               </div>
             </div>
         )
