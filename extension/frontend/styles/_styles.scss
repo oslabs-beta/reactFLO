@@ -4,8 +4,17 @@ html {
   font-family: 'Varela Round', sans-serif;
 }
 
+.widget {
+  min-width: 600px;
+}
+
 body {
   margin: 0;
   font-family: 'Varela Round', sans-serif;
   background-color: $background-color1;
+  height: 100vh;
+}
+
+#root {
+  height: 100vh;
 }

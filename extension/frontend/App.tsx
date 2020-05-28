@@ -98,7 +98,7 @@ class App extends React.Component<Props, State>{
   }
 
   render() {
-    console.log("data", this.state.data)
+
     return (
 
       // Determine if page has rendered yet using ternary
