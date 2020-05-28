@@ -4,13 +4,20 @@ import PropDisplay from "./PropDisplay";
 import { DisplayNode } from "../interfaces";
 
 interface RightPanelProps {
-  clickedNode: DisplayNode,
+  clickedNode: DisplayNode | null,
   selectProp: Function,
   clearTree: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
 }
 
 
 const RightPanel = (props: RightPanelProps) => {
+
+  if (!props.clickedNode) return (
+    <div className="rightPanel">
+      <h1 className="title">Component Data</h1>
+      <p className="noNode">Please select a node to continue</p>
+    </div>
+  );
 
   // state on line 7 is destructered from the clicked node we recieved from onclick 
   const { type, state, name } = props.clickedNode;
