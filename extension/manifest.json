@@ -18,8 +18,8 @@
     "*://*/*"
   ],
   "icons": 
-  { "16": "icons/reactflo16.png",
-    "48": "icon/reactflo48.png",
-   "128": "icon/reactflo128.png" },
+  { "16": "reactflo16.png",
+    "48": "reactflo48.png",
+   "128": "reactflo128.png" },
   "manifest_version": 2 
 }
