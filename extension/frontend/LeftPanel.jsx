@@ -1,7 +1,6 @@
+
 import React, { Component } from "react";
-
 import * as d3 from "d3";
-
 import { Stage } from "./Stage"
 import { ZoomContainer } from "./ZoomContainer"
 
@@ -45,7 +44,7 @@ class LeftPanel extends Component {
     svgLegend.append("circle").attr("cx", 200).attr("cy", 190).attr("r", 6).style("fill", "grey")
     svgLegend.append("circle").attr("cx", 200).attr("cy", 220).attr("r", 6).style("fill", "yellow")
     svgLegend.append("circle").attr("cx", 200).attr("cy", 250).attr("r", 6).style("fill", "green")
-    // Legend Descriptions
+    // Legend Description
     svgLegend.append("text").attr("x", 220).attr("y", 130).text("Non-Stateful").style("font-size", "15px").attr("alignment-baseline", "middle")
     svgLegend.append("text").attr("x", 220).attr("y", 160).text("Stateful").style("font-size", "15px").attr("alignment-baseline", "middle")
     svgLegend.append("text").attr("x", 220).attr("y", 190).text("No Relation").style("font-size", "15px").attr("alignment-baseline", "middle")
