@@ -50,7 +50,7 @@ describe('RightPanel unit tests', () => {
   // Check for 1 H1 and 2 H2s
   it(`RightPanel should have 1 <h1> and 2 <h2>'s`, () => {
     expect(wrapper.find('h1')).toHaveLength(1);
-    expect(wrapper.find('h2')).toHaveLength(2);
+    expect(wrapper.find('h2')).toHaveLength(4);
   })
 
   // Find a button that has text of Clear Selection
