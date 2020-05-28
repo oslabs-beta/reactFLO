@@ -22,9 +22,11 @@ export const PropDisplay = (props: PropDisplayProps) => {
   });
 
   return (
-    <div>
+    <div className="propDisplay">
       <h2 className="title">{props.title}</h2>
-      {propArray}
+      <div className="info">
+        {propArray}
+      </div>
     </div>
   );
 
