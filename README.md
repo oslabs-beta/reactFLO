@@ -5,6 +5,9 @@ reactFLO is a visualization tool for React developers that allows users to view 
 
 Whether you are onboarding a new codebase or looking to expand you site, reactFLO can can help you and your team make sense of the way data is being passed through an application and empower you to make informed decisions about the structure of you components
 
+<img src='/assets/demo.gif'>
+
+
 ### Getting Started
 1. Install reactFLO from the [Chrome Web Store](https://developer.chrome.com/webstore/publish)
 1. Make sure that the [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) are also installed and active
